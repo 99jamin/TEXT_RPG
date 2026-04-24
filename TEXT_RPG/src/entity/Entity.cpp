@@ -20,6 +20,12 @@ void Entity::takeDamage(int damage)
 		dead();
 }
 
+void Entity::recoverHp(int amount)
+{
+	m_curHp += amount;
+	m_curHp = std::min(m_maxHp, m_curHp);
+}
+
 bool Entity::isAlive() const
 {
 	return (m_curHp > 0);

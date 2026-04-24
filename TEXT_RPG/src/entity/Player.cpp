@@ -39,3 +39,29 @@ void Player::recoverStamina(int amount)
 	m_stamina += amount;
 	m_stamina = std::min(m_maxStamina, m_stamina);
 }
+
+void Player::startGumniCharge()
+{
+	m_isChargingGumni = true;
+}
+
+void Player::setHitWhileCharging()
+{
+	m_wasHitWhileCharging = true;
+}
+
+bool Player::isChargingGumni() const
+{
+	return m_isChargingGumni;
+}
+
+bool Player::wasHitWhileCharging() const
+{
+	return m_wasHitWhileCharging;
+}
+
+void Player::releaseGumni()
+{
+	m_isChargingGumni = false;
+	m_wasHitWhileCharging = false;
+}

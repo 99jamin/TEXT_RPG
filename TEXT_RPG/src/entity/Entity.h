@@ -21,6 +21,8 @@ public:
 	int getAtk() const { return m_atk; }
 	int getDef() const { return m_def; }
 
+	virtual void recoverHp(int amount);
+
 	bool isAlive() const override;
 
 private:
@@ -30,5 +32,11 @@ private:
 	int m_maxHp;
 	int m_atk;
 	int m_def;
+
+
+protected:
+	void setAtk(int atk) { m_atk = atk; }
+	void setDef(int def) { m_def = def; }
+	void setCurHp(int hp) { m_curHp = hp; }
 
 };

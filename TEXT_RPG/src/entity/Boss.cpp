@@ -20,7 +20,11 @@ void Boss::checkPhaseTransition()
 	float hpRatio = float(getCurHp()) / float(getMaxHp());
 
 	if (hpRatio < PHASE_TWO_THRESHOLD)
+	{
 		m_isPhaseTwo = true;
+		onPhaseTwo();
+	}
+		
 }
 
 bool Boss::isPhaseTwo() const

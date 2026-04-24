@@ -14,6 +14,8 @@ public:
 
 	bool isPhaseTwo() const;
 
+	virtual void onPhaseTwo() = 0;
+
 private:
 
 	bool m_isPhaseTwo = false;

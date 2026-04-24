@@ -28,10 +28,33 @@ public:
 	int getStamina() const { return m_stamina; }
 	int getMaxStamina() const { return m_maxStamina; }
 
+	//카운터 스킬 관련 플래그 함수
+	void startGumniCharge();
+	void setHitWhileCharging();
+	bool isChargingGumni() const;
+	bool wasHitWhileCharging() const;
+	void releaseGumni();
+
+
+	//방어 관련 플래그 함수
+	void startDefend() { m_isDefending = true; }
+	void endDefend() { m_isDefending = false; }
+	bool isDefending() const { return m_isDefending; }
+
 private:
 
 	std::vector<SkillType> m_skills;
 	//std::vector<Item> m_inven;
 	int m_stamina;
 	int m_maxStamina;
+
+	//카운터 스킬 관련 플래그
+	bool m_isChargingGumni = false;
+	bool m_wasHitWhileCharging = false;
+
+	//방어 플래그
+	bool m_isDefending = false;
+
+
+
 };
