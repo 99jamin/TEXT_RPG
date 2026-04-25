@@ -22,11 +22,35 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\core\GameManager.cpp" />
     <ClCompile Include="src\core\TitleState.cpp" />
+    <ClCompile Include="src\entity\Boss.cpp" />
+    <ClCompile Include="src\entity\Entity.cpp" />
+    <ClCompile Include="src\entity\Monster.cpp" />
+    <ClCompile Include="src\entity\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\combat\Command.h" />
+    <ClInclude Include="src\combat\DefendCommand.h" />
+    <ClInclude Include="src\combat\FleeCommand.h" />
+    <ClInclude Include="src\combat\GumniCommand.h" />
+    <ClInclude Include="src\combat\MonsterAtkCommand.h" />
+    <ClInclude Include="src\combat\MonsterEffect.h" />
+    <ClInclude Include="src\combat\MulmaruCommand.h" />
+    <ClInclude Include="src\combat\MusukiCommand.h" />
+    <ClInclude Include="src\combat\NeoulCommand.h" />
+    <ClInclude Include="src\combat\NuigyeolCommand.h" />
+    <ClInclude Include="src\combat\SkillCommand.h" />
+    <ClInclude Include="src\combat\SkillType.h" />
+    <ClInclude Include="src\combat\SoroksorokCommand.h" />
     <ClInclude Include="src\core\GameManager.h" />
     <ClInclude Include="src\core\GameState.h" />
     <ClInclude Include="src\core\TitleState.h" />
+    <ClInclude Include="src\entity\Boss.h" />
+    <ClInclude Include="src\entity\Entity.h" />
+    <ClInclude Include="src\entity\IDamageable.h" />
+    <ClInclude Include="src\entity\JeokgapsinBoss.h" />
+    <ClInclude Include="src\entity\JeokkwiBoss.h" />
+    <ClInclude Include="src\entity\Monster.h" />
+    <ClInclude Include="src\entity\Player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

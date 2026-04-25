@@ -13,9 +13,8 @@ public:
 		m_fleeSuccess = false;  // 초기화 추가
 		fleeDescription = "도망에 실패했다.";
 
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::uniform_int_distribution<int> dis(0, 9);
+		static std::mt19937 gen(std::random_device{}());
+		static std::uniform_int_distribution<int> dis(0, 9);
 
 		int result = dis(gen);
 		if (result < 8)

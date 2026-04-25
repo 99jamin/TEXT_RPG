@@ -65,3 +65,16 @@ void Player::releaseGumni()
 	m_isChargingGumni = false;
 	m_wasHitWhileCharging = false;
 }
+
+//상태이상 함수
+void Player::applyPoison() { m_isPoison = true; }
+
+void Player::curePoison() { m_isPoison = false; }
+
+bool Player::isPoisoned() const { return m_isPoison; }
+
+void Player::drainStamina(int amount)
+{
+	m_stamina -= amount;
+	m_stamina = std::max(0, m_stamina);
+}

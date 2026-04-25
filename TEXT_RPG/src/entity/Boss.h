@@ -10,8 +10,6 @@ public:
 
 	void takeDamage(int damage) override;
 
-	void checkPhaseTransition();
-
 	bool isPhaseTwo() const;
 
 	virtual void onPhaseTwo() = 0;
@@ -20,4 +18,7 @@ private:
 
 	bool m_isPhaseTwo = false;
 	static constexpr float PHASE_TWO_THRESHOLD = 0.5f;
+
+	void checkPhaseTransition();
+
 };

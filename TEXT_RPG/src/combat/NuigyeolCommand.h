@@ -2,7 +2,7 @@
 #include "SkillCommand.h"
 #include "../entity/Entity.h"
 
-class MusukiCommand : public SkillCommand
+class NuigyeolCommand : public SkillCommand
 {
 public:
 
