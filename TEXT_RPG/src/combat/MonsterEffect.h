@@ -8,4 +8,7 @@ enum class MonsterEffect
     HighDamage,    // 높은 데미지 (수라어)
     HpAbsorb,      // HP 흡수 (동굴태충)
     HpRegen,       // HP 회복 (적살귀)
+    //보스전용 상태이상
 };
+
+//string2Effect 함수

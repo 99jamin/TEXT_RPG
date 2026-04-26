@@ -17,7 +17,7 @@ public:
 	MonsterEffect getEffect() const { return m_effect; }
 
 
-private:
+protected:
 
 	MonsterEffect m_effect;
 	//std::optional<Item> m_dropItem;

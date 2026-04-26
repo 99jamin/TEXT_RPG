@@ -6,15 +6,25 @@ Player::Player(const std::string& name, int maxHp, int atk, int def, int maxStam
 
 }
 
+void Player::takeDamage(int damage)
+{
+	if (m_isChargingGumni)
+		setHitWhileCharging();
+
+	if (m_isDefending)
+		damage /= 2;  // 방어 중 피해 감소
+
+	Entity::takeDamage(damage);
+}
+
 void Player::printStatus() const
 {
-
+	
 }
 
 void Player::dead()
 {
-	//게임 오버 연출
-	//타이틀 화면으로 전환
+
 }
 
 void Player::learnSkill(SkillType skill)

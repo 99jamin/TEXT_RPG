@@ -11,6 +11,8 @@ public:
 
 	Player(const std::string& name, int maxHp, int atk, int def, int maxStamina);
 
+	void takeDamage(int damage);
+
 	void printStatus() const override;
 
 	void dead() override;
@@ -28,7 +30,7 @@ public:
 	int getStamina() const { return m_stamina; }
 	int getMaxStamina() const { return m_maxStamina; }
 
-	//세이브
+	//로드 세이브 데이터
 	void loadFromSave(int curHp, int stamina, std::vector<SkillType> skills);
 
 	//카운터 스킬 관련 플래그 함수

@@ -28,6 +28,8 @@
     <ClCompile Include="src\entity\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\combat\CombatResult.h" />
+    <ClInclude Include="src\combat\CombatSystem.h" />
     <ClInclude Include="src\combat\Command.h" />
     <ClInclude Include="src\combat\DefendCommand.h" />
     <ClInclude Include="src\combat\FleeCommand.h" />
@@ -39,6 +41,7 @@
     <ClInclude Include="src\combat\NeoulCommand.h" />
     <ClInclude Include="src\combat\NuigyeolCommand.h" />
     <ClInclude Include="src\combat\SkillCommand.h" />
+    <ClInclude Include="src\combat\SkillCommandFactory.h" />
     <ClInclude Include="src\combat\SkillType.h" />
     <ClInclude Include="src\combat\SoroksorokCommand.h" />
     <ClInclude Include="src\core\GameManager.h" />

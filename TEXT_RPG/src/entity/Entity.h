@@ -11,9 +11,9 @@ public:
 
 	void takeDamage(int damage) override;
 
-	virtual void printStatus() const = 0;
+	virtual void printStatus() const = 0;		//print의 역할...?
 
-	virtual void dead() = 0;
+	virtual void dead() = 0;					//dead의 역할...?
 
 	const std::string& getName() const { return m_name; }
 	int getCurHp() const { return m_curHp; }
@@ -40,8 +40,5 @@ private:
 	int m_maxHp;
 	int m_atk;
 	int m_def;
-
-
-
 
 };
