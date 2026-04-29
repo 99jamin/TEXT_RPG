@@ -18,7 +18,7 @@ public:
 
 	std::string getDescription() const override
 	{
-		return "¹æ¾î";
+		return "ë°©ì–´";
 	}
 
 };

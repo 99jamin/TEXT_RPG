@@ -1,14 +1,16 @@
-#pragma once
+﻿#pragma once
 #include "Command.h"
+#include "../data/DataTypes.h"
 #include <string>
+
 
 class SkillCommand : public Command
 {
 
 public:
 
-	SkillCommand(const std::string& name, float damageRatio, int staminaCost)
-		:m_name(name), m_damageRatio(damageRatio), m_staminaCost(staminaCost)
+	SkillCommand(const SkillData& data)
+		:m_name(data.name), m_damageRatio(data.damage_ratio), m_staminaCost(data.stamina_cost)
 	{
 
 	}

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "SkillType.h"
 #include "SkillCommand.h"
 #include "NuigyeolCommand.h"
@@ -7,30 +7,31 @@
 #include "GumniCommand.h"
 #include "MulmaruCommand.h"
 #include "SoroksorokCommand.h"
+#include "../data/DataManager.h"
 #include <memory>
 
 inline std::unique_ptr<SkillCommand> createSkillCommand(SkillType type) {
     switch (type) {
     
     case SkillType::Nuigyeol:
-        return std::make_unique<NuigyeolCommand>("¹Ù´å¼Ò¸®: ‡û°á", 1.2f, 1);
+        return std::make_unique<NuigyeolCommand>(DataManager::getInstance().getSkillData(type));
     
     case SkillType::Musuki:
-        return std::make_unique<MusukiCommand>("¹Ù´å¼Ò¸®: ¹«¼ö±â", 0.7f, 1);
+        return std::make_unique<MusukiCommand>(DataManager::getInstance().getSkillData(type));
     
     case SkillType::Neoul:
-        return std::make_unique<NeoulCommand>("¹Ù´å¼Ò¸®: ³Ê¿ï", 1.2f, 2);
+        return std::make_unique<NeoulCommand>(DataManager::getInstance().getSkillData(type));
     
     case SkillType::Gumni:
-        return std::make_unique<GumniCommand>("¹Ù´å¼Ò¸®: ±À´µ", 1.5f, 1);
+        return std::make_unique<GumniCommand>(DataManager::getInstance().getSkillData(type));
     
     case SkillType::Mulmaru:
-        return std::make_unique<MulmaruCommand>("¹Ù´å¼Ò¸®: ¹°¸¶·ç", 2.0f, 3);
+        return std::make_unique<MulmaruCommand>(DataManager::getInstance().getSkillData(type));
    
     case SkillType::Soroksorok:
-        return std::make_unique<SoroksorokCommand>("ÀÚÀå¼Ò¸®: ¼Ò·Ï¼Ò·Ï", 0.0f, 5);
+        return std::make_unique<SoroksorokCommand>(DataManager::getInstance().getSkillData(type));
         
-    defalult:
+    default:
         return nullptr;
     }
 }

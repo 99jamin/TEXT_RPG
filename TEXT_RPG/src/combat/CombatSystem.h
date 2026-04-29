@@ -36,15 +36,11 @@ public:
 		return m_result;
 	}
 
-	/// <summary>
-	/// Ä¿¸Çµå ÆĞÅÏÀ» ´õ »ì¸®·Á¸é »ç½Ç, Ä¿¸Çµå ÆĞÅÏÀ» Á¤ÇÏ±â¸¸ ÇÏ°í ½ÇÇàÀº ÇÑ ¹®´Ü¿¡¼­ ÇÏ´Â°Ô ¸ÂÁö ¾Ê³ª?
-	/// Áö±İ ±×³É switch¹®À¸·Î Çàµ¿À» ³ª´©´Â°Ô Ä¿¸Çµå ÆĞÅÏÀÇ¹Ì°¡ ¾ø´Â °Í °°°í, ¸ğµç Ä¿¸Çµå ÆĞÅÏÀ» ´Ù ¾Ë°íÀÖ´Â °Íµµ ¸Â´Â Áö Àß ¸ğ¸£°Ú´Ù. Ä¿¸Çµå Å¬·¡½º¸¸ ¾Ë°í ´ÙÇü¼ºÀ» »ì·Á¼­ ½ÇÇà¸¸ ½ÃÅ°´Â°Ô ¸ÂÁö ¾Ê³ª?
-	/// </summary>
+	
 	void playerTurn()
 	{
-		m_player.recoverStamina(1);  // Ãß°¡
+		m_player.recoverStamina(1);  
 
-		//±À´Ï Ä¿¸Çµå ½ÇÇà.
 		if (m_player.isChargingGumni())
 		{
 			auto cmd = createSkillCommand(SkillType::Gumni);
@@ -53,7 +49,6 @@ public:
 			return;
 		}
 
-		// µ¶ µ¥¹ÌÁö Ã³¸®
 		if (m_player.isPoisoned())
 			m_player.takeDamage(POISON_DAMAGE);
 
@@ -66,7 +61,7 @@ public:
 		}
 
 		int input;
-		std::cout << "1.°ø°İÇÏ±â\n2.¹æ¾îÇÏ±â\n3.µµ¸Á°¡±â\n4.¾ÆÀÌÅÛ";
+		std::cout << "1.ê³µê²©í•˜ê¸°\n2.ë°©ì–´í•˜ê¸°\n3.ë„ë§ê°€ê¸°\n4.ì•„ì´í…œ";
 		std::cin >> input;
 
 		switch (input)
@@ -77,7 +72,7 @@ public:
 			
 			int count = 0;
 			std::vector<SkillType> skills = m_player.getSkills();
-			for (auto& e : skills)		//TODO: ½ºÅÂ¹Ì³Ê ¾øÀ¸¸é ½ºÅ³ ºñÈ°¼ºÈ­.
+			for (auto& e : skills)		
 			{
 				std::cout << ++count << "." << toString(e) << std::endl;
 			}
@@ -87,8 +82,6 @@ public:
 			auto skill = createSkillCommand(selected);
 			skill->execute(m_player, *m_monsters[0]);
 			m_player.consumeStamina(skill->getStaminaCost());
-
-			//TODO: ¸ğµç Ä¿¸Çµå ÆĞÅÏÀ» command·Î ÅëÀÏÇØ¼­ »ç¿ëÇÒ¶§, »ç¿ë ÈÄ¿¡ ºÎ°¡ÀûÀÎ ÈÄÃ³¸® Ã³¸®
 
 			checkMonsters();
 
@@ -103,8 +96,6 @@ public:
 			
 		case 3:
 		{
-			//TODO: µµ¸Á Ä¿¸Çµå ½ÇÇàÇÒ ¶§ ÇÃ·¡±× È®ÀÎÀÛ¾÷ÀÌ ºĞ¸®µÇ¾î¾ß ÇÏ¸é, Â÷¶ó¸® ÄÄ¹î½Ã½ºÅÛÀ» Æ÷ÀÎÅÍ·Î ³Ñ°ÜÁÖ°í combatendÇÔ¼ö¸¦ Á÷Á¢ È£ÃâÇÏµµ·Ï ÇÏ´Â °Íµµ ÁÁ¾Æº¸ÀÓ. (±Ùµ¥ ±×·¯¸é ÄÄ¹î°ú Ä¿¸Çµå°¡ ¼­·Î¼­·Î ¾Ë°íÀÖ´Â °ü°è°¡ µÇ¾î¹ö¸².)
-			//¾Æ´Ï¸é Ä¿¸Çµå Å¸ÀÔÀÇ executeÇÔ¼ö ÀÚÃ¼¿¡ ¹İÈ¯°ªÀ» Áà¼­, µµ¸Á, ÀüÅõ À¯Áö µîÀ¸·Î ±¸ºĞ?
 			FleeCommand fleecommand;
 			fleecommand.execute(m_player, *m_monsters[0]);
 			if (fleecommand.isFleeSuccess())
@@ -150,13 +141,10 @@ private:
 	std::vector<Monster*> m_monsters;
 	bool m_isRunning = true;
 
-	//ÀüÅõ °á°ú
 	CombatResult m_result = CombatResult::Victory;
 
-	//»óÅÂÀÌ»ó
 	static constexpr int POISON_DAMAGE = 5;
 
-	//¸ó½ºÅÍ »ç¸Á Ã¼Å©
 	void checkMonsters()
 	{
 		m_monsters.erase(

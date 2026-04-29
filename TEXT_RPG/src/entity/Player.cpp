@@ -1,4 +1,6 @@
-#include "Player.h"
+癤�#include "Player.h"
+#include <vector>
+#include <algorithm>
 
 Player::Player(const std::string& name, int maxHp, int atk, int def, int maxStamina)
 	:Entity(name, maxHp, atk, def), m_maxStamina(maxStamina), m_stamina(maxStamina)
@@ -12,7 +14,7 @@ void Player::takeDamage(int damage)
 		setHitWhileCharging();
 
 	if (m_isDefending)
-		damage /= 2;  // 방어 중 피해 감소
+		damage /= 2;  
 
 	Entity::takeDamage(damage);
 }
@@ -76,7 +78,6 @@ void Player::releaseGumni()
 	m_wasHitWhileCharging = false;
 }
 
-//상태이상 함수
 void Player::applyPoison() { m_isPoison = true; }
 
 void Player::curePoison() { m_isPoison = false; }
@@ -87,4 +88,24 @@ void Player::drainStamina(int amount)
 {
 	m_stamina -= amount;
 	m_stamina = std::max(0, m_stamina);
+}
+
+//inven
+void Player::addItem(const std::string& id)
+{
+	m_inven[id]++;
+}
+
+void Player::removeItem(const std::string& id)
+{
+	if (m_inven[id] <= 0)
+		return;
+
+	m_inven[id]--;
+}
+
+bool Player::hasItem(const std::string& id) const
+{
+	auto it = m_inven.find(id);
+	return (it != m_inven.end() && it->second > 0);
 }

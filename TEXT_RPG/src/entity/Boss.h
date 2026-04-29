@@ -5,8 +5,8 @@ class Boss : public Monster
 {
 
 public:
-
-	Boss(const std::string& name, int maxHp, int atk, int def, MonsterEffect effect);
+	
+	using Monster::Monster;
 
 	void takeDamage(int damage) override;
 

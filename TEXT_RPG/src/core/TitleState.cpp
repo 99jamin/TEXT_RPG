@@ -4,14 +4,14 @@
 
 void TitleState::enter(GameManager& manager)
 {
-	std::cout << "====¼¶±×´Ã====\n";
+	std::cout << "====ì„¬ê·¸ëŠ˜====\n";
 }
 
 void TitleState::update(GameManager& manager)
 {
 	int input;
-	std::cout << "1. ½ÃÀÛÇÏ±â\n";
-	std::cout << "2. Á¾·áÇÏ±â\n";
+	std::cout << "1. ì‹œì‘í•˜ê¸°\n";
+	std::cout << "2. ì¢…ë£Œí•˜ê¸°\n";
 	std::cin >> input;
 
 	if (input == 2)

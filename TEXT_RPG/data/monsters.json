@@ -1,0 +1,124 @@
+{
+  "monsters": [
+    {
+      "id": "plague_fisherman",
+      "name": "역병 어부",
+      "description": "이성을 잃은 어부. 눈이 붉게 충혈되어 있고, 온몸에 역병이 창궐해있다.",
+      "hp": 30,
+      "attack": 8,
+      "defense": 2,
+      "effect": "None",
+      "drop_item": "bandage"
+    },
+    {
+      "id": "plague_dog",
+      "name": "역병 들개",
+      "description": "역병에 물든 들개. 한 두 마리가 아닌 것 같다..",
+      "hp": 25,
+      "attack": 10,
+      "defense": 1,
+      "effect": "None",
+      "drop_item": "herb"
+    },
+    {
+      "id": "paegwi",
+      "name": "패귀",
+      "description": "적조에 물든 커다란 조개. 껍질 속에 알 수 없는 붉은 살점들이 꿈틀거린다.",
+      "hp": 55,
+      "attack": 14,
+      "defense": 6,
+      "effect": "Poison",
+      "drop_item": "red_flesh"
+    },
+    {
+      "id": "jeokguin",
+      "name": "적구인",
+      "description": "적조에 물든 갯지렁이. 무엇을 먹은 것 인지, 크기가 사람 만하다.",
+      "hp": 50,
+      "attack": 12,
+      "defense": 5,
+      "effect": "StaminaDrain",
+      "drop_item": "red_flesh"
+    },
+    {
+      "id": "plague_seagull",
+      "name": "역병 갈매기",
+      "description": "적조를 먹고 변이된 갈매기. 해안에 있는 잡동사니들을 닥치는대로 먹는 듯 하다.",
+      "hp": 45,
+      "attack": 16,
+      "defense": 4,
+      "effect": "None",
+      "drop_item": "incense_pouch"
+    },
+    {
+      "id": "surae",
+      "name": "수라어",
+      "description": "적조를 흡수하며 거대해진 물고기. 머리 부분이 심하게 뒤틀려 있다.",
+      "hp": 60,
+      "attack": 22,
+      "defense": 8,
+      "effect": "HighDamage",
+      "drop_item": "dried_fish"
+    },
+    {
+      "id": "plague_mermaid",
+      "name": "역병 인어",
+      "description": "역병에 물든 인어. 인간의 형태를 유지하고 있는 상반신에 온갖 역병이 창궐해 있다.",
+      "hp": 65,
+      "attack": 18,
+      "defense": 10,
+      "effect": "None",
+      "drop_item": "yeong_yak"
+    },
+    {
+      "id": "cave_taechung",
+      "name": "동굴 태충",
+      "description": "섬 동굴에 기생하는 거대한 벌레. 공격할 때마다 상대의 피를 빨아들인다.",
+      "hp": 70,
+      "attack": 20,
+      "defense": 8,
+      "effect": "HpAbsorb",
+      "drop_item": ""
+    },
+    {
+      "id": "jeoksalgwi",
+      "name": "적살귀",
+      "description": "역병으로 합쳐진 살점 덩어리. 의식이 있어 보이진 않는다.",
+      "hp": 110,
+      "attack": 22,
+      "defense": 12,
+      "effect": "HpRegen",
+      "drop_item": "red_flesh"
+    },
+    {
+      "id": "yugangwi",
+      "name": "육안귀",
+      "description": "여섯개의 눈이 달린 거북이. 시선을 마주치면 기운이 빠지는 느낌이 든다",
+      "hp": 90,
+      "attack": 24,
+      "defense": 20,
+      "effect": "StaminaDrain",
+      "drop_item": "red_flesh"
+    },
+    {
+      "id": "jeokgapsin",
+      "name": "적갑신",
+      "description": "적조를 흡수하며 거대하게 변이된 대게. 적갈색의 껍질은 웬만한 공격을 튕겨낸다. 포구를 장악하고 있어 배를 타려면 반드시 지나쳐야 한다.",
+      "hp": 200,
+      "attack": 30,
+      "defense": 30,
+      "effect": "HighDamage",
+      "drop_item": "yeong_yak"
+    },
+    {
+      "id": "jeokkwi",
+      "name": "저퀴",
+      "description": "역병의 근원. 역병 살점과 바다 부산물로 뒤덮여 있다. 기괴한 울음소리가 들린다.",
+      "hp": 350,
+      "attack": 35,
+      "defense": 20,
+      "effect": "Poison",
+      "drop_item": ""
+    }
+  ]
+}

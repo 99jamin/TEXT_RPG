@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\entity">
+      <UniqueIdentifier>{4ef9078e-55ee-4d89-aced-0b014ac0a033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\combat">
+      <UniqueIdentifier>{f5c7c945-ad73-4c27-a6f7-58b19cf48b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\data">
+      <UniqueIdentifier>{aa85116b-36f8-44b3-9641-e47b4cee8331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core">
+      <UniqueIdentifier>{69c2f65c-f67c-412d-915b-2bbf168a982c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\GameManager.cpp">
@@ -36,85 +48,117 @@
     <ClCompile Include="src\entity\Boss.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\data\DataManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entity\Item.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\core\GameState.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\GameManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\TitleState.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity\Entity.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity\IDamageable.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity\Player.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\SkillType.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity\Monster.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\MonsterEffect.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="src\entity\Boss.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\Command.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\SkillCommand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\NuigyeolCommand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\MusukiCommand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\NeoulCommand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\GumniCommand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\MulmaruCommand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\SoroksorokCommand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity\JeokgapsinBoss.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity\JeokkwiBoss.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\DefendCommand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\FleeCommand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\MonsterAtkCommand.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\entity</Filter>
     </ClInclude>
     <ClInclude Include="src\combat\CombatResult.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\combat</Filter>
     </ClInclude>
     <ClInclude Include="src\combat\CombatSystem.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\Command.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\DefendCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\FleeCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\GumniCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\JeokgapsinBoss.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\JeokkwiBoss.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\MonsterAtkCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\MulmaruCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\MusukiCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\NeoulCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\NuigyeolCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\SkillCommand.h">
+      <Filter>헤더 파일\combat</Filter>
     </ClInclude>
     <ClInclude Include="src\combat\SkillCommandFactory.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\combat</Filter>
     </ClInclude>
+    <ClInclude Include="src\combat\SoroksorokCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\SkillType.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\Entity.h">
+      <Filter>헤더 파일\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\Item.h">
+      <Filter>헤더 파일\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\ItemEffect.h">
+      <Filter>헤더 파일\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\Monster.h">
+      <Filter>헤더 파일\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\MonsterEffect.h">
+      <Filter>헤더 파일\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\Player.h">
+      <Filter>헤더 파일\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data\DataManager.h">
+      <Filter>헤더 파일\data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data\DataTypes.h">
+      <Filter>헤더 파일\data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\GameManager.h">
+      <Filter>헤더 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\GameState.h">
+      <Filter>헤더 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\TitleState.h">
+      <Filter>헤더 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\IDamageable.h">
+      <Filter>헤더 파일\entity</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\items.json">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\maps.json">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\monsters.json">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\skills.json">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

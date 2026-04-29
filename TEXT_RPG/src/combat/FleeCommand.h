@@ -10,8 +10,8 @@ public:
 
 	void execute(Entity& user, Entity& target) override
 	{
-		m_fleeSuccess = false;  // ÃÊ±âÈ­ Ãß°¡
-		fleeDescription = "µµ¸Á¿¡ ½ÇÆĞÇß´Ù.";
+		m_fleeSuccess = false; 
+		fleeDescription = "ë„ë§ì— ì‹¤íŒ¨í–ˆë‹¤.";
 
 		static std::mt19937 gen(std::random_device{}());
 		static std::uniform_int_distribution<int> dis(0, 9);
@@ -19,8 +19,8 @@ public:
 		int result = dis(gen);
 		if (result < 8)
 		{
-			// µµÁÖ ¼º°ø
-			fleeDescription = "µµ¸Á¿¡ ¼º°øÇß´Ù.";
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			fleeDescription = "ë„ë§ì— ì„±ê³µí–ˆë‹¤.";
 			m_fleeSuccess = true;
 		}
 	}
@@ -36,7 +36,7 @@ public:
 private:
 
 	bool m_fleeSuccess = false;
-	std::string fleeDescription = "µµ¸Á¿¡ ½ÇÆĞÇß´Ù.";
+	std::string fleeDescription = "ë„ë§ì— ì‹¤íŒ¨í–ˆë‹¤.";
 
 
 };

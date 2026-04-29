@@ -1,8 +1,7 @@
-#pragma once
-#include <vector>
-#include <algorithm>
+癤�#pragma once
 #include "Entity.h"
 #include "../combat/SkillType.h"
+#include <map>
 
 class Player : public Entity
 {
@@ -30,44 +29,47 @@ public:
 	int getStamina() const { return m_stamina; }
 	int getMaxStamina() const { return m_maxStamina; }
 
-	//로드 세이브 데이터
+	//Save
 	void loadFromSave(int curHp, int stamina, std::vector<SkillType> skills);
 
-	//카운터 스킬 관련 플래그 함수
+	//GumniCommand Flag
 	void startGumniCharge();
 	void setHitWhileCharging();
 	bool isChargingGumni() const;
 	bool wasHitWhileCharging() const;
 	void releaseGumni();
 
-
-	//방어 관련 플래그 함수
+	//Defecd Flag
 	void startDefend() { m_isDefending = true; }
 	void endDefend() { m_isDefending = false; }
 	bool isDefending() const { return m_isDefending; }
 
-	//상태이상 함수
+	//Debuff Flag
 	void applyPoison();
 	void curePoison();
 	bool isPoisoned() const;
 	void drainStamina(int amount);
 
+	//inven
+	void addItem(const std::string& id);
+	void removeItem(const std::string& id);
+	bool hasItem(const std::string& id) const;
+
+
 
 private:
 
 	std::vector<SkillType> m_skills;
-	//std::vector<Item> m_inven;
+	std::map<std::string,int> m_inven;
+
 	int m_stamina;
 	int m_maxStamina;
 
-	//카운터 스킬 관련 플래그
 	bool m_isChargingGumni = false;
 	bool m_wasHitWhileCharging = false;
 
-	//방어 플래그
 	bool m_isDefending = false;
 
-	//상태이상 플래그
 	bool m_isPoison = false;
 
 

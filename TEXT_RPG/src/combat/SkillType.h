@@ -1,23 +1,24 @@
 #pragma once
+#include <string>
 
-enum class SkillType 
+enum class SkillType
 {
-	Nuigyeol,    // ‡û°á
-	Musuki,      // ¹«¼ö±â
-	Neoul,       // ³Ê¿ï
-	Gumni,       // ±À´µ
-	Mulmaru,     // ¹°¸¶·ç
-	Soroksorok   // ¼Ò·Ï¼Ò·Ï
+    Nuigyeol,    // ë‰«ê²°
+    Musuki,      // ë¬´ìˆ˜ê¸°
+    Neoul,       // ë„ˆìš¸
+    Gumni,       // êµ¼ë‰˜
+    Mulmaru,     // ë¬¼ë§ˆë£¨
+    Soroksorok   // ì†Œë¡ì†Œë¡
 };
 
 inline std::string toString(SkillType type) {
     switch (type) {
-    case SkillType::Nuigyeol:  return "¹Ù´å¼Ò¸®: ‡û°á";
-    case SkillType::Musuki:    return "¹Ù´å¼Ò¸®: ¹«¼ö±â";
-    case SkillType::Neoul:     return "¹Ù´å¼Ò¸®: ³Ê¿ï";
-    case SkillType::Gumni:     return "¹Ù´å¼Ò¸®: ±À´µ";
-    case SkillType::Mulmaru:   return "¹Ù´å¼Ò¸®: ¹°¸¶·ç";
-    case SkillType::Soroksorok: return "ÀÚÀå¼Ò¸®: ¼Ò·Ï¼Ò·Ï";
-    default: return "¾Ë ¼ö ¾øÀ½";
+    case SkillType::Nuigyeol:   return "ë°”ë‹·ì†Œë¦¬: ë‰«ê²°";
+    case SkillType::Musuki:     return "ë°”ë‹·ì†Œë¦¬: ë¬´ìˆ˜ê¸°";
+    case SkillType::Neoul:      return "ë°”ë‹·ì†Œë¦¬: ë„ˆìš¸";
+    case SkillType::Gumni:      return "ë°”ë‹·ì†Œë¦¬: êµ¼ë‰˜";
+    case SkillType::Mulmaru:    return "ë°”ë‹·ì†Œë¦¬: ë¬¼ë§ˆë£¨";
+    case SkillType::Soroksorok: return "ìì¥ì†Œë¦¬: ì†Œë¡ì†Œë¡";
+    default: return "ì•Œ ìˆ˜ ì—†ìŒ";
     }
 }

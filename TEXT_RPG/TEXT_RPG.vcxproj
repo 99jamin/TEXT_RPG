@@ -22,8 +22,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\core\GameManager.cpp" />
     <ClCompile Include="src\core\TitleState.cpp" />
+    <ClCompile Include="src\data\DataManager.cpp" />
     <ClCompile Include="src\entity\Boss.cpp" />
     <ClCompile Include="src\entity\Entity.cpp" />
+    <ClCompile Include="src\entity\Item.cpp" />
     <ClCompile Include="src\entity\Monster.cpp" />
     <ClCompile Include="src\entity\Player.cpp" />
   </ItemGroup>
@@ -47,13 +49,23 @@
     <ClInclude Include="src\core\GameManager.h" />
     <ClInclude Include="src\core\GameState.h" />
     <ClInclude Include="src\core\TitleState.h" />
+    <ClInclude Include="src\data\DataManager.h" />
+    <ClInclude Include="src\data\DataTypes.h" />
     <ClInclude Include="src\entity\Boss.h" />
     <ClInclude Include="src\entity\Entity.h" />
     <ClInclude Include="src\entity\IDamageable.h" />
+    <ClInclude Include="src\entity\Item.h" />
+    <ClInclude Include="src\entity\ItemEffect.h" />
     <ClInclude Include="src\entity\JeokgapsinBoss.h" />
     <ClInclude Include="src\entity\JeokkwiBoss.h" />
     <ClInclude Include="src\entity\Monster.h" />
     <ClInclude Include="src\entity\Player.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\items.json" />
+    <None Include="data\maps.json" />
+    <None Include="data\monsters.json" />
+    <None Include="data\skills.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -142,6 +154,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

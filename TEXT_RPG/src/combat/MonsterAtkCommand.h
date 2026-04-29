@@ -20,40 +20,40 @@ public:
 
         switch (monster->getEffect()) {
         case MonsterEffect::None:
-            // ÀÏ¹İ °ø°İ
+            
             actualDamage = monster->getAtk()* DAMAGE_RATIO;
             player->takeDamage(actualDamage);
             break;
 
         case MonsterEffect::Poison:
-            // µ¶ ºÎ¿©
+            
             actualDamage = monster->getAtk() * DAMAGE_RATIO;
             player->takeDamage(actualDamage);
             player->applyPoison();
             break;
 
         case MonsterEffect::StaminaDrain:
-            // ±â·Â °¨¼Ò
+            
             actualDamage = monster->getAtk() * DAMAGE_RATIO;
             player->takeDamage(actualDamage);
             player->drainStamina(1);
             break;
 
         case MonsterEffect::HighDamage:
-            //µ¥¹ÌÁö »½Æ¢±â
+            
             actualDamage = monster->getAtk() * HIGH_DAMAGE_RATIO;
             player->takeDamage(actualDamage);
             break;
 
         case MonsterEffect::HpAbsorb:
-            //Hp Èí¼ö
+            
             actualDamage = monster->getAtk() * DAMAGE_RATIO;
             player->takeDamage(actualDamage);
             monster->recoverHp(actualDamage * HP_ABSORB_RATIO);
             break;
 
         case MonsterEffect::HpRegen:
-            //Hp ¸®Á¨, µ¥¹ÌÁö´Â 0
+            
             monster->recoverHp((monster->getMaxHp())/ HP_REGEN_RATIO);
             break;
         }
@@ -62,7 +62,7 @@ public:
 
 	std::string getDescription() const override
 	{
-        return "ÀûÀÇ °ø°İ";
+        return "ëª¬ìŠ¤í„°ì˜ ê³µê²©";
 	}
 
 

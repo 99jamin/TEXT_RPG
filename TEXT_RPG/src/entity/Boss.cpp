@@ -1,10 +1,5 @@
 #include "Boss.h"
 
-Boss::Boss(const std::string& name, int maxHp, int atk, int def, MonsterEffect effect)
-	:Monster(name, maxHp, atk, def, effect)
-{
-
-}
 
 void Boss::takeDamage(int damage)
 {

@@ -1,0 +1,62 @@
+{
+  "maps": [
+    {
+      "id": "village",
+      "name": "바닷가 마을",
+      "description": "역병이 덮친 바닷가 마을. 인적이 끊겼고 바다 냄새 속에 썩은 냄새가 섞여있다.",
+      "next_map": "tidal_flat",
+      "grid": []
+    },
+    {
+      "id": "tidal_flat",
+      "name": "갯벌 해안",
+      "description": "붉은 조수가 발목을 적신다. 뻘 속에서 무언가 꿈틀거리는 소리가 들린다.",
+      "next_map": "ruined_village",
+      "grid": []
+    },
+    {
+      "id": "ruined_village",
+      "name": "황폐한 어촌",
+      "description": "완전히 버려진 어촌. 빈 집들 사이로 재가 날린다.",
+      "next_map": "red_tide_port",
+      "grid": []
+    },
+    {
+      "id": "red_tide_port",
+      "name": "적조 뒤덮인 포구",
+      "description": "핏빛으로 물든 바다. 포구를 장악한 거대한 무언가의 기척이 느껴진다.",
+      "next_map": "misty_island",
+      "boss": "jeokgapsin",
+      "grid": []
+    },
+    {
+      "id": "misty_island",
+      "name": "안개 낀 섬 외부",
+      "description": "짙은 안개가 섬을 감싸고 있다. 발밑에서 역병의 냄새가 진해진다.",
+      "next_map": "cave_entrance",
+      "grid": []
+    },
+    {
+      "id": "cave_entrance",
+      "name": "섬 동굴 입구",
+      "description": "동굴 깊숙이서 기묘한 울음소리가 들려온다. 역병의 기운이 이곳에서 시작된다.",
+      "next_map": "cave_b1",
+      "grid": []
+    },
+    {
+      "id": "cave_b1",
+      "name": "섬 지하 1층",
+      "description": "동굴 벽에 역병 살점이 붙어있다. 바닥에는 정체 모를 붉은 액체가 흐른다.",
+      "next_map": "jeokkwi_lair",
+      "grid": []
+    },
+    {
+      "id": "jeokkwi_lair",
+      "name": "저퀴의 심부",
+      "description": "역병의 근원. 역병 살점과 바다 부산물로 가득 찬 공간. 기괴한 울음소리가 가득하다.",
+      "next_map": "",
+      "boss": "jeokkwi",
+      "grid": []
+    }
+  ]
+}

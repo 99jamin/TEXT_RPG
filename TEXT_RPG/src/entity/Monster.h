@@ -1,13 +1,14 @@
-#pragma once
+﻿#pragma once
 #include "Entity.h"
 #include "../combat/MonsterEffect.h"
-//#include <optional>
+#include "../data/DataTypes.h"
+#include <optional>
 
 class Monster : public Entity
 {
 
 public:
-	Monster(const std::string& name, int maxHp, int atk, int def, MonsterEffect effect);
+	Monster(const MonsterData& data);
 
 
 	void printStatus() const override;
@@ -20,6 +21,7 @@ public:
 protected:
 
 	MonsterEffect m_effect;
-	//std::optional<Item> m_dropItem;
+	std::optional<std::string> m_dropItemId;
+	std::string m_description;
 
 };
