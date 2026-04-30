@@ -1,62 +1,554 @@
-{
+﻿{
   "maps": [
     {
       "id": "village",
       "name": "바닷가 마을",
       "description": "역병이 덮친 바닷가 마을. 인적이 끊겼고 바다 냄새 속에 썩은 냄새가 섞여있다.",
       "next_map": "tidal_flat",
-      "grid": []
+      "grid": [
+        [ null, null, null, null, null, null ],
+        [ "start", "skill_1", null, null, null, null ],
+        [ null, "combat_1", "item_1", "combat_2", null, null ],
+        [ null, null, "combat_3", "event_2", "exit", null ],
+        [ null, null, null, null, null, null ],
+        [ null, null, null, null, null, null ]
+      ],
+      "rooms": {
+        "start": {
+          "type": "Start",
+          "text": "집이 엉망이 되어있다.",
+          "action_text": "침대에는 아직 아이의 온기가 남아있다..."
+        },
+        "skill_1": {
+          "type": "Item",
+          "text": "남편이 남겨둔 검과, 검무를 기록한 서책이 바닥에 널부러져 있다.",
+          "action_text": "검과 무가서를 집었다. 무가서의 첫 장에는 바닷소리: 뉫결이 기록되어 있다. 뒷 장은 찢어져 알아볼 수 없다.",
+          "item": "mugaseo_1",
+          "count": 1
+        },
+        "combat_1": {
+          "type": "Combat",
+          "monster": "plague_fisherman"
+        },
+        "item_1": {
+          "type": "Item",
+          "text": "마을이 텅 비어있다. 역병의 냄새가 진하게 풍긴다.",
+          "action_text": "붕대를 주웠다.",
+          "item": "bandage",
+          "count": 1
+        },
+        "combat_2": {
+          "type": "Combat",
+          "monster": "plague_dog"
+        },
+        "combat_3": {
+          "type": "Combat",
+          "monster": "plague_fisherman"
+        },
+        "event_2": {
+          "type": "Event",
+          "text": "마을 끝자락이다. 저 멀리 갯벌이 보인다.",
+          "action_text": "바닷바람이 불어온다."
+        },
+        "exit": {
+          "type": "Exit",
+          "text": "갯벌 해안으로 향하는 길이 보인다.",
+          "action_text": "역귀들의 발자국이 갯벌 해안으로부터 오고있다."
+        }
+      }
     },
     {
       "id": "tidal_flat",
       "name": "갯벌 해안",
-      "description": "붉은 조수가 발목을 적신다. 뻘 속에서 무언가 꿈틀거리는 소리가 들린다.",
+      "description": "붉은 조수가 남긴 갯벌이다. 뻘 속에서 무언가 꿈틀거리는 소리가 들린다.",
       "next_map": "ruined_village",
-      "grid": []
+      "grid": [
+        [ null, null, "start", null, null, null ],
+        [ null, "combat_1", "event_1", "combat_2", null, null ],
+        [ null, null, "skill_1", "combat_3", null, null ],
+        [ null, null, null, "combat_5", "item_1", null ],
+        [ null, null, null, null, "combat_4", "exit" ],
+        [ null, null, null, null, null, null ]
+      ],
+      "rooms": {
+        "start": {
+          "type": "Start",
+          "text": "발밑엔 붉게 물든 뻘이 뒤엉켜있다. 걸을 때마다 역겨운 기분이 든다.",
+          "action_text": "피는 아닌것 같다."
+        },
+        "event_1": {
+          "type": "Event",
+          "text": "뻘 속에 무언가 반쯤 파묻혀 있다.",
+          "action_text": "어부의 시체다. 얼마 되지 않은 것 같다."
+        },
+        "combat_1": {
+          "type": "Combat",
+          "monster": "jeokguin"
+        },
+        "combat_2": {
+          "type": "Combat",
+          "monster": "plague_fisherman"
+        },
+        "item_1": {
+          "type": "Item",
+          "text": "적조 속에 반쯤 잠긴 시체 더미가 보인다.",
+          "action_text": "역겨운 냄새를 참고 뒤졌다. 낡은 약초 묶음이 나왔다.",
+          "item": "herb",
+          "count": 2
+        },
+        "combat_3": {
+          "type": "Combat",
+          "monster": "paegwi"
+        },
+        "skill_1": {
+          "type": "Item",
+          "text": "적조에 잠긴 시체 더미 속에 종이 뭉치가 보인다.",
+          "action_text": "무가서의 한 조각이다. 젖었지만 아직 읽을 수 있다.",
+          "item": "mugaseo_2",
+          "count": 1
+        },
+        "combat_4": {
+          "type": "Combat",
+          "monster": "jeokguin"
+        },
+        "combat_5": {
+          "type": "Combat",
+          "monster": "paegwi"
+        },
+        "exit": {
+          "type": "Exit",
+          "text": "갯벌이 끝나는 곳에 버려진 어촌이 보인다.",
+          "action_text": "발자국이 어촌까지 이어져 있다. 살아남은 사람이 있을까?"
+        }
+      }
     },
     {
       "id": "ruined_village",
       "name": "황폐한 어촌",
-      "description": "완전히 버려진 어촌. 빈 집들 사이로 재가 날린다.",
+      "description": "역병에 황폐화된 어촌. 빈 집들 사이로 인기척이 느껴진다.",
       "next_map": "red_tide_port",
-      "grid": []
+      "grid": [
+        [ null, "event_1", null, "combat_3", null, null ],
+        [ "start", "combat_1", "skill_1", "combat_2", null, null ],
+        [ null, "item_1", null, "event_2", null, null ],
+        [ null, "combat_4", null, "combat_5", null, null ],
+        [ null, null, null, "event_3", "combat_6", "exit" ],
+        [ null, null, null, null, null, null ]
+      ],
+      "rooms": {
+        "start": {
+          "type": "Start",
+          "text": "어촌 입구다. 집집마다 문이 열려있다. 시체는 보이지 않는다.",
+          "action_text": "붉은 핏 자국들이 이어져있다."
+        },
+        "combat_1": {
+          "type": "Combat",
+          "monster": "plague_seagull"
+        },
+        "event_1": {
+          "type": "Event",
+          "text": "버려진 집 안을 들여다봤다. 밥상이 그대로 차려져 있지만, 오래된 것 처럼 상해있다.",
+          "action_text": "급하게 도망친 것 같다. 아이의 신발이 문 앞에 남겨져 있었다."
+        },
+        "combat_2": {
+          "type": "Combat",
+          "monster": "plague_fisherman"
+        },
+        "item_1": {
+          "type": "Item",
+          "text": "창고 문이 반쯤 열려있다. 이성을 잃은 어민은 자신의 팔을 뜯어 먹고있다. ",
+          "action_text": "창고 선반에 걸려있는 약초 묶음을 서둘러 가져나왔다.",
+          "item": "herb",
+          "count": 2
+        },
+        "combat_3": {
+          "type": "Combat",
+          "monster": "plague_seagull"
+        },
+        "combat_4": {
+          "type": "Combat",
+          "monster": "plague_fisherman"
+        },
+        "skill_1": {
+          "type": "Item",
+          "text": "무너진 집 잔해 속에 종이 뭉치가 보인다.",
+          "action_text": "무가서의 한 조각이다.",
+          "item": "mugaseo_3",
+          "count": 1
+        },
+        "event_2": {
+          "type": "Item",
+          "text": "낡은 제단이 있다. 풍어를 빌던 곳인 것 같다.",
+          "action_text": "제단 위에 향불이 남아있다. 가져가기로 했다.",
+          "item": "incense_pouch",
+          "count": 1
+        },
+        "combat_5": {
+          "type": "Combat",
+          "monster": "plague_seagull"
+        },
+        "combat_6": {
+          "type": "Combat",
+          "monster": "plague_fisherman"
+        },
+        "event_3": {
+          "type": "Event",
+          "text": "역병에 이성을 잃은 어민이 상반신만 남은 채 기어다니고 있다.",
+          "action_text": "다른 처지에 신경쓸 시간이 없다."
+        },
+        "exit": {
+          "type": "Exit",
+          "text": "어촌을 벗어나니 포구가 보인다. 바다가 핏빛으로 물들어 있다.",
+          "action_text": "길은 포구로만 이어져 있다. 포구로 가보자."
+        }
+      }
     },
     {
       "id": "red_tide_port",
       "name": "적조 뒤덮인 포구",
-      "description": "핏빛으로 물든 바다. 포구를 장악한 거대한 무언가의 기척이 느껴진다.",
+      "description": "핏빛으로 물든 바다. 포구를 장악한 짙은 안개가 스산하다.",
       "next_map": "misty_island",
-      "boss": "jeokgapsin",
-      "grid": []
+      "grid": [
+        [ "start", "combat_1", null, null, null, null ],
+        [ null, "event_1", "combat_2", null, null, null ],
+        [ null, null, "item_1", "combat_3", null, null ],
+        [ null, null, null, "skill_1", "combat_4", null ],
+        [ null, null, null, null, "event_2", "boss_1" ],
+        [ null, null, null, null, null, "exit" ]
+      ],
+      "rooms": {
+        "start": {
+          "type": "Start",
+          "text": "포구 입구다. 바다가 완전히 붉게 물들어 있다. 비린내와 썩은 냄새가 뒤섞여 코를 찌른다.",
+          "action_text": "발자국들이 바다로 부터 나와있다. 건너편 섬에서 온 것인가..?"
+        },
+        "combat_1": {
+          "type": "Combat",
+          "monster": "surae"
+        },
+        "event_1": {
+          "type": "Event",
+          "text": "포구 창고 앞에 시체들이 쌓여있다.",
+          "action_text": "상반신이 통째로 뜯겨나간 시체들이다. 무언가 씹어 삼킨 듯한 거친 단면이다."
+        },
+        "combat_2": {
+          "type": "Combat",
+          "monster": "plague_seagull"
+        },
+        "item_1": {
+          "type": "Item",
+          "text": "뒤집힌 배 아래 무언가 걸려있다.",
+          "action_text": "어포 한 묶음이다. 소금에 절여져 아직 먹을 수 있다.",
+          "item": "dried_fish",
+          "count": 2
+        },
+        "combat_3": {
+          "type": "Combat",
+          "monster": "surae"
+        },
+        "skill_1": {
+          "type": "Item",
+          "text": "부서진 배의 선실 안에 방수포로 감싼 꾸러미가 있다.",
+          "action_text": "무가서의 한 조각이다.",
+          "item": "mugaseo_4",
+          "count": 1
+        },
+        "combat_4": {
+          "type": "Combat",
+          "monster": "surae"
+        },
+        "event_2": {
+          "type": "Event",
+          "text": "포구 끝이다. 배 한 척이 묶여있다. 저 배로 섬에 갈 수 있을 것 같다.",
+          "action_text": "배 주변에 거대한 무언가의 흔적이 있다. 파쇄된 나무 조각들, 뜯긴 밧줄...... 발밑에 진동이 인다."
+        },
+        "boss_1": {
+          "type": "Combat",
+          "monster": "jeokgapsin"
+        },
+        "exit": {
+          "type": "Exit",
+          "text": "묶여있던 배가 자유로워졌다. 안개에 싸인 섬이 저 멀리 보인다.",
+          "action_text": "달리 방도가 없다. 섬으로 향하자."
+        }
+      }
     },
     {
       "id": "misty_island",
       "name": "안개 낀 섬 외부",
       "description": "짙은 안개가 섬을 감싸고 있다. 발밑에서 역병의 냄새가 진해진다.",
       "next_map": "cave_entrance",
-      "grid": []
+      "grid": [
+        [ "start", "combat_1", "event_1", "combat_2", "combat_3", "event_2" ],
+        [ null, null, null, null, null, "combat_5" ],
+        [ null, null, null, null, null, "item_1" ],
+        [ null, null, "exit", "item_2", "event_3", "combat_4" ],
+        [ null, null, null, null, null, null ],
+        [ null, null, null, null, null, null ]
+      ],
+      "rooms": {
+        "start": {
+          "type": "Start",
+          "text": "배에서 내렸다. 섬 전체가 안개로 뒤덮여 있다. 섬 외곽길을 따라 걸어간다.",
+          "action_text": "발자국들이 선명하게 한길로 이어져있다."
+        },
+        "combat_1": {
+          "type": "Combat",
+          "monster": "surae"
+        },
+        "event_1": {
+          "type": "Event",
+          "text": "길 주변에 붉은 물체들이 꿈틀거린다.",
+          "action_text": "괜히 건드리지 않는게 좋겠다."
+        },
+        "event_3": {
+          "type": "Event",
+          "text": "안개 속에서 기묘한 울음소리가 들린다.",
+          "action_text": "섬 중심에서 나는 소리다. 계속 나아가기로 했다."
+        },
+        "combat_2": {
+          "type": "Combat",
+          "monster": "plague_seagull"
+        },
+        "combat_3": {
+          "type": "Combat",
+          "monster": "surae"
+        },
+        "item_1": {
+          "type": "Item",
+          "text": "바위 틈에 낡은 보따리가 끼어있다.",
+          "action_text": "누군가 숨겨둔 것 같다. 안에 약초가 들어있다.",
+          "item": "herb",
+          "count": 1
+        },
+        "item_2": {
+          "type": "Item",
+          "text": "소름돋을 만큼 많은 발자국이 동굴 입구로부터 나와 찍혀있다.",
+          "action_text": "발자국들 사이에 어포들도 떨어져 있다.",
+          "item": "dried_fish",
+          "count": 1
+        },
+        "event_2": {
+          "type": "Event",
+          "text": "섬을 반쯤 돌았다. 역병의 기운이 점점 짙어진다.",
+          "action_text": "발밑의 땅이 적갈색으로 물들어 있다. 이 섬 자체가 역병에 물든 것 같다."
+        },
+        "combat_4": {
+          "type": "Combat",
+          "monster": "plague_seagull"
+        },
+        "exit": {
+          "type": "Exit",
+          "text": "동굴 입구가 보인다. 안에서 역병의 기운이 흘러나오고 있다.",
+          "action_text": "동굴로 들어가보자."
+        },
+        "combat_5": {
+          "type": "Combat",
+          "monster": "surae"
+        }
+      }
     },
     {
       "id": "cave_entrance",
       "name": "섬 동굴 입구",
       "description": "동굴 깊숙이서 기묘한 울음소리가 들려온다. 역병의 기운이 이곳에서 시작된다.",
       "next_map": "cave_b1",
-      "grid": []
+      "grid": [
+        [ null, null, "start", null, null, null ],
+        [ null, null, "combat_1", null, null, null ],
+        [ null, "event_1", "item_1", "combat_2", null, null ],
+        [ null, null, "combat_3", null, null, null ],
+        [ null, null, "combat_4", "event_2", null, null ],
+        [ null, null, "exit", null, null, null ]
+      ],
+      "rooms": {
+        "start": {
+          "type": "Start",
+          "text": "동굴 입구다. 바깥 빛이 희미하게 들어온다. 벽면에 검붉은 얼룩이 번져있다.",
+          "action_text": "이 동굴로 부터 역귀들이 온 것이 분명하다."
+        },
+        "combat_1": {
+          "type": "Combat",
+          "monster": "cave_taechung"
+        },
+        "event_1": {
+          "type": "Event",
+          "text": "인간이 아닌것이 붉은 반점에 뒤덮여 죽어있다.",
+          "action_text": "인어인듯 하다. 실제로는 처음 본다."
+        },
+        "item_1": {
+          "type": "Item",
+          "text": "어두운 탓에 붉은 물체를 밟았다.",
+          "action_text": "...역겹지만 용도가 있을 것 같다.",
+          "item": "red_flesh",
+          "count": 1
+        },
+        "combat_2": {
+          "type": "Combat",
+          "monster": "plague_mermaid"
+        },
+        "combat_3": {
+          "type": "Combat",
+          "monster": "cave_taechung"
+        },
+        "combat_4": {
+          "type": "Combat",
+          "monster": "plague_mermaid"
+        },
+        "event_2": {
+          "type": "Event",
+          "text": "빛이 완전히 사라졌다. 역병의 냄새가 숨을 막는다.",
+          "action_text": "아이 생각이 났다. 지금쯤 자고 있을 것이다. 계속 나아가기로 했다."
+        },
+        "exit": {
+          "type": "Exit",
+          "text": "지하로 내려가는 통로가 보인다. 아래에서 기묘한 울음소리가 들려온다.",
+          "action_text": "더 내려가보자."
+        }
+      }
     },
     {
       "id": "cave_b1",
-      "name": "섬 지하 1층",
-      "description": "동굴 벽에 역병 살점이 붙어있다. 바닥에는 정체 모를 붉은 액체가 흐른다.",
+      "name": "섬 지하",
+      "description": "바닥에는 정체 모를 붉은 액체가 흐른다. 울음소리가 한층 가까워 졌다.",
       "next_map": "jeokkwi_lair",
-      "grid": []
+      "grid": [
+        [ "start", "combat_1", null, "event_1", null, null ],
+        [ null, "combat_2", null, "combat_3", null, null ],
+        [ null, "event_2", "combat_4", "combat_5", null, null ],
+        [ null, null, "item_1", null, "combat_6", null ],
+        [ null, "skill_1", "combat_7", null, "combat_8", null ],
+        [ null, null, "exit", null, null, null ]
+      ],
+      "rooms": {
+        "start": {
+          "type": "Start",
+          "text": "완전한 어둠 속에 역병의 기운이 가득하다. 벽면이 살점으로 덮여있다.",
+          "action_text": "역귀들의 수장이라도 있는 걸까. 공포감이 밀려온다."
+        },
+        "combat_1": {
+          "type": "Combat",
+          "monster": "cave_taechung"
+        },
+        "event_1": {
+          "type": "Event",
+          "text": "막다른 곳이다. 시체들이 쌓여있다.",
+          "action_text": "남편이 떠날 때 입었던 옷과 비슷한 옷가지들이 시체 사이사이에 널부러져 있다."
+        },
+        "combat_2": {
+          "type": "Combat",
+          "monster": "jeoksalgwi"
+        },
+        "combat_3": {
+          "type": "Combat",
+          "monster": "yugangwi"
+        },
+        "item_1": {
+          "type": "Item",
+          "text": "바닥에 무언가 떨어져 있다.",
+          "action_text": "향낭이다. 역병을 조금 가시게 하는 것 같다.",
+          "item": "incense_pouch",
+          "count": 1
+        },
+        "combat_4": {
+          "type": "Combat",
+          "monster": "cave_taechung"
+        },
+        "combat_5": {
+          "type": "Combat",
+          "monster": "jeoksalgwi"
+        },
+        "event_2": {
+          "type": "Event",
+          "text": "길이 갈라진다. 어느 쪽에서도 울음소리가 들린다.",
+          "action_text": "두 길 모두 역병의 기운이 짙다."
+        },
+        "combat_6": {
+          "type": "Combat",
+          "monster": "cave_taechung"
+        },
+        "skill_1": {
+          "type": "Item",
+          "text": "바닥에 방수포에 싸인 꾸러미가 있다.",
+          "action_text": "무가서의 마지막 조각이다.",
+          "item": "mugaseo_5",
+          "count": 1
+        },
+        "combat_7": {
+          "type": "Combat",
+          "monster": "jeoksalgwi"
+        },
+        "combat_8": {
+          "type": "Combat",
+          "monster": "yugangwi"
+        },
+        "exit": {
+          "type": "Exit",
+          "text": "더 깊은 곳으로 내려가는 통로가 보인다. 아래에서 기괴한 울음소리 같은 것이 들려온다.",
+          "action_text": "이곳에 역병의 근원이 있음에 분명하다. 두렵지만 가야한다."
+        }
+      }
     },
     {
       "id": "jeokkwi_lair",
-      "name": "저퀴의 심부",
-      "description": "역병의 근원. 역병 살점과 바다 부산물로 가득 찬 공간. 기괴한 울음소리가 가득하다.",
+      "name": "섬의 심부",
+      "description": "역병의 근원. 기괴한 울음소리가 가득하다.",
+      "next_map": "ending",
+      "grid": [
+        [ null, null, null, null, null, null ],
+        [ null, null, null, null, null, null ],
+        [ null, null, "start", "boss", "exit", null ],
+        [ null, null, null, null, null, null ],
+        [ null, null, null, null, null, null ],
+        [ null, null, null, null, null, null ]
+      ],
+      "rooms": {
+        "start": {
+          "type": "Start",
+          "text": "심부다. 살점과 바다 부산물들로 덮여있는 흉물이 보인다. 기괴한 울음소리가 사방에서 들려온다. 아이의 울음소리 같기도 하다.",
+          "action_text": "이젠 돌이킬 수 없다."
+        },
+        "boss": {
+          "type": "Combat",
+          "monster": "jeokkwi"
+        },
+        "exit": {
+          "type": "Exit",
+          "text": "모든 것이 끝났다. 이제 집으로 가자.",
+          "action_text": "섬 외곽의 배로 향하자."
+        }
+      }
+    },
+    {
+      "id": "ending",
+      "name": "집으로 가는 길",
+      "description": "집으로 가는 길.",
       "next_map": "",
-      "boss": "jeokkwi",
-      "grid": []
+      "grid": [
+        [ null, null, null, null, null, null ],
+        [ null, null, null, null, null, null ],
+        [ null, null, "exit", "event_1", "start", null ],
+        [ null, null, null, null, null, null ],
+        [ null, null, null, null, null, null ],
+        [ null, null, null, null, null, null ]
+      ],
+      "rooms": {
+        "start": {
+          "type": "Start",
+          "text": "한걸음을 내딛기가 힘들다. 머리가 어지럽고 이성의 끈이 끊길 것 같다. 그래도 가야한다. 아이가 기다리고 있다.",
+          "action_text": "배와 가까워져 간다."
+        },
+        "event_1": {
+          "type": "Event",
+          "text": "붉은 바다에 비친 내모습이 보인다.",
+          "action_text": "온몸에 붉은 반점이 가득한, 역병에 걸린 모습이다.... 아이에게 가선 안된다. 마지막 남은 역병을 처리해야 한다. 이성을 잃기 전에."
+        },
+        "exit": {
+          "type": "Exit",
+          "text": "아이는 잘 자고있을까? 자장가를 불러줘야 하는데,",
+          "action_text": "..............................."
+        }
+      }
     }
   ]
 }

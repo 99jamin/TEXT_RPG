@@ -25,6 +25,12 @@
     <Filter Include="헤더 파일\core">
       <UniqueIdentifier>{69c2f65c-f67c-412d-915b-2bbf168a982c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\map">
+      <UniqueIdentifier>{0b5061d3-14ba-4215-a9d5-de61218766f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\ui">
+      <UniqueIdentifier>{26b4edd7-1792-4b4b-9f35-e5d1f06b53cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\GameManager.cpp">
@@ -52,6 +58,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\entity\Item.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\map\Map.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\ExploreState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,11 +152,29 @@
     <ClInclude Include="src\core\GameState.h">
       <Filter>헤더 파일\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\entity\IDamageable.h">
+      <Filter>헤더 파일\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\map\Map.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\map\Room.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\map\RoomType.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\ExploreState.h">
+      <Filter>헤더 파일\core</Filter>
+    </ClInclude>
     <ClInclude Include="src\core\TitleState.h">
       <Filter>헤더 파일\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\entity\IDamageable.h">
-      <Filter>헤더 파일\entity</Filter>
+    <ClInclude Include="src\map\Direction.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\UIRenderer.h">
+      <Filter>헤더 파일\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

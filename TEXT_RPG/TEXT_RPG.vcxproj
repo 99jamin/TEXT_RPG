@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\core\ExploreState.cpp" />
     <ClCompile Include="src\core\GameManager.cpp" />
     <ClCompile Include="src\core\TitleState.cpp" />
     <ClCompile Include="src\data\DataManager.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="src\entity\Item.cpp" />
     <ClCompile Include="src\entity\Monster.cpp" />
     <ClCompile Include="src\entity\Player.cpp" />
+    <ClCompile Include="src\map\Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\combat\CombatResult.h" />
@@ -46,6 +48,7 @@
     <ClInclude Include="src\combat\SkillCommandFactory.h" />
     <ClInclude Include="src\combat\SkillType.h" />
     <ClInclude Include="src\combat\SoroksorokCommand.h" />
+    <ClInclude Include="src\core\ExploreState.h" />
     <ClInclude Include="src\core\GameManager.h" />
     <ClInclude Include="src\core\GameState.h" />
     <ClInclude Include="src\core\TitleState.h" />
@@ -60,6 +63,11 @@
     <ClInclude Include="src\entity\JeokkwiBoss.h" />
     <ClInclude Include="src\entity\Monster.h" />
     <ClInclude Include="src\entity\Player.h" />
+    <ClInclude Include="src\map\Map.h" />
+    <ClInclude Include="src\map\Room.h" />
+    <ClInclude Include="src\map\RoomType.h" />
+    <ClInclude Include="src\map\Direction.h" />
+    <ClInclude Include="src\ui\UIRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\items.json" />

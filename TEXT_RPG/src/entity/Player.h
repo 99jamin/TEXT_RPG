@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Entity.h"
 #include "../combat/SkillType.h"
+#include <vector>
 #include <map>
 
 class Player : public Entity
@@ -51,7 +52,7 @@ public:
 	void drainStamina(int amount);
 
 	//inven
-	void addItem(const std::string& id);
+	void addItem(const std::string& id, int count);
 	void removeItem(const std::string& id);
 	bool hasItem(const std::string& id) const;
 

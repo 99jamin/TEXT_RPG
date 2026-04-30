@@ -1,4 +1,4 @@
-#include "DataManager.h"
+﻿#include "DataManager.h"
 #include <fstream>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
@@ -14,6 +14,7 @@ void DataManager::loadAll()
     loadMonsters("data/monsters.json");
     loadItems("data/items.json");
     loadSkills("data/skills.json");
+    loadMaps("data/maps.json");
 }
 
 MonsterData DataManager::getMonsterData(const std::string& id)
@@ -38,6 +39,14 @@ ItemData DataManager::getItemData(const std::string& id)
     if (it != m_itemTable.end())
         return it->second;
     return ItemData{};
+}
+
+MapData DataManager::getMapData(const std::string& id)
+{
+    auto it = m_mapTable.find(id);
+    if (it != m_mapTable.end())
+        return it->second;
+    return MapData{};
 }
 
 void DataManager::loadMonsters(const std::string& path)
@@ -100,6 +109,50 @@ void DataManager::loadSkills(const std::string& path)
     }
 }
 
+void DataManager::loadMaps(const std::string& path)
+{
+    std::ifstream file(path);
+    json data = json::parse(file);
+
+    for (auto& j : data["maps"])
+    {
+        MapData map;
+        map.id = j["id"];
+        map.name = j["name"];
+        map.description = j["description"];
+        map.nextMapId = j["next_map"];
+
+        for (auto& row : j["grid"])
+        {
+            std::vector<std::string> gridRow;
+            for (auto& cell : row)
+            {
+                if (cell.is_null())
+                    gridRow.push_back("");  // null은 빈 문자열로
+                else
+                    gridRow.push_back(cell.get<std::string>());
+            }
+            map.grid.push_back(gridRow);
+        }
+
+        for (auto& [roomId, roomJson] : j["rooms"].items())
+        {
+            RoomData room;
+            room.id = roomId;  // 키가 id
+            room.type = stringToRoomType(roomJson["type"]);
+            room.text = roomJson.value("text", "");
+            room.actionText = roomJson.value("action_text", "");
+            room.monsterId = roomJson.value("monster", "");
+            room.itemId = roomJson.value("item", "");
+            room.itemCount = roomJson.value("count", 0);
+
+            map.rooms[roomId] = room;
+        }
+
+        m_mapTable[map.id] = map;
+    }
+}
+
 MonsterEffect DataManager::stringToMonsterEffect(const std::string& str)
 {
     if (str == "Poison")       return MonsterEffect::Poison;
@@ -129,4 +182,14 @@ SkillType DataManager::stringToSkillType(const std::string& str)
     if (str == "Mulmaru")    return SkillType::Mulmaru;
     if (str == "Soroksorok") return SkillType::Soroksorok;
     return SkillType::Nuigyeol;
+}
+
+RoomType DataManager::stringToRoomType(const std::string& str)
+{
+    if (str == "Start")  return RoomType::Start;
+    if (str == "Combat") return RoomType::Combat;
+    if (str == "Item")   return RoomType::Item;
+    if (str == "Event")  return RoomType::Event;
+    if (str == "Exit")   return RoomType::Exit;
+    return RoomType::Event;
 }

@@ -91,9 +91,12 @@ void Player::drainStamina(int amount)
 }
 
 //inven
-void Player::addItem(const std::string& id)
+void Player::addItem(const std::string& id, int count)
 {
-	m_inven[id]++;
+	for (int i = 0; i < count; ++i)
+	{
+		m_inven[id]++;
+	}
 }
 
 void Player::removeItem(const std::string& id)
