@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Command.h"
 #include <random>
 #include <string>
@@ -19,7 +19,6 @@ public:
 		int result = dis(gen);
 		if (result < 8)
 		{
-			// ���� ����
 			fleeDescription = "도망에 성공했다.";
 			m_fleeSuccess = true;
 		}

@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <algorithm>
 #include "Idamageable.h"
+
 
 class Entity : public IDamageable
 {

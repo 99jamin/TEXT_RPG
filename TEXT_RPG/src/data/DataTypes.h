@@ -34,6 +34,7 @@ struct RoomData {
     std::string text;
     std::string actionText;
     std::string monsterId;
+    int monsterCount;
     std::string itemId;
     int itemCount = 0;
 };

@@ -27,7 +27,7 @@ MonsterData DataManager::getMonsterData(const std::string& id)
 
 SkillData DataManager::getSkillData(SkillType skill)
 {
-    auto it = m_skillTable.find(toString(skill));
+    auto it = m_skillTable.find(toId(skill));
     if (it != m_skillTable.end())
         return it->second;
     return SkillData{};
@@ -143,6 +143,7 @@ void DataManager::loadMaps(const std::string& path)
             room.text = roomJson.value("text", "");
             room.actionText = roomJson.value("action_text", "");
             room.monsterId = roomJson.value("monster", "");
+            room.monsterCount = roomJson.value("monster_count", 0);
             room.itemId = roomJson.value("item", "");
             room.itemCount = roomJson.value("count", 0);
 

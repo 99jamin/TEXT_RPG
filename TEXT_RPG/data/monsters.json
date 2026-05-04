@@ -6,7 +6,7 @@
       "description": "이성을 잃은 어부. 눈이 붉게 충혈되어 있고, 온몸에 역병이 창궐해있다.",
       "hp": 30,
       "attack": 8,
-      "defense": 2,
+      "defense": 3,
       "effect": "None",
       "drop_item": "bandage"
     },

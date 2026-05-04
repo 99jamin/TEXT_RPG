@@ -33,7 +33,6 @@ Map::Map(const MapData& data)
     }
 
     currentRoom = m_roomGrid[m_currentY][m_currentX].get();
-    currentRoom->visit();
 }
 
 // 이동 시도 - 성공하면 true 반환
@@ -59,7 +58,6 @@ bool Map::move(Direction dir)
     m_currentX = newX;
     m_currentY = newY;
     currentRoom = m_roomGrid[m_currentY][m_currentX].get();
-    currentRoom->visit();
     return true;
 }
 

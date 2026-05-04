@@ -30,6 +30,7 @@
     <ClCompile Include="src\entity\Monster.cpp" />
     <ClCompile Include="src\entity\Player.cpp" />
     <ClCompile Include="src\map\Map.cpp" />
+    <ClCompile Include="src\ui\UIRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\combat\CombatResult.h" />
@@ -48,6 +49,7 @@
     <ClInclude Include="src\combat\SkillCommandFactory.h" />
     <ClInclude Include="src\combat\SkillType.h" />
     <ClInclude Include="src\combat\SoroksorokCommand.h" />
+    <ClInclude Include="src\core\CombatState.h" />
     <ClInclude Include="src\core\ExploreState.h" />
     <ClInclude Include="src\core\GameManager.h" />
     <ClInclude Include="src\core\GameState.h" />

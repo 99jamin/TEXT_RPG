@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../entity/Player.h"
 #include "../entity/Monster.h"
 #include "CombatResult.h"
@@ -6,6 +6,7 @@
 #include "FleeCommand.h"
 #include "MonsterAtkCommand.h"
 #include "SkillCommandFactory.h"
+#include "../ui/UIRenderer.h"
 #include <iostream>
 
 class CombatSystem
@@ -43,6 +44,7 @@ public:
 
 		if (m_player.isChargingGumni())
 		{
+			UIRenderer::addLog("집중을 끝냈다.");
 			auto cmd = createSkillCommand(SkillType::Gumni);
 			cmd->execute(m_player, *m_monsters[0]);
 			checkMonsters();
@@ -50,7 +52,10 @@ public:
 		}
 
 		if (m_player.isPoisoned())
+		{
+			UIRenderer::addLog("역병에 걸려 피해를 입고있다.");
 			m_player.takeDamage(POISON_DAMAGE);
+		}
 
 
 		if (!m_player.isAlive())
@@ -60,27 +65,35 @@ public:
 			return;
 		}
 
+		std::vector<std::string> choice = { "1. 공격","2. 방어","3. 도주","4. 소지품", };
+		UIRenderer::printCombatScreen(m_monsters, m_player, choice);
+		
+		
 		int input;
-		std::cout << "1.공격하기\n2.방어하기\n3.도망가기\n4.아이템";
 		std::cin >> input;
 
 		switch (input)
 		{
 
+
 		case 1:
 		{
-			
+			std::vector<std::string> skillChoice;
+
 			int count = 0;
 			std::vector<SkillType> skills = m_player.getSkills();
 			for (auto& e : skills)		
 			{
-				std::cout << ++count << "." << toString(e) << std::endl;
+				skillChoice.push_back(std::to_string(++count)+ "."+ toString(e));
 			}
+
+			UIRenderer::printCombatScreen(m_monsters, m_player, skillChoice);
 
 			std::cin >> input;
 			SkillType selected = skills[input - 1];
 			auto skill = createSkillCommand(selected);
 			skill->execute(m_player, *m_monsters[0]);
+			UIRenderer::addLog(skill->getDescription() + " 을 사용했다.");
 			m_player.consumeStamina(skill->getStaminaCost());
 
 			checkMonsters();
@@ -91,6 +104,7 @@ public:
 		case 2:
 		{
 			DefendCommand().execute(m_player, *m_monsters[0]);
+			UIRenderer::addLog("방어 자세를 잡았다.");
 			break;
 		}
 			
@@ -98,6 +112,8 @@ public:
 		{
 			FleeCommand fleecommand;
 			fleecommand.execute(m_player, *m_monsters[0]);
+			UIRenderer::addLog(fleecommand.getDescription());
+
 			if (fleecommand.isFleeSuccess())
 			{
 				m_result = CombatResult::Fled;
@@ -119,6 +135,8 @@ public:
 	void monsterTurn(Monster& monster)
 	{
 		MonsterAtkCommand().execute(monster, m_player);
+		
+		UIRenderer::addLog(monster.getName()+" 의 공격");
 
 		m_player.endDefend();
 

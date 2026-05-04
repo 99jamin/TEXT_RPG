@@ -1,4 +1,5 @@
-#include "Entity.h"
+﻿#include "Entity.h"
+#include "../ui/UIRenderer.h"
 
 Entity::Entity(const std::string& name, int maxHp, int atk, int def)
 	:m_name(name), m_maxHp(maxHp), m_atk(atk), m_def(def)
@@ -14,6 +15,7 @@ void Entity::takeDamage(int damage)
 		int actualDamage = std::max(0, damage - m_def);
 		m_curHp -= actualDamage;
 		m_curHp = std::max(0, m_curHp);
+		UIRenderer::addLog(m_name + " 은 " + std::to_string(actualDamage)+" 의 피해를 입었다.");
 	}
 
 	if (!isAlive())

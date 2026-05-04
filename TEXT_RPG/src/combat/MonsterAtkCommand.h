@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Command.h"
 #include "../entity/Monster.h"
 #include "../entity/Player.h"
@@ -21,40 +21,40 @@ public:
         switch (monster->getEffect()) {
         case MonsterEffect::None:
             
-            actualDamage = monster->getAtk()* DAMAGE_RATIO;
+            actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
             player->takeDamage(actualDamage);
             break;
 
         case MonsterEffect::Poison:
             
-            actualDamage = monster->getAtk() * DAMAGE_RATIO;
+            actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
             player->takeDamage(actualDamage);
             player->applyPoison();
             break;
 
         case MonsterEffect::StaminaDrain:
             
-            actualDamage = monster->getAtk() * DAMAGE_RATIO;
+            actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
             player->takeDamage(actualDamage);
             player->drainStamina(1);
             break;
 
         case MonsterEffect::HighDamage:
             
-            actualDamage = monster->getAtk() * HIGH_DAMAGE_RATIO;
+            actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
             player->takeDamage(actualDamage);
             break;
 
         case MonsterEffect::HpAbsorb:
             
-            actualDamage = monster->getAtk() * DAMAGE_RATIO;
+            actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
             player->takeDamage(actualDamage);
             monster->recoverHp(actualDamage * HP_ABSORB_RATIO);
             break;
 
         case MonsterEffect::HpRegen:
             
-            monster->recoverHp((monster->getMaxHp())/ HP_REGEN_RATIO);
+            monster->recoverHp(static_cast<int>(actualDamage * HP_ABSORB_RATIO));
             break;
         }
 	}

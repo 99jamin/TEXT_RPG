@@ -1,41 +1,55 @@
 ﻿#pragma once
+#define NOMINMAX
+#include <functional>
 #include <iostream>
+#include <windows.h>
+#include <vector>
 #include "../map/Map.h"
+
+
+class Player;
+class Monster;
 
 class UIRenderer
 {
 
 public:
 
-	static void printMiniMap(const Map& map)
-	{
-		int curX = map.getCurrentX();
-		int curY = map.getCurrentY();
-		auto& gird = map.getRoomGrid();
+	static void printExploreScreen(const Map& map, const Player& player, const std::vector<std::string>& choices);
 
-		for (int y = 0; y < 6; ++y)
-		{
-			for (int x = 0; x < 6; ++x)
-			{
-				if (!gird[y][x])
-				{
-					std::cout << "  ";
-				}
-				else if(x==curX && y==curY)
-				{
-					std::cout << "■";
-				}
-				else
-				{
-					std::cout << "□";
-				}
-			}
-			std::cout << "\n";
-		}
-	}
+	static void printCombatScreen(const std::vector<Monster*>& monsters, const Player& player, const std::vector<std::string>& choices);
+
+	static void printTitleScreen();
+
+	static void addLog(const std::string& log);
+
+	static void clearLogs();
 
 private:
 
+	
+	static void printLayout(const Player& player, std::function<void()> rightPanelFn, const std::vector<std::string>& choices);
 
+	static void printStatBar(const Player& player);
+
+	static void printEnemyInfo(const std::vector<Monster*>& monsters);
+
+	static void printMapInfo(const Map& map);
+
+	static void printMiniMap(const Map& map);
+
+	static void setCursor(int x, int y);
+
+	static std::vector<std::string> s_logs;
+
+	static const int STAT_ROW = 2;   // 스탯바 행
+	static const int LOG_START_ROW = 5;   // 로그 시작 행
+	static const int LOG_END_ROW = 24;  // 로그 끝 행 (10줄)
+	static const int SEP_ROW = 25;  // 구분선 행
+	static const int CHOICE_ROW = 27;  // 선택지 시작 행
+
+	static const int TOTAL_WIDTH = 140;	//총 너비
+	static const int LEFT_WIDTH = 90;  // 왼쪽 패널 너비
+	static const int RIGHT_COL = 92;  // 오른쪽 패널 시작 열
 
 };

@@ -1,7 +1,12 @@
-#include "GameManager.h"
+﻿#include "GameManager.h"
+#include "TitleState.h"
 
 GameManager::GameManager()
-	:running(true) {}
+	:running(true),
+	m_player(std::make_unique<Player>("엄마",100,5,3,5))
+{
+
+}
 
 GameManager::~GameManager()
 {
@@ -63,7 +68,23 @@ void GameManager::quit()
 	running = false;
 }
 
+void GameManager::gameover()
+{
+	while (!stateStack.empty())
+	{
+		stateStack.top()->exit(*this);
+		stateStack.pop();
+	}
+
+	pushState(std::make_unique<TitleState>());
+}
+
 bool GameManager::isRunning() const
 {
 	return running;
+}
+
+Player& GameManager::getPlayer()
+{
+	return *m_player;
 }

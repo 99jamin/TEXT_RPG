@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <stack>
 #include <memory>
 #include "GameState.h"
+#include "../entity/Player.h"
 
 class GameManager {
 
@@ -20,12 +21,17 @@ public:
 
 	void quit();
 
+	void gameover();
+
 	bool isRunning() const;
+
+	Player& getPlayer();
 
 
 private:
 
 	std::stack<std::unique_ptr<GameState>> stateStack;
+	std::unique_ptr<Player> m_player;
 	bool running;
 
 };

@@ -1,31 +1,34 @@
 ﻿#pragma once
 #include "GameState.h"
 #include "GameManager.h"
+#include "CombatState.h"
 #include "../map/Map.h"
 #include "../map/RoomType.h"
 #include "../data/DataManager.h"
 #include "../entity/Player.h"
+#include "../ui/UIRenderer.h"
 #include <iostream>
+#include <memory>
 
 class GameManager;
 
 class ExploreState : public GameState
 {
 public:
-    ExploreState(const std::string& mapId, Player& player)
-        : m_map(DataManager::getInstance().getMapData(mapId)), m_player(player)
+    ExploreState(const std::string& mapId)
+        : m_map(DataManager::getInstance().getMapData(mapId))
     {
 
     }
 
     void enter(GameManager& manager) override
     {
-        printMapText();
+        printRoomText();
     }
 
     void update(GameManager& manager) override
     {
-        printMenu();
+        UIRenderer::printExploreScreen(m_map, manager.getPlayer(), getChoices());
 
         int input;
         std::cin >> input;
@@ -36,7 +39,7 @@ public:
         case 2: handleAction(manager); break;
         case 3: handleInventory(manager); break;
         case 4: handleDiary(manager); break;
-        default: std::cout << "잘못된 입력입니다.\n"; break;
+        default: UIRenderer::addLog("잘못된 입력입니다."); break;
         }
     }
 
@@ -47,43 +50,40 @@ public:
 
 private:
 
-    void printMapText()
-    {
-        std::cout << "\n[ " << m_map.getName() << " ]\n";
-        std::cout << m_map.getDescription() << "\n";
-        printRoomText();
-    }
-
     // 현재 방 텍스트 출력
     void printRoomText()
     {
         Room* room = m_map.getCurRoom();
         if (!room->getText().empty())
-            std::cout << "\n" << room->getText() << "\n";
+            UIRenderer::addLog(room->getText());
     }
 
     // 선택지 출력
-    void printMenu()
+   
+    std::vector<std::string> getChoices()
     {
         Room* room = m_map.getCurRoom();
-        std::cout << "\n";
 
-        std::cout << "1. 이동하기\n";
+        std::vector<std::string> choices;
+        choices.push_back("1. 이동하기");
 
         // 방 타입에 따라 2번 선택지 변경
-        if (room->getRoomType() == RoomType::Combat)
-            std::cout << "2. 공격하기\n";
+        if (room->getRoomType() == RoomType::Combat && !room->isCleared())
+            choices.push_back("2. 공격하기");
         else
-            std::cout << "2. 조사하기\n";
+            choices.push_back("2. 조사하기");
 
-        std::cout << "3. 소지품\n";
-        std::cout << "4. 일기\n";
-        std::cout << "> ";
+        choices.push_back("3. 소지품");
+        choices.push_back("4. 일기");
+
+        return choices;
     }
 
     // 이동 처리
     void handleMove(GameManager& manager)
     {
+        std::vector<std::string> choices;
+
         std::vector<Direction> availableDirs;
         if (m_map.canMove(Direction::North)) availableDirs.push_back(Direction::North);
         if (m_map.canMove(Direction::South)) availableDirs.push_back(Direction::South);
@@ -91,8 +91,10 @@ private:
         if (m_map.canMove(Direction::East)) availableDirs.push_back(Direction::East);
 
         for (int i = 0; i < availableDirs.size(); i++)
-            std::cout << i + 1 << "." << dirToString(availableDirs[i]) << "\n";
-        std::cout << "0. 취소\n";
+            choices.push_back(std::to_string(i + 1) + "." + dirToString(availableDirs[i]));
+        choices.push_back("0. 취소");
+
+        UIRenderer::printExploreScreen(m_map, manager.getPlayer(), choices);
 
         int input;
         std::cin >> input;
@@ -101,7 +103,7 @@ private:
 
         if (input < 1 || input >(int)availableDirs.size()) 
         {
-            std::cout << "잘못된 입력입니다.\n";
+            UIRenderer::addLog("잘못된 입력입니다.");
             return;
         }
         else 
@@ -117,35 +119,49 @@ private:
     {
         Room* room = m_map.getCurRoom();
 
+        if (room->isCleared())
+        {
+            UIRenderer::addLog("더 조사할 것은 없어보인다.");
+            return;
+        }
+
         switch (room->getRoomType())
         {
+        case RoomType::Start:
+        {
+            UIRenderer::addLog(room->getActionText());
+            break;
+        }
         case RoomType::Combat:
         {
             // TODO: CombatState로 전환
-           /* MonsterData data = DataManager::getInstance().getMonsterData(room->getMonsterId());
-            Monster* monster = new Monster(data);*/
-            //manager.pushState(std::make_unique<CombatState>(m_player, monster));
-            std::cout << "[전투 시작 - 미구현]\n";
+            manager.pushState(std::make_unique<CombatState>(room->getMonsterCount(), room->getMonsterId(), [room](CombatResult result) {
+                if (result == CombatResult::Victory)
+                    room->setCleared();
+                }));
             break;
         }
         case RoomType::Item:
         {
-            std::cout << room->getActionText() << "\n";
-            // TODO: 아이템 획득 처리
-            m_player.addItem(room->getItemId(),room->getItemCount());
+            UIRenderer::addLog(room->getActionText());
+
+            manager.getPlayer().addItem(room->getItemId(), room->getItemCount());
+
+            room->setCleared();
+
             break;
         }
         case RoomType::Event:
         {
-            std::cout << room->getActionText() << "\n";
+            UIRenderer::addLog(room->getActionText());
             break;
         }
         case RoomType::Exit:
         {
-            std::cout << room->getActionText() << "\n";
-            // TODO: 다음 맵으로 전환
+            UIRenderer::addLog(room->getActionText());
+
             m_map = Map(DataManager::getInstance().getMapData(m_map.getNextMapId()));
-            printMapText();
+            printRoomText();
             break;
         }
         default:
@@ -157,16 +173,16 @@ private:
     void handleInventory(GameManager& manager)
     {
         // TODO: InventoryState push
-        std::cout << "[소지품 - 미구현]\n";
+        UIRenderer::addLog("[소지품 - 미구현]");
     }
 
     // 일기 처리
     void handleDiary(GameManager& manager)
     {
         // TODO: DiaryState push
-        std::cout << "[일기 - 미구현]\n";
+        UIRenderer::addLog("[일기 - 미구현]");
     }
 
     Map m_map;
-    Player& m_player;
+
 };

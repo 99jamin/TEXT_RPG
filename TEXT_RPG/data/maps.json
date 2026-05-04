@@ -3,7 +3,7 @@
     {
       "id": "village",
       "name": "바닷가 마을",
-      "description": "역병이 덮친 바닷가 마을. 인적이 끊겼고 바다 냄새 속에 썩은 냄새가 섞여있다.",
+      "description": "역병이 덮친 바닷가 마을.",
       "next_map": "tidal_flat",
       "grid": [
         [ null, null, null, null, null, null ],
@@ -22,13 +22,15 @@
         "skill_1": {
           "type": "Item",
           "text": "남편이 남겨둔 검과, 검무를 기록한 서책이 바닥에 널부러져 있다.",
-          "action_text": "검과 무가서를 집었다. 무가서의 첫 장에는 바닷소리: 뉫결이 기록되어 있다. 뒷 장은 찢어져 알아볼 수 없다.",
+          "action_text": "검과 무가서를 집었다. 무가서에는 바닷소리를 본 뜬 검무 형식이 자세히 기록되어 있다.",
           "item": "mugaseo_1",
           "count": 1
         },
         "combat_1": {
           "type": "Combat",
-          "monster": "plague_fisherman"
+          "text": "역병에 걸린 어부가 걸어온다.",
+          "monster": "plague_fisherman",
+          "monster_count": 1
         },
         "item_1": {
           "type": "Item",
@@ -39,11 +41,15 @@
         },
         "combat_2": {
           "type": "Combat",
-          "monster": "plague_dog"
+          "text": "개떼들이 나를 둘러 싼다.",
+          "monster": "plague_dog",
+          "monster_count": 3
         },
         "combat_3": {
           "type": "Combat",
-          "monster": "plague_fisherman"
+          "text": "역병에 걸린 어부가 걸어온다.",
+          "monster": "plague_fisherman",
+          "monster_count": 1
         },
         "event_2": {
           "type": "Event",
@@ -60,7 +66,7 @@
     {
       "id": "tidal_flat",
       "name": "갯벌 해안",
-      "description": "붉은 조수가 남긴 갯벌이다. 뻘 속에서 무언가 꿈틀거리는 소리가 들린다.",
+      "description": "붉은 조수가 남긴 붉은 갯벌.",
       "next_map": "ruined_village",
       "grid": [
         [ null, null, "start", null, null, null ],
@@ -83,11 +89,15 @@
         },
         "combat_1": {
           "type": "Combat",
-          "monster": "jeokguin"
+          "text": "혐오스러운 갯지렁이가 내 발을 감싼다.",
+          "monster": "jeokguin",
+          "monster_count": 2
         },
         "combat_2": {
           "type": "Combat",
-          "monster": "plague_fisherman"
+          "text": "역병에 걸린 어부가 걸어온다.",
+          "monster": "plague_fisherman",
+          "monster_count": 1
         },
         "item_1": {
           "type": "Item",
@@ -98,7 +108,9 @@
         },
         "combat_3": {
           "type": "Combat",
-          "monster": "paegwi"
+          "text": "거대한 조개가 나에게 붉은 살점들은 내뱉는다.",
+          "monster": "paegwi",
+          "monster_count": 1
         },
         "skill_1": {
           "type": "Item",
@@ -109,11 +121,15 @@
         },
         "combat_4": {
           "type": "Combat",
-          "monster": "jeokguin"
+          "text": "혐오스러운 갯지렁이가 내 발을 감싼다.",
+          "monster": "jeokguin",
+          "monster_count": 3
         },
         "combat_5": {
           "type": "Combat",
-          "monster": "paegwi"
+          "text": "거대한 조개가 나에게 붉은 살점들은 내뱉는다.",
+          "monster": "paegwi",
+          "monster_count": 1
         },
         "exit": {
           "type": "Exit",
@@ -125,7 +141,7 @@
     {
       "id": "ruined_village",
       "name": "황폐한 어촌",
-      "description": "역병에 황폐화된 어촌. 빈 집들 사이로 인기척이 느껴진다.",
+      "description": "역병에 황폐화된 어촌.",
       "next_map": "red_tide_port",
       "grid": [
         [ null, "event_1", null, "combat_3", null, null ],
@@ -143,7 +159,9 @@
         },
         "combat_1": {
           "type": "Combat",
-          "monster": "plague_seagull"
+          "text": "갈매기가 이성을 잃고 달려든다.",
+          "monster": "plague_seagull",
+          "monster_count": 2
         },
         "event_1": {
           "type": "Event",
@@ -152,7 +170,9 @@
         },
         "combat_2": {
           "type": "Combat",
-          "monster": "plague_fisherman"
+          "text": "역병에 걸린 어부가 걸어온다.",
+          "monster": "plague_fisherman",
+          "monster_count": 2
         },
         "item_1": {
           "type": "Item",
@@ -163,11 +183,15 @@
         },
         "combat_3": {
           "type": "Combat",
-          "monster": "plague_seagull"
+          "text": "갈매기가 이성을 잃고 달려든다.",
+          "monster": "plague_seagull",
+          "monster_count": 2
         },
         "combat_4": {
           "type": "Combat",
-          "monster": "plague_fisherman"
+          "text": "역병에 걸린 어부가 걸어온다.",
+          "monster": "plague_fisherman",
+          "monster_count": 1
         },
         "skill_1": {
           "type": "Item",
@@ -185,11 +209,15 @@
         },
         "combat_5": {
           "type": "Combat",
-          "monster": "plague_seagull"
+          "text": "갈매기가 이성을 잃고 달려든다.",
+          "monster": "plague_seagull",
+          "monster_count": 3
         },
         "combat_6": {
           "type": "Combat",
-          "monster": "plague_fisherman"
+          "text": "역병에 걸린 어부가 걸어온다.",
+          "monster": "plague_fisherman",
+          "monster_count": 2
         },
         "event_3": {
           "type": "Event",
@@ -206,7 +234,7 @@
     {
       "id": "red_tide_port",
       "name": "적조 뒤덮인 포구",
-      "description": "핏빛으로 물든 바다. 포구를 장악한 짙은 안개가 스산하다.",
+      "description": "핏빛으로 물든 포구.",
       "next_map": "misty_island",
       "grid": [
         [ "start", "combat_1", null, null, null, null ],
@@ -224,7 +252,9 @@
         },
         "combat_1": {
           "type": "Combat",
-          "monster": "surae"
+          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "monster": "surae",
+          "monster_count": 2
         },
         "event_1": {
           "type": "Event",
@@ -233,7 +263,9 @@
         },
         "combat_2": {
           "type": "Combat",
-          "monster": "plague_seagull"
+          "text": "갈매기가 이성을 잃고 달려든다.",
+          "monster": "plague_seagull",
+          "monster_count": 3
         },
         "item_1": {
           "type": "Item",
@@ -244,7 +276,9 @@
         },
         "combat_3": {
           "type": "Combat",
-          "monster": "surae"
+          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "monster": "surae",
+          "monster_count": 2
         },
         "skill_1": {
           "type": "Item",
@@ -255,7 +289,9 @@
         },
         "combat_4": {
           "type": "Combat",
-          "monster": "surae"
+          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "monster": "surae",
+          "monster_count": 3
         },
         "event_2": {
           "type": "Event",
@@ -264,7 +300,9 @@
         },
         "boss_1": {
           "type": "Combat",
-          "monster": "jeokgapsin"
+          "text": "거대한 적갈색의 붉은 게가 거대한 집게발을 휘두른다.",
+          "monster": "jeokgapsin",
+          "monster_count": 1
         },
         "exit": {
           "type": "Exit",
@@ -276,7 +314,7 @@
     {
       "id": "misty_island",
       "name": "안개 낀 섬 외부",
-      "description": "짙은 안개가 섬을 감싸고 있다. 발밑에서 역병의 냄새가 진해진다.",
+      "description": "짙은 안개가 감싸진 섬.",
       "next_map": "cave_entrance",
       "grid": [
         [ "start", "combat_1", "event_1", "combat_2", "combat_3", "event_2" ],
@@ -294,7 +332,9 @@
         },
         "combat_1": {
           "type": "Combat",
-          "monster": "surae"
+          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "monster": "surae",
+          "monster_count": 2
         },
         "event_1": {
           "type": "Event",
@@ -308,11 +348,15 @@
         },
         "combat_2": {
           "type": "Combat",
-          "monster": "plague_seagull"
+          "text": "갈매기가 이성을 잃고 달려든다.",
+          "monster": "plague_seagull",
+          "monster_count": 3
         },
         "combat_3": {
           "type": "Combat",
-          "monster": "surae"
+          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "monster": "surae",
+          "monster_count": 2
         },
         "item_1": {
           "type": "Item",
@@ -335,7 +379,9 @@
         },
         "combat_4": {
           "type": "Combat",
-          "monster": "plague_seagull"
+          "text": "갈매기가 이성을 잃고 달려든다.",
+          "monster": "plague_seagull",
+          "monster_count": 2
         },
         "exit": {
           "type": "Exit",
@@ -344,14 +390,16 @@
         },
         "combat_5": {
           "type": "Combat",
-          "monster": "surae"
+          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "monster": "surae",
+          "monster_count": 3
         }
       }
     },
     {
       "id": "cave_entrance",
       "name": "섬 동굴 입구",
-      "description": "동굴 깊숙이서 기묘한 울음소리가 들려온다. 역병의 기운이 이곳에서 시작된다.",
+      "description": "동굴 깊숙이서 기묘한 울음소리가 들려온다.",
       "next_map": "cave_b1",
       "grid": [
         [ null, null, "start", null, null, null ],
@@ -369,7 +417,9 @@
         },
         "combat_1": {
           "type": "Combat",
-          "monster": "cave_taechung"
+          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "monster": "cave_taechung",
+          "monster_count": 3
         },
         "event_1": {
           "type": "Event",
@@ -385,15 +435,21 @@
         },
         "combat_2": {
           "type": "Combat",
-          "monster": "plague_mermaid"
+          "text": "인어가 고통에 신음하며 울부짖는다.",
+          "monster": "plague_mermaid",
+          "monster_count": 1
         },
         "combat_3": {
           "type": "Combat",
-          "monster": "cave_taechung"
+          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "monster": "cave_taechung",
+          "monster_count": 4
         },
         "combat_4": {
           "type": "Combat",
-          "monster": "plague_mermaid"
+          "text": "인어가 고통에 신음하며 울부짖는다.",
+          "monster": "plague_mermaid",
+          "monster_count": 2
         },
         "event_2": {
           "type": "Event",
@@ -410,7 +466,7 @@
     {
       "id": "cave_b1",
       "name": "섬 지하",
-      "description": "바닥에는 정체 모를 붉은 액체가 흐른다. 울음소리가 한층 가까워 졌다.",
+      "description": "바닥에는 정체 모를 붉은 액체가 흐른다.",
       "next_map": "jeokkwi_lair",
       "grid": [
         [ "start", "combat_1", null, "event_1", null, null ],
@@ -428,7 +484,9 @@
         },
         "combat_1": {
           "type": "Combat",
-          "monster": "cave_taechung"
+          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "monster": "cave_taechung",
+          "monster_count": 4
         },
         "event_1": {
           "type": "Event",
@@ -437,11 +495,15 @@
         },
         "combat_2": {
           "type": "Combat",
-          "monster": "jeoksalgwi"
+          "text": "붉은 살점들이 모여든다.",
+          "monster": "jeoksalgwi",
+          "monster_count": 3
         },
         "combat_3": {
           "type": "Combat",
-          "monster": "yugangwi"
+          "text": "거북 껍질에서 나온 여섯개의 눈이 나를 응시한다.",
+          "monster": "yugangwi",
+          "monster_count": 1
         },
         "item_1": {
           "type": "Item",
@@ -452,11 +514,15 @@
         },
         "combat_4": {
           "type": "Combat",
-          "monster": "cave_taechung"
+          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "monster": "cave_taechung",
+          "monster_count": 4
         },
         "combat_5": {
           "type": "Combat",
-          "monster": "jeoksalgwi"
+          "text": "붉은 살점들이 모여든다.",
+          "monster": "jeoksalgwi",
+          "monster_count": 3
         },
         "event_2": {
           "type": "Event",
@@ -465,7 +531,9 @@
         },
         "combat_6": {
           "type": "Combat",
-          "monster": "cave_taechung"
+          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "monster": "cave_taechung",
+          "monster_count": 3
         },
         "skill_1": {
           "type": "Item",
@@ -476,11 +544,15 @@
         },
         "combat_7": {
           "type": "Combat",
-          "monster": "jeoksalgwi"
+          "text": "붉은 살점들이 모여든다.",
+          "monster": "jeoksalgwi",
+          "monster_count": 3
         },
         "combat_8": {
           "type": "Combat",
-          "monster": "yugangwi"
+          "text": "거북 껍질에서 나온 여섯개의 눈이 나를 응시한다.",
+          "monster": "yugangwi",
+          "monster_count": 2
         },
         "exit": {
           "type": "Exit",
@@ -510,7 +582,9 @@
         },
         "boss": {
           "type": "Combat",
-          "monster": "jeokkwi"
+          "text": "나를 보고 적개심 가득한 비명을 지른다.",
+          "monster": "jeokkwi",
+          "monster_count": 1
         },
         "exit": {
           "type": "Exit",

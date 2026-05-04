@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "TitleState.h"
 #include "GameManager.h"
+#include "ExploreState.h"
 
 void TitleState::enter(GameManager& manager)
 {
@@ -13,6 +14,10 @@ void TitleState::update(GameManager& manager)
 	std::cout << "1. 시작하기\n";
 	std::cout << "2. 종료하기\n";
 	std::cin >> input;
+
+	std::string str = "village";
+	if (input == 1)
+		manager.pushState(std::make_unique<ExploreState>(str));
 
 	if (input == 2)
 		manager.quit();

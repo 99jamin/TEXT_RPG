@@ -4,7 +4,7 @@
 Item::Item(const ItemData& data)
 	:m_id(data.id), m_name(data.name), m_description(data.description), m_effect(data.effect), m_value(data.value), m_skillId(data.skillId)
 {
-
+	
 }
 
 void Item::useItem(Player& player)

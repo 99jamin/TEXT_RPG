@@ -5,7 +5,7 @@
 Player::Player(const std::string& name, int maxHp, int atk, int def, int maxStamina)
 	:Entity(name, maxHp, atk, def), m_maxStamina(maxStamina), m_stamina(maxStamina)
 {
-
+	learnSkill(SkillType::Nuigyeol);
 }
 
 void Player::takeDamage(int damage)
@@ -33,6 +33,7 @@ void Player::learnSkill(SkillType skill)
 {
 	if (!hasSkill(skill))
 		m_skills.push_back(skill);
+
 }
 
 bool Player::hasSkill(SkillType skill) const

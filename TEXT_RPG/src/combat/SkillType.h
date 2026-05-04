@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 
 enum class SkillType
@@ -20,5 +20,17 @@ inline std::string toString(SkillType type) {
     case SkillType::Mulmaru:    return "바닷소리: 물마루";
     case SkillType::Soroksorok: return "자장소리: 소록소록";
     default: return "알 수 없음";
+    }
+}
+
+inline std::string toId(SkillType type) {
+    switch (type) {
+    case SkillType::Nuigyeol:   return "Nuigyeol";
+    case SkillType::Musuki:     return "Musuki";
+    case SkillType::Neoul:      return "Neoul";
+    case SkillType::Gumni:      return "Gumni";
+    case SkillType::Mulmaru:    return "Mulmaru";
+    case SkillType::Soroksorok: return "Soroksorok";
+    default: return "";
     }
 }
