@@ -1,6 +1,7 @@
 ﻿#include "UIRenderer.h"
 #include "../entity/Player.h"
 #include "../entity/Monster.h"
+#include "../data/DataManager.h"
 std::vector<std::string> UIRenderer::s_logs;
 
  void UIRenderer::printExploreScreen(const Map& map, const Player& player, const std::vector<std::string>& choices)
@@ -17,9 +18,18 @@ std::vector<std::string> UIRenderer::s_logs;
 	printLayout(player, [&]() { printEnemyInfo(monsters); }, choices);
 }
 
+ void UIRenderer::printInvenScreen(const std::vector<std::pair<std::string, int>>& itemList, const Player& player, const std::vector<std::string>& choices)
+{
+	system("cls");
+
+	printLayout(player, [&]() { printItemInfo(itemList); }, choices);
+}
+
+
+
  void UIRenderer::printTitleScreen()
 {
-
+	 //TODO: 타이틀 구현
 }
 
  void UIRenderer::addLog(const std::string& log)
@@ -118,11 +128,11 @@ std::vector<std::string> UIRenderer::s_logs;
 {
 	for (int i = 0; i < (int)monsters.size(); ++i)
 	{
-		setCursor(RIGHT_COL, LOG_START_ROW + i);
+		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i));
 		std::cout << i + 1 << ". " << monsters[i]->getName();
 
 		int hpBar = (monsters[i]->getCurHp() * 10) / monsters[i]->getMaxHp();
-
+		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i) + 1);
 		for (int j = 1; j <= 10; ++j)
 		{
 			if (j <= hpBar)
@@ -136,6 +146,20 @@ std::vector<std::string> UIRenderer::s_logs;
 		}
 	}
 }
+
+ void UIRenderer::printItemInfo(const std::vector<std::pair<std::string, int>>& itemList)
+{
+	for (int i = 0; i < (int)itemList.size(); ++i)
+	{
+		ItemData data = DataManager::getInstance().getItemData(itemList[i].first);
+
+		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i));
+		std::cout << i + 1 << ". " << data.name;
+		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i) + 1);
+		std::cout << data.description;
+	}
+}
+
 
  void UIRenderer::printMapInfo(const Map& map)
 {

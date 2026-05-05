@@ -55,7 +55,11 @@ public:
 	void addItem(const std::string& id, int count);
 	void removeItem(const std::string& id);
 	bool hasItem(const std::string& id) const;
-
+	const std::map<std::string, int > getInven() const
+	{
+		return m_inven;
+	}
+	void useItem(const std::string& id);
 
 
 private:

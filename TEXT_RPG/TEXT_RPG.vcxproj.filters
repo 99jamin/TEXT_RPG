@@ -182,6 +182,9 @@
     <ClInclude Include="src\core\CombatState.h">
       <Filter>헤더 파일\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\InventoryState.h">
+      <Filter>헤더 파일\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\items.json">

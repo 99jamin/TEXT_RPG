@@ -45,8 +45,26 @@ public:
 		if (m_player.isChargingGumni())
 		{
 			UIRenderer::addLog("집중을 끝냈다.");
-			auto cmd = createSkillCommand(SkillType::Gumni);
-			cmd->execute(m_player, *m_monsters[0]);
+			auto skill = createSkillCommand(SkillType::Gumni);
+
+			if (m_monsters.size() == 1)
+			{
+				skill->execute(m_player, *m_monsters[0]);
+			}
+			else
+			{
+				printTargetChoice();
+				int targetInput;
+				std::cin >> targetInput;
+				if (targetInput <= m_monsters.size() && targetInput > 0)
+					skill->execute(m_player, *m_monsters[targetInput - 1]);
+				else
+				{
+					UIRenderer::addLog("잘못된 선택입니다.");
+					return;
+				}
+			}
+			
 			checkMonsters();
 			return;
 		}
@@ -89,11 +107,51 @@ public:
 
 			UIRenderer::printCombatScreen(m_monsters, m_player, skillChoice);
 
-			std::cin >> input;
-			SkillType selected = skills[input - 1];
+			int skillInput;
+			std::cin >> skillInput;
+			SkillType selected = skills[skillInput - 1];
 			auto skill = createSkillCommand(selected);
-			skill->execute(m_player, *m_monsters[0]);
-			UIRenderer::addLog(skill->getDescription() + " 을 사용했다.");
+
+			if (selected == SkillType::Neoul)
+			{
+				UIRenderer::addLog(skill->getDescription() + " 을 사용했다.");
+				for (auto& e : m_monsters)
+				{
+					skill->execute(m_player, *e);
+				}
+			}
+			else if (selected == SkillType::Gumni)
+			{
+				UIRenderer::addLog(skill->getDescription() + " 을 사용했다.");
+				skill->execute(m_player, *m_monsters[0]);	//굼니 커맨드의 첫번째 호출은 어떤 몬스터 포인터든 상관없음.
+			}
+			else
+			{
+				if (m_monsters.size() == 1)
+				{
+					UIRenderer::addLog(skill->getDescription() + " 을 사용했다.");
+					skill->execute(m_player, *m_monsters[0]);
+				}
+				else
+				{
+					printTargetChoice();
+					int targetInput;
+					std::cin >> targetInput;
+					
+
+					if (targetInput <= m_monsters.size() && targetInput > 0)
+					{
+						UIRenderer::addLog(skill->getDescription() + " 을 사용했다.");
+						skill->execute(m_player, *m_monsters[targetInput - 1]);
+					}
+					else
+					{
+						UIRenderer::addLog("잘못된 선택입니다.");
+						return;
+					}
+				}
+			}
+
 			m_player.consumeStamina(skill->getStaminaCost());
 
 			checkMonsters();
@@ -125,19 +183,18 @@ public:
 
 		case 4:
 		{
-			//Item
+			handleItemInCombat();
 			break;
 		}
-
 		}
 	}
 
 	void monsterTurn(Monster& monster)
 	{
+		UIRenderer::addLog(monster.getName() + " 의 공격");
+
 		MonsterAtkCommand().execute(monster, m_player);
 		
-		UIRenderer::addLog(monster.getName()+" 의 공격");
-
 		m_player.endDefend();
 
 		if (!m_player.isAlive())
@@ -162,6 +219,57 @@ private:
 	CombatResult m_result = CombatResult::Victory;
 
 	static constexpr int POISON_DAMAGE = 5;
+
+	void printTargetChoice()
+	{
+		std::vector<std::string> choice;
+		int count = 0;
+		for (auto& e : m_monsters)
+		{
+			if (e->isAlive())
+				choice.push_back(std::to_string(++count) + ". " + e->getName());
+		}
+
+		UIRenderer::printCombatScreen(m_monsters, m_player, choice);
+	}
+
+	void handleItemInCombat()
+	{
+		auto& inven = m_player.getInven();
+
+		if (inven.empty())
+		{
+			UIRenderer::addLog("소지품이 없다.");
+			return;
+		}
+
+		// 아이템 목록 출력
+		std::vector<std::string> itemChoices;
+		std::vector<std::pair<std::string, int>> itemList;
+		int count = 0;
+		for (auto& e : inven)
+		{
+			itemList.push_back(e);
+			ItemData data = DataManager::getInstance().getItemData(e.first);
+			itemChoices.push_back(std::to_string(++count) + ". " + data.name);
+		}
+		itemChoices.push_back(std::to_string(++count) + ". 취소");
+
+		UIRenderer::printInvenScreen(itemList, m_player, itemChoices);
+
+		int input;
+		std::cin >> input;
+
+		if (input == count) return; // 취소
+		if (input < 1 || input >= count)
+		{
+			UIRenderer::addLog("잘못된 선택입니다.");
+			return;
+		}
+
+		std::string selectedId = itemList[input - 1].first;
+		m_player.useItem(selectedId);
+	}
 
 	void checkMonsters()
 	{

@@ -53,6 +53,7 @@
     <ClInclude Include="src\core\ExploreState.h" />
     <ClInclude Include="src\core\GameManager.h" />
     <ClInclude Include="src\core\GameState.h" />
+    <ClInclude Include="src\core\InventoryState.h" />
     <ClInclude Include="src\core\TitleState.h" />
     <ClInclude Include="src\data\DataManager.h" />
     <ClInclude Include="src\data\DataTypes.h" />

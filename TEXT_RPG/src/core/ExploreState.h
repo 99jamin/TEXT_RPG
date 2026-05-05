@@ -172,10 +172,42 @@ private:
     // 소지품 처리
     void handleInventory(GameManager& manager)
     {
-        // TODO: InventoryState push
-        UIRenderer::addLog("[소지품 - 미구현]");
-    }
+        auto& inven = manager.getPlayer().getInven();
 
+        if (inven.empty())
+        {
+            UIRenderer::addLog("소지품이 없다.");
+            return;
+        }
+
+        // 아이템 목록 출력
+        std::vector<std::string> itemChoices;
+        std::vector<std::pair<std::string, int>> itemList;
+        int count = 0;
+        for (auto& e : inven)
+        {
+            itemList.push_back(e);
+            ItemData data = DataManager::getInstance().getItemData(e.first);
+            itemChoices.push_back(std::to_string(++count) + ". " + data.name);
+        }
+        itemChoices.push_back(std::to_string(++count) + ". 취소");
+
+        UIRenderer::printInvenScreen(itemList, manager.getPlayer(), itemChoices);
+
+        int input;
+        std::cin >> input;
+
+        if (input == count) return; // 취소
+        if (input < 1 || input >= count)
+        {
+            UIRenderer::addLog("잘못된 선택입니다.");
+            return;
+        }
+
+        std::string selectedId = itemList[input - 1].first;
+        manager.getPlayer().useItem(selectedId);
+    }
+    
     // 일기 처리
     void handleDiary(GameManager& manager)
     {

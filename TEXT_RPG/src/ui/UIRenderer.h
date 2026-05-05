@@ -19,6 +19,9 @@ public:
 
 	static void printCombatScreen(const std::vector<Monster*>& monsters, const Player& player, const std::vector<std::string>& choices);
 
+	static void printInvenScreen(const std::vector<std::pair<std::string, int>>& itemList, const Player& player, const std::vector<std::string>& choices);
+
+
 	static void printTitleScreen();
 
 	static void addLog(const std::string& log);
@@ -33,6 +36,8 @@ private:
 	static void printStatBar(const Player& player);
 
 	static void printEnemyInfo(const std::vector<Monster*>& monsters);
+
+	static void printItemInfo(const std::vector<std::pair<std::string, int>>& itemList);
 
 	static void printMapInfo(const Map& map);
 

@@ -1,4 +1,7 @@
 ﻿#include "Player.h"
+#include "Item.h"
+#include "../data/DataManager.h"
+#include "../ui/UIRenderer.h"
 #include <vector>
 #include <algorithm>
 
@@ -106,10 +109,24 @@ void Player::removeItem(const std::string& id)
 		return;
 
 	m_inven[id]--;
+
+	if (m_inven[id] == 0)
+		m_inven.erase(id);
 }
 
 bool Player::hasItem(const std::string& id) const
 {
 	auto it = m_inven.find(id);
 	return (it != m_inven.end() && it->second > 0);
+}
+
+void Player::useItem(const std::string& id)
+{
+	if (!hasItem(id)) return;
+	ItemData data = DataManager::getInstance().getItemData(id);
+	Item item(data);
+	item.useItem(*this);
+	removeItem(id);
+	UIRenderer::addLog(data.name + " 을 사용했다.");
+
 }
