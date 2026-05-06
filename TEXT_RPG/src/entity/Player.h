@@ -31,7 +31,7 @@ public:
 	int getMaxStamina() const { return m_maxStamina; }
 
 	//Save
-	void loadFromSave(int curHp, int stamina, std::vector<SkillType> skills);
+	void loadFromSave(int curHp, int stamina, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills);
 
 	//GumniCommand Flag
 	void startGumniCharge();

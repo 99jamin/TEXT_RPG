@@ -27,9 +27,55 @@ std::vector<std::string> UIRenderer::s_logs;
 
 
 
- void UIRenderer::printTitleScreen()
+ void UIRenderer::printTitleScreen(const std::string& message)
 {
-	 //TODO: 타이틀 구현
+	 //system("cls");
+
+	 // 아스키 아트 (15줄, 가운데 상단)
+	 std::vector<std::string> art = {
+		
+		 "                                                                ",
+		 "                                                                ",
+		 "                                                                ",
+		 "                                                                ",
+		 "            -%=    #*   .-*++===+*+.    :%                      ",
+		 "           :%*.:*#*%*           :#+      *#******.              ",
+		 "         .+*..+#-  #*           :#-  :=+==-=====+##+            ",
+		 "        ::     +:  +:           =*      :------==               ",
+		 "            -#+:::-%=  --::::::-#++*=.  .::....**               ",
+		 "            :*=.  :%:                    #+.   ..               ",
+		 "            .==:::::.                    :=======-              ",
+		 "                                                                ",
+		 "                                                                ",
+		 "                                                                ",
+		 "                                                                "
+	 };
+
+	 int artStartX = (TOTAL_WIDTH - 65) / 2;
+	 for (int i = 0; i < (int)art.size(); i++)
+	 {
+		 setCursor(artStartX, 3 + i);
+		 std::cout << art[i];
+	 }
+
+	 // 선택지
+	 int menuX = TOTAL_WIDTH / 2 - 8;
+	 setCursor(menuX, 20);
+	 std::cout << "1. 새로하기";
+	 setCursor(menuX, 22);
+	 std::cout << "2. 이어하기";
+	 setCursor(menuX, 24);
+	 std::cout << "3. 종료하기";
+
+	 // 메시지
+	 if (!message.empty())
+	 {
+		 setCursor(menuX, 27);
+		 std::cout << message;
+	 }
+
+	 setCursor(menuX, 29);
+	 std::cout << "> ";
 }
 
  void UIRenderer::addLog(const std::string& log)

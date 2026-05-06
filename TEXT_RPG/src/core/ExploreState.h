@@ -7,6 +7,7 @@
 #include "../data/DataManager.h"
 #include "../entity/Player.h"
 #include "../ui/UIRenderer.h"
+#include "../save/SaveManager.h"
 #include <iostream>
 #include <memory>
 
@@ -15,10 +16,14 @@ class GameManager;
 class ExploreState : public GameState
 {
 public:
-    ExploreState(const std::string& mapId)
+    ExploreState(const std::string& mapId, bool isLoad = false)
         : m_map(DataManager::getInstance().getMapData(mapId))
     {
-
+        if (isLoad)
+        {
+            auto& mapData = SaveManager::getInstance().getMapData();
+            m_map.loadFromSave(mapData.currentX, mapData.currentY, mapData.mapClearData.count(mapId) ? mapData.mapClearData.at(mapId) : std::vector<std::string>{});
+        }
     }
 
     void enter(GameManager& manager) override
@@ -45,7 +50,7 @@ public:
 
     void exit(GameManager& manager) override
     {
-        // TODO: 세이브 처리
+
     }
 
 private:
@@ -211,8 +216,16 @@ private:
     // 일기 처리
     void handleDiary(GameManager& manager)
     {
-        // TODO: DiaryState push
-        UIRenderer::addLog("[일기 - 미구현]");
+        UIRenderer::printExploreScreen(m_map, manager.getPlayer(), {"1. 일기를 작성한다.","2. 취소"});
+        
+        int input;
+        std::cin >> input;
+        
+        if (input == 1)
+        {
+            UIRenderer::addLog("일기를 작성했다.");
+            SaveManager::getInstance().saveData(manager.getPlayer(), m_map);
+        }
     }
 
     Map m_map;

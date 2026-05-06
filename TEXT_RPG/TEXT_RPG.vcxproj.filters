@@ -31,6 +31,9 @@
     <Filter Include="헤더 파일\ui">
       <UniqueIdentifier>{26b4edd7-1792-4b4b-9f35-e5d1f06b53cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\save">
+      <UniqueIdentifier>{7f03b592-efa6-4a37-bbe0-d688afa75cf5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\GameManager.cpp">
@@ -182,8 +185,8 @@
     <ClInclude Include="src\core\CombatState.h">
       <Filter>헤더 파일\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\InventoryState.h">
-      <Filter>헤더 파일\core</Filter>
+    <ClInclude Include="src\save\SaveManager.h">
+      <Filter>헤더 파일\save</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

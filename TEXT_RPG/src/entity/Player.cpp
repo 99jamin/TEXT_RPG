@@ -8,7 +8,7 @@
 Player::Player(const std::string& name, int maxHp, int atk, int def, int maxStamina)
 	:Entity(name, maxHp, atk, def), m_maxStamina(maxStamina), m_stamina(maxStamina)
 {
-	learnSkill(SkillType::Nuigyeol);
+
 }
 
 void Player::takeDamage(int damage)
@@ -54,6 +54,17 @@ void Player::recoverStamina(int amount)
 {
 	m_stamina += amount;
 	m_stamina = std::min(m_maxStamina, m_stamina);
+}
+
+
+//Save
+void Player::loadFromSave(int curHp, int stamina, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills)
+{
+	Entity::setCurHp(curHp);
+	m_stamina = stamina;
+	m_isPoison = poisoned;
+	m_inven = inventory;
+	m_skills = skills;
 }
 
 void Player::startGumniCharge()

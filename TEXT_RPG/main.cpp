@@ -10,7 +10,7 @@ int main()
 {
 	SetConsoleOutputCP(CP_UTF8);
 	SetConsoleCP(CP_UTF8);
-	system("mode con cols=140 lines=50");
+	system("mode con cols=140 lines=40");
 
 	DataManager::getInstance().loadAll();
 

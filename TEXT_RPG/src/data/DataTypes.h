@@ -1,14 +1,15 @@
 ﻿#pragma once
 #include <string>
 #include <vector>
-#include <unordered_map>
+#include <map>
 #include "../combat/MonsterEffect.h"
 #include "../combat/SkillType.h"
 #include "../entity/ItemEffect.h"
 #include "../map/RoomType.h"
 
 
-struct MonsterData {
+struct MonsterData 
+{
     std::string id;
     std::string name;
     std::string description;
@@ -19,7 +20,8 @@ struct MonsterData {
     std::string dropItemId;
 };
 
-struct ItemData {
+struct ItemData 
+{
     std::string id;
     std::string name;
     std::string description;
@@ -28,7 +30,8 @@ struct ItemData {
     int value;
 };
 
-struct RoomData {
+struct RoomData 
+{
     std::string id;
     RoomType type;
     std::string text;
@@ -39,18 +42,46 @@ struct RoomData {
     int itemCount = 0;
 };
 
-struct MapData {
+struct MapData
+{
     std::string id;
     std::string name;
     std::string description;
     std::string nextMapId;
     std::vector<std::vector<std::string>> grid;
-    std::unordered_map<std::string, RoomData> rooms;  // id → RoomData
+    std::map<std::string, RoomData> rooms;  // id → RoomData
 };
 
-struct SkillData {
+struct SkillData 
+{
     std::string id;
     std::string name;
     float damage_ratio;
     int stamina_cost;
+};
+
+
+struct SaveData
+{
+    // player
+    struct PlayerSaveData
+    {
+        int hp;
+        int stamina;
+        bool poisoned;
+        std::map<std::string, int> inventory;
+        std::vector<SkillType> skills;
+    };
+
+    // map
+    struct MapSaveData
+    {
+        std::string currentMapId;
+        int currentX;
+        int currentY;
+        std::map<std::string, std::vector<std::string>> mapClearData;
+    };
+
+    PlayerSaveData player;
+    MapSaveData map;
 };

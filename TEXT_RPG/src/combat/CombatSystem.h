@@ -100,6 +100,13 @@ public:
 
 			int count = 0;
 			std::vector<SkillType> skills = m_player.getSkills();
+
+			if (skills.empty())
+			{
+				UIRenderer::addLog("공격할 수단이 없다. 무가서를 읽어야 한다.");
+				return;
+			}
+
 			for (auto& e : skills)		
 			{
 				skillChoice.push_back(std::to_string(++count)+ "."+ toString(e));

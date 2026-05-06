@@ -35,6 +35,29 @@ Map::Map(const MapData& data)
     currentRoom = m_roomGrid[m_currentY][m_currentX].get();
 }
 
+void Map::loadFromSave(int currentX, int currentY, std::vector<std::string> clearRoomId)
+{
+    m_currentX = currentX;
+    m_currentY = currentY;
+
+    for (auto& row : m_roomGrid)
+    {
+        for (auto& room : row)
+        {
+            if (!room)
+                continue;
+
+            for (auto& id : clearRoomId)
+            {
+                if (room->getRoomId() == id)
+                    room->setCleared();
+            }
+        }
+    }
+
+    currentRoom = m_roomGrid[m_currentY][m_currentX].get();
+}
+
 // 이동 시도 - 성공하면 true 반환
 bool Map::move(Direction dir)
 {
@@ -77,4 +100,26 @@ bool Map::canMove(Direction dir) const
 
     if (newX < 0 || newX >= 6 || newY < 0 || newY >= 6) return false;
     return m_roomGrid[newY][newX] != nullptr;
+}
+
+std::vector<std::string> Map::getClearRooms() const
+{
+    std::vector<std::string> clearRooms;
+
+    for (auto& row : m_roomGrid)
+    {
+        for (auto& room : row)
+        {
+            if (!room)
+            {
+                continue;
+            }
+            else
+            {
+                if (room->isCleared())
+                    clearRooms.push_back(room->getRoomId());
+            }
+        }
+    }
+    return clearRooms;
 }

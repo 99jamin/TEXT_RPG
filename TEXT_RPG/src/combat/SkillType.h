@@ -34,3 +34,13 @@ inline std::string toId(SkillType type) {
     default: return "";
     }
 }
+
+inline SkillType fromId(const std::string& id) {
+    if (id == "Nuigyeol")   return SkillType::Nuigyeol;
+    if (id == "Musuki")     return SkillType::Musuki;
+    if (id == "Neoul")      return SkillType::Neoul;
+    if (id == "Gumni")      return SkillType::Gumni;
+    if (id == "Mulmaru")    return SkillType::Mulmaru;
+    if (id == "Soroksorok") return SkillType::Soroksorok;
+    return SkillType::Nuigyeol; // default
+}

@@ -1,0 +1,25 @@
+{
+    "map": {
+        "currentMapId": "village",
+        "currentX": 2,
+        "currentY": 2,
+        "mapClearData": {
+            "village": [
+                "skill_1",
+                "combat_1",
+                "item_1"
+            ]
+        }
+    },
+    "player": {
+        "hp": 46,
+        "inventory": {
+            "bandage": 1
+        },
+        "poisoned": false,
+        "skills": [
+            "Nuigyeol"
+        ],
+        "stamina": 4
+    }
+}

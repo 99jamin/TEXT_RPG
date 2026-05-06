@@ -21,8 +21,7 @@ public:
 
 	static void printInvenScreen(const std::vector<std::pair<std::string, int>>& itemList, const Player& player, const std::vector<std::string>& choices);
 
-
-	static void printTitleScreen();
+	static void printTitleScreen(const std::string& message = "");
 
 	static void addLog(const std::string& log);
 

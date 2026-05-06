@@ -15,6 +15,8 @@ class Map
 public:
     Map(const MapData& data);
 
+    void loadFromSave(int currentX, int currentY, std::vector<std::string> clearRoomId);;
+
     // 이동 시도 - 성공하면 true 반환
     bool move(Direction dir);
 
@@ -27,6 +29,7 @@ public:
     const std::string& getName() const { return m_name; }
     const std::string& getDescription() const { return m_description; }
     const std::string& getNextMapId() const { return m_nextMapId; }
+    std::vector<std::string> getClearRooms() const;
 
     // 미니맵 출력용
     const std::vector<std::vector<std::unique_ptr<Room>>>& getRoomGrid() const { return m_roomGrid; }
