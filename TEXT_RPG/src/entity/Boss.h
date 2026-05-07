@@ -14,6 +14,8 @@ public:
 
 	virtual void onPhaseTwo() = 0;
 
+	bool isBoss() const override { return true; };
+
 private:
 
 	bool m_isPhaseTwo = false;

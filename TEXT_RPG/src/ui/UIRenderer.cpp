@@ -196,10 +196,17 @@ void UIRenderer::addLog(const LogLine& line)
 {
 	 setColor(Color::RED);
 
+	 if (monsters[0]->isBoss())
+		 setColor(Color::BOSS); // 보스 색상
+
 	for (int i = 0; i < (int)monsters.size(); ++i)
 	{
 		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i));
-		std::cout << i + 1 << ". " << monsters[i]->getName();
+
+		if (monsters[0]->isBoss())
+			std::cout << monsters[i]->getName();
+		else
+			std::cout << i + 1 << ". " << monsters[i]->getName();
 
 		int hpBar = (monsters[i]->getCurHp() * 30) / monsters[i]->getMaxHp();
 		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i) + 2);
@@ -227,7 +234,7 @@ void UIRenderer::addLog(const LogLine& line)
 		ItemData data = DataManager::getInstance().getItemData(itemList[i].first);
 
 		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i));
-		std::cout << i + 1 << ". " << data.name;
+		std::cout << i + 1 << ". " << data.name << " : " << itemList[i].second << "개";
 		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i) + 1);
 		std::cout << data.description;
 	}

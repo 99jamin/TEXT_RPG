@@ -6,6 +6,8 @@
 #include "../combat/CombatSystem.h"
 #include "../combat/CombatResult.h"
 #include "GameManager.h"
+#include "../entity/JeokgapsinBoss.h"
+#include "../entity/JeokkwiBoss.h"
 
 class GameManager;
 
@@ -17,9 +19,21 @@ public:
 		: m_onResult(onResult)
 	{
 		MonsterData data = DataManager::getInstance().getMonsterData(monsterId);
-		for (int i = 0; i < monsterCount; i++)
+
+		if (monsterId == "jeokgapsin")
 		{
-			m_monsters.push_back(std::make_unique<Monster>(data));
+			m_monsters.push_back(std::make_unique<JeokgapsinBoss>(data));
+		}
+		else if (monsterId == "jeokkwi")
+		{
+			m_monsters.push_back(std::make_unique<JeokkwiBoss>(data));
+		}
+		else
+		{
+			for (int i = 0; i < monsterCount; i++)
+			{
+				m_monsters.push_back(std::make_unique<Monster>(data));
+			}
 		}
 	}
 

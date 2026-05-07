@@ -20,6 +20,10 @@ public:
     MapData getMapData(const std::string& id);
 
     std::string getItemName(const std::string& id);
+    
+    int getSkillStamina(SkillType skill);
+
+
 
 private:
     DataManager() = default;

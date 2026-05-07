@@ -106,7 +106,7 @@
       "description": "적조를 흡수한 대게. 적갈색 껍질은 공격을 튕겨낸다. 배를 타려면 반드시 지나쳐야 한다.",
       "hp": 200,
       "attack": 30,
-      "defense": 30,
+      "defense": 0,
       "effect": "HighDamage",
       "drop_item": "yeong_yak"
     },

@@ -160,12 +160,23 @@ private:
         }
         case RoomType::Combat:
         {
-            // TODO: CombatState로 전환
-
-            manager.pushState(std::make_unique<CombatState>(room->getMonsterCount(), room->getMonsterId(), [room](CombatResult result) {
+            manager.pushState(std::make_unique<CombatState>(room->getMonsterCount(), room->getMonsterId(), [room, &manager](CombatResult result)
+                {
                 if (result == CombatResult::Victory)
+                {
                     room->setCleared();
+                    
+                    UIRenderer::addLog("역귀들이 모두 죽었다.");
+
+                    auto data = DataManager::getInstance().getMonsterData(room->getMonsterId());
+                    if (!data.dropItemId.empty())
+                    {
+                        manager.getPlayer().addItem(data.dropItemId, 1);
+                    }
+                }
                 }));
+
+
             break;
         }
         case RoomType::Item:
@@ -217,17 +228,15 @@ private:
             ItemData data = DataManager::getInstance().getItemData(e.first);
             itemChoices.push_back(std::to_string(++count) + ". " + data.name);
         }
-        itemChoices.push_back(std::to_string(++count) + ". 취소");
+        itemChoices.push_back("0. 취소");
 
         UIRenderer::printInvenScreen(itemList, manager.getPlayer(), itemChoices);
 
         int input;
         std::cin >> input;
 
-        if (input == count) return; // 취소
         if (input < 1 || input >= count)
         {
-            UIRenderer::addLog("잘못된 선택입니다.");
             return;
         }
 

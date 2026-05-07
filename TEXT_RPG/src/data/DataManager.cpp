@@ -55,6 +55,11 @@ std::string DataManager::getItemName(const std::string& id)
     return getItemData(id).name;
 }
 
+int DataManager::getSkillStamina(SkillType skill)
+{
+    return getSkillData(skill).stamina_cost;
+}
+
 void DataManager::loadMonsters(const std::string& path)
 {
     std::ifstream file(path);

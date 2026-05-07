@@ -15,6 +15,8 @@ public:
 	void dead() override;
 
 	MonsterEffect getEffect() const { return m_effect; }
+	
+	virtual bool isBoss() const { return false; }
 
 
 protected:

@@ -110,7 +110,7 @@ void Player::addItem(const std::string& id, int count)
 {
 	std::vector<LogSegment>log;
 	log.push_back(LogSegment("["+DataManager::getInstance().getItemName(id)+"]", Color::CYAN));
-	log.push_back(LogSegment(" 을/를 주웠다.", Color::WHITE));
+	log.push_back(LogSegment(" 을/를 습득했다.", Color::WHITE));
 	UIRenderer::addLog(log);
 
 	m_inven[id] += count;
