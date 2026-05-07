@@ -11,7 +11,7 @@ Player::Player(const std::string& name, int maxHp, int atk, int def, int maxStam
 
 }
 
-void Player::takeDamage(int damage)
+int Player::takeDamage(int damage)
 {
 	if (m_isChargingGumni)
 		setHitWhileCharging();
@@ -19,7 +19,7 @@ void Player::takeDamage(int damage)
 	if (m_isDefending)
 		damage /= 2;  
 
-	Entity::takeDamage(damage);
+	return Entity::takeDamage(damage);
 }
 
 void Player::printStatus() const
@@ -108,10 +108,12 @@ void Player::drainStamina(int amount)
 //inven
 void Player::addItem(const std::string& id, int count)
 {
-	for (int i = 0; i < count; ++i)
-	{
-		m_inven[id]++;
-	}
+	std::vector<LogSegment>log;
+	log.push_back(LogSegment("["+DataManager::getInstance().getItemName(id)+"]", Color::CYAN));
+	log.push_back(LogSegment(" 을/를 주웠다.", Color::WHITE));
+	UIRenderer::addLog(log);
+
+	m_inven[id] += count;
 }
 
 void Player::removeItem(const std::string& id)
@@ -138,6 +140,10 @@ void Player::useItem(const std::string& id)
 	Item item(data);
 	item.useItem(*this);
 	removeItem(id);
-	UIRenderer::addLog(data.name + " 을 사용했다.");
+
+	std::vector<LogSegment>log;
+	log.push_back(LogSegment("["+data.name+"]", Color::CYAN));
+	log.push_back(LogSegment(" 을/를 사용했다.", Color::WHITE));
+	UIRenderer::addLog(log);
 
 }

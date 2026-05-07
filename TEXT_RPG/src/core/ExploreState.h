@@ -60,7 +60,25 @@ private:
     {
         Room* room = m_map.getCurRoom();
         if (!room->getText().empty())
+        {
+            if (room->getRoomType() == RoomType::Combat)
+                printMonsterText(room);
+
             UIRenderer::addLog(room->getText());
+        }
+    }
+
+    void printMonsterText(Room* room)
+    {
+        if (room->isCleared())
+            return;
+
+        auto data = DataManager::getInstance().getMonsterData(room->getMonsterId());
+
+        std::vector<LogSegment>log;
+        log.push_back(LogSegment("[" + data.name + "]", Color::RED));
+        log.push_back(LogSegment(" 와 조우했다.", Color::WHITE));
+        UIRenderer::addLog(log);
     }
 
     // 선택지 출력
@@ -73,7 +91,10 @@ private:
         choices.push_back("1. 이동하기");
 
         // 방 타입에 따라 2번 선택지 변경
-        if (room->getRoomType() == RoomType::Combat && !room->isCleared())
+
+        if(room->getRoomType() == RoomType::Exit)
+            choices.push_back("2. 다음 지역으로 이동하기.");
+        else if (room->getRoomType() == RoomType::Combat && !room->isCleared())
             choices.push_back("2. 공격하기");
         else
             choices.push_back("2. 조사하기");
@@ -140,6 +161,7 @@ private:
         case RoomType::Combat:
         {
             // TODO: CombatState로 전환
+
             manager.pushState(std::make_unique<CombatState>(room->getMonsterCount(), room->getMonsterId(), [room](CombatResult result) {
                 if (result == CombatResult::Victory)
                     room->setCleared();

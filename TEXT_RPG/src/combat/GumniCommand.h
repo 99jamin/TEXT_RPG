@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "SkillCommand.h"
 #include "../entity/Entity.h"
 #include "../entity/Player.h"
@@ -9,10 +9,12 @@ public:
 
 	using SkillCommand::SkillCommand;
 
-	void execute(Entity& user, Entity& target) override
+	int execute(Entity& user, Entity& target) override
 	{
+		int realDamage = 0;
+
 		Player* player = dynamic_cast<Player*>(&user);
-		if (!player) return;
+		if (!player) return 0;
 
 		if (!player->isChargingGumni())
 		{
@@ -23,16 +25,18 @@ public:
 			if (player->wasHitWhileCharging())
 			{
 				int actualdamage = player->getAtk() * HIT_DAMAGE_RATIO;
-				target.takeDamage(actualdamage);
+				realDamage = target.takeDamage(actualdamage);
 			}
 			else
 			{
 				int actualdamage = (player->getAtk() * m_damageRatio);
-				target.takeDamage(actualdamage);
+				realDamage = target.takeDamage(actualdamage);
 			}
 
 			player->releaseGumni();
 		}
+
+		return realDamage;
 	}
 
 private:

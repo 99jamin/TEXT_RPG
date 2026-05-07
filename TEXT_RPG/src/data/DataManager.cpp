@@ -41,12 +41,18 @@ ItemData DataManager::getItemData(const std::string& id)
     return ItemData{};
 }
 
+
 MapData DataManager::getMapData(const std::string& id)
 {
     auto it = m_mapTable.find(id);
     if (it != m_mapTable.end())
         return it->second;
     return MapData{};
+}
+
+std::string DataManager::getItemName(const std::string& id)
+{
+    return getItemData(id).name;
 }
 
 void DataManager::loadMonsters(const std::string& path)

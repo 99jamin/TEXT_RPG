@@ -15,7 +15,7 @@ public:
 
 	}
 
-	virtual void execute(Entity& user, Entity& target) = 0;
+	virtual int execute(Entity& user, Entity& target) = 0;
 	
 
 	std::string getDescription() const override

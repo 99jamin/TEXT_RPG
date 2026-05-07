@@ -1,37 +1,37 @@
-{
+﻿{
   "items": [
     {
       "id": "bandage",
       "name": "붕대",
-      "description": "낡은 천 조각. 상처를 감싸 피를 멎게 한다.",
+      "description": "낡은 천 조각. 피를 멎게 한다.",
       "effect": "HpRestore",
       "value": 10
     },
     {
       "id": "herb",
       "name": "약초",
-      "description": "바닷가에서 자라는 쓴 풀. 달여 마시면 기력이 돈다.",
+      "description": "쓴 풀. 달여 마시면 기력이 돈다.",
       "effect": "HpRestore",
       "value": 20
     },
     {
       "id": "incense_pouch",
       "name": "향낭",
-      "description": "역병을 쫓는다고 전해지는 향주머니. 독기를 걷어낸다.",
+      "description": "역병 쫓는 향주머니. 독기를 걷어낸다.",
       "effect": "CurePoison",
       "value": 0
     },
     {
       "id": "yeong_yak",
       "name": "영약",
-      "description": "용궁에서 온듯한 신비로운 약. 모든 상처를 아물게 한다.",
+      "description": "신비로운 약. 모든 상처를 아물게 한다.",
       "effect": "HpRestoreFull",
       "value": 0
     },
     {
       "id": "red_flesh",
       "name": "붉은 살점",
-      "description": "정체 모를 붉은 살점 덩어리. 독기가 가득해 보인다.",
+      "description": "붉은 살점. 독기가 가득하다.",
       "effect": "HpRestore",
       "value": 50
     },
@@ -45,35 +45,35 @@
     {
       "id": "mugaseo_1",
       "name": "찢긴 무가서",
-      "description": "남편이 남긴 찢긴 무가서. 바다가 숨 고르는 소리, 뉫결이 적혀있다.",
+      "description": "찢긴 무가서. 뉫결이 새겨져 있다.",
       "effect": "SkillLearn",
       "skill": "Nuigyeol"
     },
     {
       "id": "mugaseo_2",
       "name": "무가서 조각 첫째",
-      "description": "무가서의 한 조각. 물이 세차게 쏟아지는 소리, 무수기가 적혀있다.",
+      "description": "무가서 조각. 무수기가 새겨져 있다.",
       "effect": "SkillLearn",
       "skill": "Musuki"
     },
     {
       "id": "mugaseo_3",
       "name": "무가서 조각 둘째",
-      "description": "무가서의 한 조각. 크게 일렁이는 파도 소리, 너울이 적혀있다.",
+      "description": "무가서 조각. 너울이 새겨져 있다.",
       "effect": "SkillLearn",
       "skill": "Neoul"
     },
     {
       "id": "mugaseo_4",
       "name": "무가서 조각 셋째",
-      "description": "무가서의 한 조각. 바람 없이 이는 큰 파도 소리, 굼뉘가 적혀있다.",
+      "description": "무가서 조각. 굼뉘가 새겨져 있다.",
       "effect": "SkillLearn",
       "skill": "Gumni"
     },
     {
       "id": "mugaseo_5",
-      "name": "무가서 조각 넷째",
-      "description": "무가서의 마지막 조각. 가장 높은 파도의 소리, 물마루가 적혀있다.",
+      "name": "무가서 마지막 조각",
+      "description": "무가서 마지막. 물마루가 새겨져 있다.",
       "effect": "SkillLearn",
       "skill": "Mulmaru"
     }

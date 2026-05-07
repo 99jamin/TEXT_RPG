@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Monster.h"
 
 class Boss : public Monster
@@ -8,7 +8,7 @@ public:
 	
 	using Monster::Monster;
 
-	void takeDamage(int damage) override;
+	int takeDamage(int damage) override;
 
 	bool isPhaseTwo() const;
 

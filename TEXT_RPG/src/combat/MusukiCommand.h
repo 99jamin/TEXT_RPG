@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "SkillCommand.h"
 #include "../entity/Entity.h"
 
@@ -8,12 +8,15 @@ public:
 
 	using SkillCommand::SkillCommand;
 
-	void execute(Entity& user, Entity& target) override
+	int execute(Entity& user, Entity& target) override
 	{
+		int realDmamage = 0;
 		int actualDamage = user.getAtk() * m_damageRatio;
 
+		realDmamage = target.takeDamage(actualDamage);
 		target.takeDamage(actualDamage);
-		target.takeDamage(actualDamage);
+
+		return realDmamage;
 	}
 
 };

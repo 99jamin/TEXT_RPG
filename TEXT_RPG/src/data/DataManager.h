@@ -19,6 +19,8 @@ public:
 
     MapData getMapData(const std::string& id);
 
+    std::string getItemName(const std::string& id);
+
 private:
     DataManager() = default;
 

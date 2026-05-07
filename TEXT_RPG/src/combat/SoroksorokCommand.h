@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "SkillCommand.h"
 #include "../entity/Entity.h"
 #include "../entity/Boss.h"
@@ -9,12 +9,14 @@ public:
 
 	using SkillCommand::SkillCommand;
 
-	void execute(Entity& user, Entity& target) override
+	int execute(Entity& user, Entity& target) override
 	{
 		Boss* boss = dynamic_cast<Boss*>(&target);
 		if (boss) {
 			target.dead();
 		}
+
+		return 0;
 	}
 
 };

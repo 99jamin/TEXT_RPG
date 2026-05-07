@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Command.h"
 #include "../entity/Player.h"
 
@@ -7,12 +7,14 @@ class DefendCommand : public Command
 
 public:
 
-	void execute(Entity& user, Entity& target) override
+	int execute(Entity& user, Entity& target) override
 	{
 		Player* player = dynamic_cast<Player*>(&user);
-		if (!player) return;
+		if (!player) return 0;
 
 		player->startDefend();
+
+		return 0;
 	}
 
 

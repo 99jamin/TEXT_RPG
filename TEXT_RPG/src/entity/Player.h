@@ -11,7 +11,7 @@ public:
 
 	Player(const std::string& name, int maxHp, int atk, int def, int maxStamina);
 
-	void takeDamage(int damage);
+	int takeDamage(int damage);
 
 	void printStatus() const override;
 

@@ -10,7 +10,7 @@ public:
 	
 	Entity(const std::string& name, int maxHp, int atk, int def);
 
-	void takeDamage(int damage) override;
+	int takeDamage(int damage) override;
 
 	virtual void printStatus() const = 0;		
 

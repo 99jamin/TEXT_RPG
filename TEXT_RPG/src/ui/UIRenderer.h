@@ -6,6 +6,27 @@
 #include <vector>
 #include "../map/Map.h"
 
+enum class Color : WORD
+{
+	WHITE = 7,
+	RED = 12,
+	GREEN = 10,
+	YELLOW = 14,
+	CYAN = 11,
+	PURPLE = 13,
+	ORANGE = 6,
+	BLUE = 9
+};
+
+struct LogSegment
+{
+	std::string text;
+	Color color;
+
+	LogSegment(const std::string& t, Color c) : text(t), color(c) {}
+};
+
+using LogLine = std::vector<LogSegment>;
 
 class Player;
 class Monster;
@@ -24,6 +45,8 @@ public:
 	static void printTitleScreen(const std::string& message = "");
 
 	static void addLog(const std::string& log);
+
+	static void addLog(const LogLine& line);
 
 	static void clearLogs();
 
@@ -44,7 +67,11 @@ private:
 
 	static void setCursor(int x, int y);
 
-	static std::vector<std::string> s_logs;
+	static void setColor(Color color);
+
+	static void resetColor();
+
+	static std::vector<LogLine> s_logs;
 
 	static const int STAT_ROW = 2;   // 스탯바 행
 	static const int LOG_START_ROW = 5;   // 로그 시작 행
@@ -56,4 +83,5 @@ private:
 	static const int LEFT_WIDTH = 90;  // 왼쪽 패널 너비
 	static const int RIGHT_COL = 92;  // 오른쪽 패널 시작 열
 
+	
 };

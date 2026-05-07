@@ -8,47 +8,49 @@ class MonsterAtkCommand : public Command
 
 public:
 
-	void execute(Entity& user, Entity& target) override
+	int execute(Entity& user, Entity& target) override
 	{
 		Monster* monster = dynamic_cast<Monster*>(&user);
-		if (!monster) return;
+		if (!monster) return 0;
 
         Player* player = dynamic_cast<Player*>(&target);
-        if (!player) return;
+        if (!player) return 0;
 
         int actualDamage = 0;
+
+        int realDamage = 0;
 
         switch (monster->getEffect()) {
         case MonsterEffect::None:
             
             actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
-            player->takeDamage(actualDamage);
+            realDamage = player->takeDamage(actualDamage);
             break;
 
         case MonsterEffect::Poison:
             
             actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
-            player->takeDamage(actualDamage);
+            realDamage = player->takeDamage(actualDamage);
             player->applyPoison();
             break;
 
         case MonsterEffect::StaminaDrain:
             
             actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
-            player->takeDamage(actualDamage);
+            realDamage = player->takeDamage(actualDamage);
             player->drainStamina(1);
             break;
 
         case MonsterEffect::HighDamage:
             
-            actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
-            player->takeDamage(actualDamage);
+            actualDamage = static_cast<int>(monster->getAtk() * HIGH_DAMAGE_RATIO);
+            realDamage = player->takeDamage(actualDamage);
             break;
 
         case MonsterEffect::HpAbsorb:
             
             actualDamage = static_cast<int>(monster->getAtk() * DAMAGE_RATIO);
-            player->takeDamage(actualDamage);
+            realDamage = player->takeDamage(actualDamage);
             monster->recoverHp(actualDamage * HP_ABSORB_RATIO);
             break;
 
@@ -57,12 +59,14 @@ public:
             monster->recoverHp(static_cast<int>(actualDamage * HP_ABSORB_RATIO));
             break;
         }
+
+        return realDamage;
 	}
 
 
 	std::string getDescription() const override
 	{
-        return "몬스터의 공격";
+        return "적이 공격한다.";
 	}
 
 

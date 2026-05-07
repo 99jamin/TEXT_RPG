@@ -8,7 +8,7 @@ class FleeCommand : public Command
 
 public:
 
-	void execute(Entity& user, Entity& target) override
+	int execute(Entity& user, Entity& target) override
 	{
 		m_fleeSuccess = false; 
 		fleeDescription = "도망에 실패했다.";
@@ -22,6 +22,8 @@ public:
 			fleeDescription = "도망에 성공했다.";
 			m_fleeSuccess = true;
 		}
+
+		return 0;
 	}
 
 

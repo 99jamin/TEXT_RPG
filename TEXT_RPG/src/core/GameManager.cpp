@@ -3,7 +3,7 @@
 
 GameManager::GameManager()
 	:running(true),
-	m_player(std::make_unique<Player>("엄마",100,5,3,5))
+	m_player(std::make_unique<Player>("엄마",1000,15,0,5))
 {
 
 }

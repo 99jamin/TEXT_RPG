@@ -10,7 +10,6 @@ class Monster : public Entity
 public:
 	Monster(const MonsterData& data);
 
-
 	void printStatus() const override;
 
 	void dead() override;

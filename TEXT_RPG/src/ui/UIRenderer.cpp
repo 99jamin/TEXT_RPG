@@ -2,7 +2,8 @@
 #include "../entity/Player.h"
 #include "../entity/Monster.h"
 #include "../data/DataManager.h"
-std::vector<std::string> UIRenderer::s_logs;
+
+std::vector<LogLine> UIRenderer::s_logs;
 
  void UIRenderer::printExploreScreen(const Map& map, const Player& player, const std::vector<std::string>& choices)
 {
@@ -33,22 +34,21 @@ std::vector<std::string> UIRenderer::s_logs;
 
 	 // 아스키 아트 (15줄, 가운데 상단)
 	 std::vector<std::string> art = {
-		
-		 "                                                                ",
-		 "                                                                ",
-		 "                                                                ",
-		 "                                                                ",
-		 "            -%=    #*   .-*++===+*+.    :%                      ",
-		 "           :%*.:*#*%*           :#+      *#******.              ",
-		 "         .+*..+#-  #*           :#-  :=+==-=====+##+            ",
-		 "        ::     +:  +:           =*      :------==               ",
-		 "            -#+:::-%=  --::::::-#++*=.  .::....**               ",
-		 "            :*=.  :%:                    #+.   ..               ",
-		 "            .==:::::.                    :=======-              ",
-		 "                                                                ",
-		 "                                                                ",
-		 "                                                                ",
-		 "                                                                "
+	"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⣶⣶⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⠘⣿⣷⣦⠀⠀⠀⠀⠈⣿⣿⡇⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣤⣤⣤⡀⠀⠀⠀⠀⠈⠙⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⢠⣿⣿⡟⠀⠀⠀⠀⣠⣿⣿⡇⠀⠀⠀⠀⠈⠛⠿⠿⠟⠛⠛⠛⠛⠛⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⣿⣿⣧⠀⠀⠀⠀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⢠⣿⣿⣿⣧⠘⠻⣿⡿⢿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠙⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⢀⣴⣿⡟⠛⠛⣿⣿⣧⡀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠀⢠⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣴⣶⣶⣶⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⢀⣴⡿⠟⠁⠀⠀⠈⠻⢿⠇⠀⠀⢿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⠙⠻⠿⠟⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠁⠀⠀⠀⣠⣤⣤⣄⣠⣤⣤⣤⣴⣾⣯⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡏⠀⠀⠀⠀⠀⠀⠐⢿⣿⣶⣶⠶⠿⠿⢿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⠈⣿⣿⣿⠋⠉⠉⠉⠻⣿⣿⠁⠀⠀⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣴⣾⣿⣿⣶⣾⣶⣦⠀⠀⠀⢀⣠⣽⣿⣀⣀⣀⣀⣈⣿⣿⣗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⢠⣿⣿⠀⠀⠀⠈⠙⠻⠛⠛⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀⠀⠈⢻⣿⣿⡟⠛⠛⠛⠛⠛⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣶⣶⣿⣿⡿⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣷⣶⣶⣴⣶⣶⣾⣿⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⠀⠀⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
 	 };
 
 	 int artStartX = (TOTAL_WIDTH - 65) / 2;
@@ -80,10 +80,19 @@ std::vector<std::string> UIRenderer::s_logs;
 
  void UIRenderer::addLog(const std::string& log)
 {
-	s_logs.push_back(log);
+	 LogLine line = { LogSegment(log, Color::WHITE) };
+
+	s_logs.push_back(line);
 	if (s_logs.size() > 20)
 		s_logs.erase(s_logs.begin());
 }
+
+void UIRenderer::addLog(const LogLine& line)
+ {
+	s_logs.push_back(line);
+	if (s_logs.size() > 20)
+		s_logs.erase(s_logs.begin());
+ }
 
  void UIRenderer::clearLogs()
 {
@@ -109,10 +118,17 @@ std::vector<std::string> UIRenderer::s_logs;
 	}
 
 	// 로그 출력
-	for (int i = 0; i < (int)s_logs.size(); i++)
+	int logY = 0;
+	for (auto& line : s_logs)
 	{
-		setCursor(1, LOG_START_ROW + i);
-		std::cout << s_logs[i];
+		setCursor(1, LOG_START_ROW + (logY++));
+
+		for (auto& seg : line)
+		{
+			setColor(seg.color);
+			std::cout << (seg.text);
+		}
+		resetColor();
 	}
 
 	// 오른쪽 패널
@@ -139,6 +155,8 @@ std::vector<std::string> UIRenderer::s_logs;
 	std::string condition = player.isPoisoned() ? "역병" : "없음";
 
 	setCursor(3, STAT_ROW);
+	int threshold = player.getMaxHp() * 3 / 10;
+	setColor(player.getCurHp() <= threshold ? Color::RED : Color::GREEN);
 	std::cout << "체력 : ";
 	for (int i = 1; i <= 20; ++i)
 	{
@@ -153,6 +171,7 @@ std::vector<std::string> UIRenderer::s_logs;
 	}
 
 	setCursor(43, STAT_ROW);  // 기력 시작 x 고정
+	setColor(Color::YELLOW);
 	std::cout << "기력 : ";
 	for (int i = 1; i <= player.getMaxStamina(); ++i)
 	{
@@ -167,19 +186,25 @@ std::vector<std::string> UIRenderer::s_logs;
 	}
 
 	setCursor(73, STAT_ROW);  // 상태이상 시작 x 고정
+	setColor(player.isPoisoned() ? Color::PURPLE : Color::WHITE);
 	std::cout << "상태이상 : " << condition;
+	resetColor();
+
 }
 
  void UIRenderer::printEnemyInfo(const std::vector<Monster*>& monsters)
 {
+	 setColor(Color::RED);
+
 	for (int i = 0; i < (int)monsters.size(); ++i)
 	{
 		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i));
 		std::cout << i + 1 << ". " << monsters[i]->getName();
 
-		int hpBar = (monsters[i]->getCurHp() * 10) / monsters[i]->getMaxHp();
-		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i) + 1);
-		for (int j = 1; j <= 10; ++j)
+		int hpBar = (monsters[i]->getCurHp() * 30) / monsters[i]->getMaxHp();
+		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i) + 2);
+		//std::cout << "체력: ";
+		for (int j = 1; j <= 30; ++j)
 		{
 			if (j <= hpBar)
 			{
@@ -191,6 +216,8 @@ std::vector<std::string> UIRenderer::s_logs;
 			}
 		}
 	}
+
+	resetColor();
 }
 
  void UIRenderer::printItemInfo(const std::vector<std::pair<std::string, int>>& itemList)
@@ -249,3 +276,13 @@ std::vector<std::string> UIRenderer::s_logs;
 	COORD pos = { (SHORT)x, (SHORT)y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
+
+void UIRenderer::setColor(Color color)
+ {
+	 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), static_cast<WORD>(color));
+ }
+
+void UIRenderer::resetColor()
+ {
+	 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); // 기본색
+ }

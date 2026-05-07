@@ -1,10 +1,12 @@
-#include "Boss.h"
+﻿#include "Boss.h"
 
 
-void Boss::takeDamage(int damage)
+int Boss::takeDamage(int damage)
 {
-	Monster::takeDamage(damage);
+	int actualDamage = Monster::takeDamage(damage);
 	checkPhaseTransition();
+
+	return actualDamage;
 }
 
 void Boss::checkPhaseTransition()
