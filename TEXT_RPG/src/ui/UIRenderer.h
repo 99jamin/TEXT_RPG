@@ -5,29 +5,7 @@
 #include <windows.h>
 #include <vector>
 #include "../map/Map.h"
-
-enum class Color : WORD
-{
-	WHITE = 7,
-	RED = 12,
-	GREEN = 10,
-	YELLOW = 14,
-	CYAN = 11,
-	PURPLE = 13,
-	ORANGE = 6,
-	BLUE = 9,
-	BOSS = 5
-};
-
-struct LogSegment
-{
-	std::string text;
-	Color color;
-
-	LogSegment(const std::string& t, Color c) : text(t), color(c) {}
-};
-
-using LogLine = std::vector<LogSegment>;
+#include "LogLine.h"
 
 class Player;
 class Monster;

@@ -9,14 +9,29 @@ public:
 
 	using SkillCommand::SkillCommand;
 
-	int execute(Entity& user, Entity& target) override
+	void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
-		Boss* boss = dynamic_cast<Boss*>(&target);
-		if (boss) {
-			target.dead();
+		Player* player = dynamic_cast<Player*>(&user);
+		if (player) player->consumeStamina(m_staminaCost);
+
+		Boss* boss = dynamic_cast<Boss*>(targets[targetIndex]);
+
+		if (boss)
+		{
+			if (logCallback)
+			{
+				m_log.clear();
+				m_log.push_back(LogSegment("<" + m_name + ">", Color::CYAN));
+				m_log.push_back(LogSegment(" 을/를 사용했다, ", Color::WHITE));
+				m_log.push_back(LogSegment("[" + targets[targetIndex]->getName() + "]", Color::BOSS));
+				m_log.push_back(LogSegment(" 는 울음을 그치고 안식에 들었다.", Color::WHITE));
+				logCallback(m_log);
+			}
+
+			targets[targetIndex]-> dead();
 		}
 
-		return 0;
+		return;
 	}
 
 };

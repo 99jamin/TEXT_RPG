@@ -1,13 +1,18 @@
 ﻿#pragma once
 #include <string>
+#include <vector>
+#include <functional>
+#include "../ui/LogLine.h"
+
 class Entity;
 
 class Command
 {
 public:
 
-	virtual int execute(Entity& user, Entity& target) = 0;
-	virtual std::string getDescription() const = 0;
-	virtual int getStaminaCost() const { return 0; }
+	virtual void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) = 0;
 
+protected:
+
+	LogLine m_log;
 };

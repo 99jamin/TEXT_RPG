@@ -8,13 +8,13 @@ class MonsterAtkCommand : public Command
 
 public:
 
-	int execute(Entity& user, Entity& target) override
+    void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
 		Monster* monster = dynamic_cast<Monster*>(&user);
-		if (!monster) return 0;
+		if (!monster) return;
 
-        Player* player = dynamic_cast<Player*>(&target);
-        if (!player) return 0;
+        Player* player = dynamic_cast<Player*>(targets[0]);
+        if (!player) return;
 
         int actualDamage = 0;
 
@@ -60,13 +60,17 @@ public:
             break;
         }
 
-        return realDamage;
-	}
+        if (logCallback)
+        {
+            m_log.clear();
+            m_log.push_back(LogSegment("[" + user.getName() + "]", Color::RED));
+            m_log.push_back(LogSegment(" 의 공격, ", Color::WHITE));
+            m_log.push_back(LogSegment(" " + std::to_string(realDamage), Color::RED));
+            m_log.push_back(LogSegment(" 의 피해를 입었다.", Color::WHITE));
+            logCallback(m_log);
+        }
 
-
-	std::string getDescription() const override
-	{
-        return "적이 공격한다.";
+        return;
 	}
 
 
@@ -76,5 +80,4 @@ private:
     static constexpr float HIGH_DAMAGE_RATIO = 2.0;
     static constexpr float HP_ABSORB_RATIO = 0.2;
     static constexpr int HP_REGEN_RATIO = 3;
-
 };

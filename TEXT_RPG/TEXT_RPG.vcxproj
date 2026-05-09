@@ -65,11 +65,13 @@
     <ClInclude Include="src\entity\JeokkwiBoss.h" />
     <ClInclude Include="src\entity\Monster.h" />
     <ClInclude Include="src\entity\Player.h" />
+    <ClInclude Include="src\input\InputHandler.h" />
     <ClInclude Include="src\map\Map.h" />
     <ClInclude Include="src\map\Room.h" />
     <ClInclude Include="src\map\RoomType.h" />
     <ClInclude Include="src\map\Direction.h" />
     <ClInclude Include="src\save\SaveManager.h" />
+    <ClInclude Include="src\ui\LogLine.h" />
     <ClInclude Include="src\ui\UIRenderer.h" />
   </ItemGroup>
   <ItemGroup>

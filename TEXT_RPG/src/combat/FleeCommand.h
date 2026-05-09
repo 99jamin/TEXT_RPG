@@ -8,28 +8,24 @@ class FleeCommand : public Command
 
 public:
 
-	int execute(Entity& user, Entity& target) override
+	void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
-		m_fleeSuccess = false; 
-		fleeDescription = "도망에 실패했다.";
-
 		static std::mt19937 gen(std::random_device{}());
 		static std::uniform_int_distribution<int> dis(0, 9);
 
-		int result = dis(gen);
-		if (result < 8)
+		m_fleeSuccess = dis(gen) < 8;
+
+		if (logCallback)
 		{
-			fleeDescription = "도망에 성공했다.";
-			m_fleeSuccess = true;
+			m_log.clear();
+
+			if (m_fleeSuccess)
+				m_log.push_back(LogSegment("도주했다.", Color::WHITE));
+			else
+				m_log.push_back(LogSegment("도주에 실패했다.", Color::WHITE));
+
+			logCallback(m_log);
 		}
-
-		return 0;
-	}
-
-
-	std::string getDescription() const override
-	{
-		return fleeDescription;
 	}
 
 	bool isFleeSuccess() const { return m_fleeSuccess; }
@@ -37,7 +33,4 @@ public:
 private:
 
 	bool m_fleeSuccess = false;
-	std::string fleeDescription = "도망에 실패했다.";
-
-
 };

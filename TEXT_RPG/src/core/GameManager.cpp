@@ -1,11 +1,12 @@
 ﻿#include "GameManager.h"
 #include "TitleState.h"
+#include "../data/DataManager.h"
 
 GameManager::GameManager()
 	:running(true),
 	m_player(std::make_unique<Player>("엄마",1000,15,0,5))
 {
-
+	DataManager::getInstance().loadAll();
 }
 
 GameManager::~GameManager()

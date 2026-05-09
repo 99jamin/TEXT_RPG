@@ -7,20 +7,22 @@ class DefendCommand : public Command
 
 public:
 
-	int execute(Entity& user, Entity& target) override
+	void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
 		Player* player = dynamic_cast<Player*>(&user);
-		if (!player) return 0;
+		if (!player) return;
 
 		player->startDefend();
+		
+		
+		if (logCallback)
+		{
+			m_log.clear();
+			m_log.push_back(LogSegment("방어 자세를 취했다.", Color::WHITE));
+			logCallback(m_log);
+		}
 
-		return 0;
-	}
-
-
-	std::string getDescription() const override
-	{
-		return "방어";
+		return;
 	}
 
 };

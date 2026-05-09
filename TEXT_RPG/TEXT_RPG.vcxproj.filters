@@ -34,6 +34,9 @@
     <Filter Include="헤더 파일\save">
       <UniqueIdentifier>{7f03b592-efa6-4a37-bbe0-d688afa75cf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\input">
+      <UniqueIdentifier>{cf721f2d-6bdc-4c1c-949e-32ff56118efc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\GameManager.cpp">
@@ -187,6 +190,12 @@
     </ClInclude>
     <ClInclude Include="src\save\SaveManager.h">
       <Filter>헤더 파일\save</Filter>
+    </ClInclude>
+    <ClInclude Include="src\input\InputHandler.h">
+      <Filter>헤더 파일\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\LogLine.h">
+      <Filter>헤더 파일\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

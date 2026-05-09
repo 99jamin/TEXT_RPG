@@ -8,6 +8,7 @@
 #include "../entity/Player.h"
 #include "../ui/UIRenderer.h"
 #include "../save/SaveManager.h"
+#include "../input/InputHandler.h"
 #include <iostream>
 #include <memory>
 
@@ -35,16 +36,14 @@ public:
     {
         UIRenderer::printExploreScreen(m_map, manager.getPlayer(), getChoices());
 
-        int input;
-        std::cin >> input;
-
+        int input = InputHandler::getInt(1,4, [&]() {UIRenderer::printExploreScreen(m_map, manager.getPlayer(), getChoices()); });
+        
         switch (input)
         {
         case 1: handleMove(manager); break;
         case 2: handleAction(manager); break;
         case 3: handleInventory(manager); break;
         case 4: handleDiary(manager); break;
-        default: UIRenderer::addLog("잘못된 입력입니다."); break;
         }
     }
 
@@ -122,22 +121,13 @@ private:
 
         UIRenderer::printExploreScreen(m_map, manager.getPlayer(), choices);
 
-        int input;
-        std::cin >> input;
+        int input = InputHandler::getInt(0, (int)availableDirs.size(), [&]() {UIRenderer::printExploreScreen(m_map, manager.getPlayer(), choices); });
 
         if (input == 0) return;
 
-        if (input < 1 || input >(int)availableDirs.size()) 
-        {
-            UIRenderer::addLog("잘못된 입력입니다.");
-            return;
-        }
-        else 
-        {
-            Direction selected = availableDirs[input - 1];
-            m_map.move(selected);
-            printRoomText();
-        }
+        Direction selected = availableDirs[input - 1];
+        m_map.move(selected);
+        printRoomText();
     }
 
     // 조사하기 / 공격하기 처리
@@ -232,13 +222,10 @@ private:
 
         UIRenderer::printInvenScreen(itemList, manager.getPlayer(), itemChoices);
 
-        int input;
-        std::cin >> input;
+        int input = InputHandler::getInt(0, itemList.size(), [&]() {UIRenderer::printInvenScreen(itemList, manager.getPlayer(), itemChoices); });
 
-        if (input < 1 || input >= count)
-        {
+        if (input == 0)
             return;
-        }
 
         std::string selectedId = itemList[input - 1].first;
         manager.getPlayer().useItem(selectedId);
@@ -247,10 +234,9 @@ private:
     // 일기 처리
     void handleDiary(GameManager& manager)
     {
-        UIRenderer::printExploreScreen(m_map, manager.getPlayer(), {"1. 일기를 작성한다.","2. 취소"});
+        UIRenderer::printExploreScreen(m_map, manager.getPlayer(), {"1. 일기를 작성한다.","0. 취소"});
         
-        int input;
-        std::cin >> input;
+        int input = InputHandler::getInt(0, 1, [&]() {UIRenderer::printExploreScreen(m_map, manager.getPlayer(), { "1. 일기를 작성한다.","0. 취소" }); });
         
         if (input == 1)
         {

@@ -15,24 +15,13 @@ public:
 
 	}
 
-	virtual int execute(Entity& user, Entity& target) = 0;
+	virtual void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) = 0;
+
 	
-
-	std::string getDescription() const override
-	{
-		return m_name;
-	}
-
-	int getStaminaCost() const override
-	{
-		return m_staminaCost;
-	}
-
-
 protected:
 
 	float m_damageRatio;
 	int m_staminaCost;
 	std::string m_name;
-
+	LogLine m_log;
 };

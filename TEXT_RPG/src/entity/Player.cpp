@@ -17,7 +17,10 @@ int Player::takeDamage(int damage)
 		setHitWhileCharging();
 
 	if (m_isDefending)
-		damage /= 2;  
+	{
+		damage /= 2;
+		endDefend();
+	}
 
 	return Entity::takeDamage(damage);
 }

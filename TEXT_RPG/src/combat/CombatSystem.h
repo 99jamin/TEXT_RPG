@@ -7,6 +7,7 @@
 #include "MonsterAtkCommand.h"
 #include "SkillCommandFactory.h"
 #include "../ui/UIRenderer.h"
+#include "../input/InputHandler.h"
 #include <iostream>
 
 class CombatSystem
@@ -19,7 +20,7 @@ public:
 	{
 		m_isRunning = true;
 	}
-
+	
 	CombatResult combatStart()
 	{
 		while (m_isRunning)
@@ -37,270 +38,74 @@ public:
 		return m_result;
 	}
 
-	
+private:
+
+	Player& m_player;
+	std::vector<Monster*> m_monsters;
+	bool m_isRunning = true;
+
+	CombatResult m_result = CombatResult::Victory;
+
+	static constexpr int POISON_DAMAGE = 5;
+
 	void playerTurn()
 	{
-		m_player.recoverStamina(1);  
-
-		if (m_player.isChargingGumni())
-		{
-			std::vector<LogSegment>dmgLog;
-
-			dmgLog.push_back(LogSegment("[집중]", Color::YELLOW));
-			dmgLog.push_back(LogSegment(" 을 끝냈다, ", Color::WHITE));
-			dmgLog.push_back(LogSegment("[" + m_monsters[0]->getName() + "]", Color::RED));
-			dmgLog.push_back(LogSegment(" 에게 ", Color::WHITE));
-
-			int actualDamage = 0;
-
-			auto skill = createSkillCommand(SkillType::Gumni);
+		//플레이어 스태미너 회복
+		m_player.recoverStamina(1);
 
 
-			if (m_monsters.size() == 1)
-			{
-				actualDamage = skill->execute(m_player, *m_monsters[0]);
-				dmgLog.push_back(LogSegment(std::to_string(actualDamage), Color::ORANGE));
-				dmgLog.push_back(LogSegment(" 의 피해를 입혔다.", Color::WHITE));
-				UIRenderer::addLog(dmgLog);
-			}
-			else
-			{
-
-				while (true)
-				{
-					printTargetChoice();
-					int targetInput;
-					std::cin >> targetInput;
-					if (targetInput <= m_monsters.size() && targetInput > 0)
-					{
-						actualDamage = skill->execute(m_player, *m_monsters[targetInput - 1]);
-						dmgLog.push_back(LogSegment(std::to_string(actualDamage), Color::ORANGE));
-						dmgLog.push_back(LogSegment(" 의 피해를 입혔다.", Color::WHITE));
-						UIRenderer::addLog(dmgLog);
-						break;
-					}
-					else
-					{
-						continue;
-					}
-				}
-			}
-			
-			checkMonsters();
+		//플레이어 상태 체크
+		if (!checkPlayerStatus())
 			return;
-		}
-
-		if (m_player.isPoisoned())
-		{
-			int damage = m_player.takeDamage(POISON_DAMAGE);
-
-			std::vector<LogSegment>log;
-			log.push_back(LogSegment("[역병]", Color::PURPLE));
-			log.push_back(LogSegment("에 의해 ", Color::WHITE));
-			log.push_back(LogSegment(std::to_string(damage), Color::PURPLE));
-			log.push_back(LogSegment(" 의 피해를 입었다.", Color::WHITE));
-			UIRenderer::addLog(log);
-		}
 
 
-		if (!m_player.isAlive())
-		{
-			m_result = CombatResult::Defeat;
-			combatEnd();
-			return;
-		}
-
+		//플레이어 입력
 		std::vector<std::string> choice = { "1. 공격","2. 방어","3. 도주","4. 소지품", };
 		bool actionDone = false;
 		while (!actionDone)
+
 		{
 			UIRenderer::printCombatScreen(m_monsters, m_player, choice);
 
-			int input;
-			std::cin >> input;
+			int input = InputHandler::getInt(1, 4, [&]() {UIRenderer::printCombatScreen(m_monsters, m_player, choice); });
 
 			switch (input)
 			{
-
-
 			case 1:
 			{
-				std::vector<std::string> skillChoice;
-
-				int count = 0;
-				std::vector<SkillType> skills = m_player.getSkills();
-
-				if (skills.empty())
-				{
-					UIRenderer::addLog("공격할 수단이 없다. 무가서를 읽어야 한다.");
-					break;
-				}
-
-				for (auto& e : skills)
-				{
-					skillChoice.push_back(std::to_string(++count) + "." + toString(e) + " / 기력 소모 : " + std::to_string(DataManager::getInstance().getSkillStamina(e)));
-				}
-				skillChoice.push_back("0. 취소");
-
-				UIRenderer::printCombatScreen(m_monsters, m_player, skillChoice);
-
-				int skillInput;
-				std::cin >> skillInput;
-				
-				if (skillInput > skills.size() || skillInput <= 0)
-				{
-					break;
-				}
-				
-				SkillType selected = skills[skillInput - 1];
-
-				if (m_player.getStamina() < DataManager::getInstance().getSkillStamina(selected))
-				{
-					UIRenderer::addLog("기력이 부족하다.");
-					break;
-				}
-
-				auto skill = createSkillCommand(selected);
-
-				std::vector<LogSegment>log;
-				int actualDamage = 0;
-
-				if (selected == SkillType::Neoul)
-				{
-					log.push_back(LogSegment("<" + skill->getDescription() + ">", Color::BLUE));
-					log.push_back(LogSegment(" 을/를 사용했다, ", Color::WHITE));
-
-					log.push_back(LogSegment("[적 전체]", Color::RED));
-					log.push_back(LogSegment(" 에게", Color::WHITE));
-
-					for (auto& e : m_monsters)
-					{
-						actualDamage = skill->execute(m_player, *e);
-					}
-
-					log.push_back(LogSegment(std::to_string(actualDamage), Color::ORANGE));
-
-				}
-				else if (selected == SkillType::Gumni)
-				{
-					log.push_back(LogSegment("<" + skill->getDescription() + ">", Color::BLUE));
-					log.push_back(LogSegment(" 을/를 사용했다, ", Color::WHITE));
-
-					log.push_back(LogSegment("적에게 ", Color::WHITE));
-					log.push_back(LogSegment("[집중]", Color::YELLOW));
-					log.push_back(LogSegment(" 하고있다.", Color::WHITE));
-
-					skill->execute(m_player, *m_monsters[0]);	//굼니 커맨드의 첫번째 호출은 어떤 몬스터 포인터든 상관없음.
-				}
-				else
-				{
-					if (m_monsters.size() == 1)
-					{
-						log.push_back(LogSegment("<" + skill->getDescription() + ">", Color::BLUE));
-						log.push_back(LogSegment(" 을/를 사용했다, ", Color::WHITE));
-
-						log.push_back(LogSegment("[" + m_monsters[0]->getName() + "]", Color::RED));
-						log.push_back(LogSegment(" 에게", Color::WHITE));
-
-						actualDamage = skill->execute(m_player, *m_monsters[0]);
-
-						log.push_back(LogSegment(std::to_string(actualDamage), Color::ORANGE));
-					}
-					else
-					{
-						printTargetChoice();
-						int targetInput;
-						std::cin >> targetInput;
-
-
-						if (targetInput <= m_monsters.size() && targetInput > 0)
-						{
-							log.push_back(LogSegment("<" + skill->getDescription() + ">", Color::BLUE));
-							log.push_back(LogSegment(" 을/를 사용했다, ", Color::WHITE));
-
-							log.push_back(LogSegment("[" + m_monsters[0]->getName() + "]", Color::RED));
-							log.push_back(LogSegment(" 에게", Color::WHITE));
-
-							actualDamage = skill->execute(m_player, *m_monsters[targetInput - 1]);
-
-							log.push_back(LogSegment(std::to_string(actualDamage), Color::ORANGE));
-
-						}
-						else
-						{
-							break;
-						}
-					}
-				}
-
-				if (selected == SkillType::Musuki)
-					log.push_back(LogSegment(" 의 피해를 두번 입혔다.", Color::WHITE));
-				else if (selected != SkillType::Gumni)
-					log.push_back(LogSegment(" 의 피해를 입혔다.", Color::WHITE));
-
-				UIRenderer::addLog(log);
-
-				m_player.consumeStamina(skill->getStaminaCost());
-
-				checkMonsters();
-				actionDone = true;
+				actionDone = executeSkillCommand();
 				break;
 			}
 
 			case 2:
 			{
-				DefendCommand().execute(m_player, *m_monsters[0]);
-				UIRenderer::addLog("방어 자세를 잡았다.");
-				actionDone = true;
+				actionDone = executeDefendCommand();
 				break;
 			}
 
 			case 3:
 			{
-				FleeCommand fleecommand;
-				fleecommand.execute(m_player, *m_monsters[0]);
-				UIRenderer::addLog(fleecommand.getDescription());
-
-				if (fleecommand.isFleeSuccess())
-				{
-					m_result = CombatResult::Fled;
-					combatEnd();
-				}
-
-				actionDone = true;
+				actionDone = executeFleeCommand();
 				break;
 			}
-
 
 			case 4:
 			{
-				handleItemInCombat();
-				actionDone = true;
-				break;
-			}
-			default:
-			{
-				UIRenderer::addLog("잘못된 선택이다.");
+				actionDone = handleItemInCombat();
 				break;
 			}
 			}
 		}
-		}
+	}
 
-		
+
 
 	void monsterTurn(Monster& monster)
 	{
-		int damage = MonsterAtkCommand().execute(monster, m_player);
+		std::vector<Entity*> targets;
+		targets.push_back(&m_player);
 
-		std::vector<LogSegment> dmgLog;
-		dmgLog.push_back(LogSegment("[" + monster.getName() + "]", Color::RED));
-		dmgLog.push_back(LogSegment(" 의 공격, ", Color::WHITE));
-		dmgLog.push_back(LogSegment(" "+std::to_string(damage), Color::RED));
-		dmgLog.push_back(LogSegment(" 의 피해를 입었다.", Color::WHITE));
-		UIRenderer::addLog(dmgLog);
-		
-		m_player.endDefend();
+		MonsterAtkCommand().execute(monster, targets, 0, [](LogLine log) {UIRenderer::addLog(log); });
 
 		if (!m_player.isAlive())
 		{
@@ -315,16 +120,6 @@ public:
 	}
 
 
-private:
-
-	Player& m_player;
-	std::vector<Monster*> m_monsters;
-	bool m_isRunning = true;
-
-	CombatResult m_result = CombatResult::Victory;
-
-	static constexpr int POISON_DAMAGE = 5;
-
 	void printTargetChoice()
 	{
 		std::vector<std::string> choice;
@@ -338,14 +133,139 @@ private:
 		UIRenderer::printCombatScreen(m_monsters, m_player, choice);
 	}
 
-	void handleItemInCombat()
+	bool checkPlayerStatus()
+	{
+
+		//카운터 스킬 상태 체크
+		if (m_player.isChargingGumni())
+		{
+			auto skill = createSkillCommand(SkillType::Gumni);
+			std::vector<Entity*> targets(m_monsters.begin(), m_monsters.end());
+
+			if (m_monsters.size() == 1)
+			{
+				skill->execute(m_player, targets, 0, [](LogLine log) {UIRenderer::addLog(log); });
+			}
+			else
+			{
+				printTargetChoice();
+
+				int targetInput = InputHandler::getInt(1, m_monsters.size(), [&]() {printTargetChoice(); }) - 1;
+
+				skill->execute(m_player, targets, targetInput, [](LogLine log) {UIRenderer::addLog(log); });
+			}
+
+			checkMonsters();
+			return false;
+		}
+
+		//플레이어 상태이상 체크
+		if (m_player.isPoisoned())
+		{
+			int damage = m_player.takeDamage(POISON_DAMAGE);
+
+			std::vector<LogSegment>log;
+			log.push_back(LogSegment("[역병]", Color::PURPLE));
+			log.push_back(LogSegment("에 의해 ", Color::WHITE));
+			log.push_back(LogSegment(std::to_string(damage), Color::PURPLE));
+			log.push_back(LogSegment(" 의 피해를 입었다.", Color::WHITE));
+			UIRenderer::addLog(log);
+		}
+
+		//플레이어 생존 체크
+		if (!m_player.isAlive())
+		{
+			m_result = CombatResult::Defeat;
+			combatEnd();
+			return false;
+		}
+
+		return true;
+	}
+
+	bool executeSkillCommand()
+	{
+		//스킬 선택
+		std::vector<std::string> skillChoice;
+
+		int count = 0;
+		std::vector<SkillType> skills = m_player.getSkills();
+
+		if (skills.empty())
+		{
+			UIRenderer::addLog("공격할 수단이 없다. 무가서를 읽어야 한다.");
+			return false;
+		}
+
+		for (auto& e : skills)
+		{
+			skillChoice.push_back(std::to_string(++count) + "." + toString(e) + " / 기력 소모 : " + std::to_string(DataManager::getInstance().getSkillStamina(e)));
+		}
+
+		skillChoice.push_back("0. 취소");
+
+		UIRenderer::printCombatScreen(m_monsters, m_player, skillChoice);
+
+		//스킬 입력
+		int skillInput = InputHandler::getInt(0, skills.size(), [&]() {UIRenderer::printCombatScreen(m_monsters, m_player, skillChoice); });
+
+		if (skillInput == 0)
+			return false;
+
+		SkillType selected = skills[skillInput - 1];
+
+		if (m_player.getStamina() < DataManager::getInstance().getSkillStamina(selected))
+		{
+			UIRenderer::addLog("기력이 부족하다.");
+			return false;
+		}
+
+		//스킬 커맨드 실행
+		auto skill = createSkillCommand(selected);
+
+		std::vector<Entity*> targets(m_monsters.begin(), m_monsters.end());
+
+		int targetIndex = selectTarget(selected);
+
+		skill->execute(m_player, targets, targetIndex, [](LogLine log) {UIRenderer::addLog(log); });
+
+		checkMonsters();
+
+		return true;
+	}
+
+	
+	
+	bool executeDefendCommand()
+	{
+		std::vector<Entity*> targets;
+		DefendCommand().execute(m_player, targets, 0, [](LogLine log) {UIRenderer::addLog(log); });
+		return true;
+	}
+
+	bool executeFleeCommand()
+	{
+		std::vector<Entity*> targets;
+		FleeCommand fleecommand;
+		fleecommand.execute(m_player, targets, 0, [](LogLine log) {UIRenderer::addLog(log); });
+
+		if (fleecommand.isFleeSuccess())
+		{
+			m_result = CombatResult::Fled;
+			combatEnd();
+		}
+
+		return true;
+	}
+
+	bool handleItemInCombat()
 	{
 		auto& inven = m_player.getInven();
 
 		if (inven.empty())
 		{
 			UIRenderer::addLog("소지품이 없다.");
-			return;
+			return false;
 		}
 
 		// 아이템 목록 출력
@@ -362,16 +282,27 @@ private:
 
 		UIRenderer::printInvenScreen(itemList, m_player, itemChoices);
 
-		int input;
-		std::cin >> input;
+		int input = InputHandler::getInt(0, count, [&]() {UIRenderer::printInvenScreen(itemList, m_player, itemChoices); } );
 
-		if (input < 1 || input >= count)
+		if (input == 0)
 		{
-			return;
+			return false;
 		}
 
 		std::string selectedId = itemList[input - 1].first;
 		m_player.useItem(selectedId);
+
+		return true;
+	}
+
+	int selectTarget(SkillType selected)
+	{
+		if (selected == SkillType::Neoul || selected == SkillType::Gumni)
+			return 0;
+		if (m_monsters.size() == 1)
+			return 0;
+		printTargetChoice();
+		return InputHandler::getInt(1, m_monsters.size(), [&]() {printTargetChoice(); }) - 1;
 	}
 
 	void checkMonsters()
