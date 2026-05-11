@@ -75,6 +75,18 @@
     <ClCompile Include="src\ui\UIRenderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\combat\CombatSystem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\CombatState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\PrologueState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\GameOverState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entity\Boss.h">
@@ -84,9 +96,6 @@
       <Filter>헤더 파일\combat</Filter>
     </ClInclude>
     <ClInclude Include="src\combat\CombatSystem.h">
-      <Filter>헤더 파일\combat</Filter>
-    </ClInclude>
-    <ClInclude Include="src\combat\Command.h">
       <Filter>헤더 파일\combat</Filter>
     </ClInclude>
     <ClInclude Include="src\combat\DefendCommand.h">
@@ -196,6 +205,21 @@
     </ClInclude>
     <ClInclude Include="src\ui\LogLine.h">
       <Filter>헤더 파일\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\PlayerCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\MonsterCommand.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\combat\MonsterFactory.h">
+      <Filter>헤더 파일\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\PrologueState.h">
+      <Filter>헤더 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\GameOverState.h">
+      <Filter>헤더 파일\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

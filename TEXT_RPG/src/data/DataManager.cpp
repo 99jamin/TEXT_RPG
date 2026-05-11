@@ -75,6 +75,7 @@ void DataManager::loadMonsters(const std::string& path)
         monster.defense = j["defense"];
         monster.effect = stringToMonsterEffect(j["effect"]);
         monster.dropItemId = j["drop_item"];
+        monster.art = j["art"];
 
         m_monsterTable[monster.id] = monster;
     }
@@ -200,6 +201,7 @@ RoomType DataManager::stringToRoomType(const std::string& str)
 {
     if (str == "Start")  return RoomType::Start;
     if (str == "Combat") return RoomType::Combat;
+    if (str == "Boss") return RoomType::Boss;
     if (str == "Item")   return RoomType::Item;
     if (str == "Event")  return RoomType::Event;
     if (str == "Exit")   return RoomType::Exit;

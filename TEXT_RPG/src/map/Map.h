@@ -8,20 +8,20 @@
 #include <memory>
 #include <string>
 
-
-
 class Map
 {
 public:
     Map(const MapData& data);
 
-    void loadFromSave(int currentX, int currentY, std::vector<std::string> clearRoomId);;
+    void loadFromSave(int currentX, int currentY, std::vector<std::string> clearRoomId);
 
     // 이동 시도 - 성공하면 true 반환
     bool move(Direction dir);
 
     // 이동 가능 여부 확인
     bool canMove(Direction dir) const;
+
+    Room* getAdjacentRoom(Direction dir) const;
 
     Room* getCurRoom() const { return currentRoom; }
 
@@ -47,4 +47,6 @@ private:
 
     int m_currentX = 0;
     int m_currentY = 0;
+
+    std::pair<int, int> getDelta(Direction dir) const;
 };

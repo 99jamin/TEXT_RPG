@@ -1,19 +1,15 @@
 ﻿#pragma once
-#include "Command.h"
+#include "PlayerCommand.h"
 #include "../entity/Player.h"
 
-class DefendCommand : public Command
+class DefendCommand : public PlayerCommand
 {
 
 public:
 
-	void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) override
+	void execute(Player& player, std::vector<Monster*>& monsters, int monsterIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
-		Player* player = dynamic_cast<Player*>(&user);
-		if (!player) return;
-
-		player->startDefend();
-		
+		player.startDefend();
 		
 		if (logCallback)
 		{

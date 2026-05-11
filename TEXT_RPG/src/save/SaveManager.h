@@ -5,6 +5,7 @@
 #include "../combat/SkillType.h"
 #include "../data/DataTypes.h"
 #include <fstream>
+#include <filesystem>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;

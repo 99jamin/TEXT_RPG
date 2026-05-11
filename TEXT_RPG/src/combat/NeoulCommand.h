@@ -8,16 +8,15 @@ public:
 
 	using SkillCommand::SkillCommand;
 
-	void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) override
+	void execute(Player& player, std::vector<Monster*>& monsters, int monsterIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
-		Player* player = dynamic_cast<Player*>(&user);
-		if (player) player->consumeStamina(m_staminaCost);
+		player.consumeStamina(m_staminaCost);
 
 		int realDamage = 0;
 
-		int actualDamage = user.getAtk() * m_damageRatio;
+		int actualDamage = player.getAtk() * m_damageRatio;
 
-		for (auto& e : targets)
+		for (auto& e : monsters)
 		{
 			realDamage = e->takeDamage(actualDamage);
 		}

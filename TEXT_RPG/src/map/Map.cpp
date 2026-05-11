@@ -61,25 +61,13 @@ void Map::loadFromSave(int currentX, int currentY, std::vector<std::string> clea
 // 이동 시도 - 성공하면 true 반환
 bool Map::move(Direction dir)
 {
-    int newX = m_currentX;
-    int newY = m_currentY;
+    if (!canMove(dir))
+        return false;
 
-    switch (dir)
-    {
-    case Direction::North: newY--; break;
-    case Direction::South: newY++; break;
-    case Direction::West:  newX--; break;
-    case Direction::East:  newX++; break;
-    }
+    auto [dx, dy] = getDelta(dir);
 
-    // 범위 체크
-    if (newX < 0 || newX >= 6 || newY < 0 || newY >= 6) return false;
-
-    // 방 존재 체크
-    if (m_roomGrid[newY][newX] == nullptr) return false;
-
-    m_currentX = newX;
-    m_currentY = newY;
+    m_currentX += dx;
+    m_currentY += dy;
     currentRoom = m_roomGrid[m_currentY][m_currentX].get();
     return true;
 }
@@ -87,19 +75,22 @@ bool Map::move(Direction dir)
 // 이동 가능 여부 확인
 bool Map::canMove(Direction dir) const
 {
-    int newX = m_currentX;
-    int newY = m_currentY;
+    auto [dx, dy] = getDelta(dir);
 
-    switch (dir)
-    {
-    case Direction::North: newY--; break;
-    case Direction::South: newY++; break;
-    case Direction::West:  newX--; break;
-    case Direction::East:  newX++; break;
-    }
+    int newX = m_currentX + dx;
+    int newY = m_currentY + dy;
 
     if (newX < 0 || newX >= 6 || newY < 0 || newY >= 6) return false;
     return m_roomGrid[newY][newX] != nullptr;
+}
+
+Room* Map::getAdjacentRoom(Direction dir) const
+{
+    auto [dx, dy] = getDelta(dir);
+    int nx = m_currentX + dx;
+    int ny = m_currentY + dy;
+    if (nx < 0 || nx >= 6 || ny < 0 || ny >= 6) return nullptr;
+    return m_roomGrid[ny][nx].get();
 }
 
 std::vector<std::string> Map::getClearRooms() const
@@ -122,4 +113,16 @@ std::vector<std::string> Map::getClearRooms() const
         }
     }
     return clearRooms;
+}
+
+std::pair<int, int> Map::getDelta(Direction dir) const
+{
+    switch (dir)
+    {
+    case Direction::North: return { 0,-1 };
+    case Direction::South: return { 0,1 };
+    case Direction::West:  return { -1,0 };
+    case Direction::East:  return { 1,0 };
+    }
+    return{ 0,0 };
 }

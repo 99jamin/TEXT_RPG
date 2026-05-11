@@ -18,6 +18,7 @@ struct MonsterData
     int defense;
     MonsterEffect effect;
     std::string dropItemId;
+    std::vector<std::string> art;
 };
 
 struct ItemData 

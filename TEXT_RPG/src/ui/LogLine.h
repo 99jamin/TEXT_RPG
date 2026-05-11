@@ -14,7 +14,9 @@ enum class Color : WORD
 	PURPLE = 13,
 	ORANGE = 6,
 	BLUE = 9,
-	BOSS = 5
+	BOSS = 5,
+	BWHITE = 15,
+
 };
 
 struct LogSegment

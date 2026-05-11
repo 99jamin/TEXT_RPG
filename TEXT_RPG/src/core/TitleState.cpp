@@ -2,6 +2,10 @@
 #include "TitleState.h"
 #include "GameManager.h"
 #include "ExploreState.h"
+#include "PrologueState.h"
+#include "../save/SaveManager.h"
+#include "../ui/UIRenderer.h"
+#include "../input/InputHandler.h"
 
 void TitleState::enter(GameManager& manager)
 {
@@ -13,17 +17,20 @@ void TitleState::update(GameManager& manager)
 
 	UIRenderer::printTitleScreen();
 
-	int input;
-	std::cin >> input;
+	int input = InputHandler::getInt(1, 3,[&](){UIRenderer::printTitleScreen(); });
 
 	if (input == 1)
-		manager.pushState(std::make_unique<ExploreState>("village"));
+	{
+		m_startNewGame = true;
+		manager.getPlayer().init();
+		manager.pushState(std::make_unique<PrologueState>());
+	}
 	
 	if (input == 2)
 	{
 		if (!SaveManager::getInstance().hasSave())
 		{
-			UIRenderer::printTitleScreen("이전 기록이 없습니다.");
+			//UIRenderer::printTitleScreen("이전 기록이 없습니다.");
 			return;
 		}
 			
@@ -41,4 +48,15 @@ void TitleState::update(GameManager& manager)
 void TitleState::exit(GameManager& manager)
 {
 
+}
+
+void TitleState::pause(GameManager& manager) {}
+
+void TitleState::resume(GameManager& manager)
+{
+	if (m_startNewGame)
+	{
+		m_startNewGame = false;
+		manager.pushState(std::make_unique<ExploreState>("village"));
+	}
 }

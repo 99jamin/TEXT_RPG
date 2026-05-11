@@ -35,8 +35,8 @@
         "item_1": {
           "type": "Item",
           "text": "마을이 텅 비어있다. 역병의 냄새가 진하게 풍긴다.",
-          "action_text": "뻣뻣하게 굳은 시체 옆에 붕대 조각이 떨어져 있었다.",
-          "item": "bandage",
+          "action_text": "뻣뻣하게 굳은 시체 옆에 약초 묶음이 떨어져 있었다.",
+          "item": "herb",
           "count": 1
         },
         "combat_2": {
@@ -299,7 +299,7 @@
           "action_text": "배 주변에 거대한 무언가의 흔적이 있다. 파쇄된 나무 조각들, 뜯긴 밧줄.."
         },
         "boss_1": {
-          "type": "Combat",
+          "type": "Boss",
           "text": "거대한 적갈색의 붉은 게가 거대한 집게발을 휘두른다.",
           "monster": "jeokgapsin",
           "monster_count": 1
@@ -423,7 +423,7 @@
         },
         "event_1": {
           "type": "Event",
-          "text": "인간이 아닌것이 붉은 반점에 뒤덮여 죽어있다.",
+          "text": "인간이 아닌것이 붉은 반점에 뒤덮여 신음하고있다.",
           "action_text": "인어인듯 하다. 실제로는 처음 본다."
         },
         "item_1": {
@@ -581,7 +581,7 @@
           "action_text": "이젠 돌이킬 수 없다."
         },
         "boss": {
-          "type": "Combat",
+          "type": "Boss",
           "text": "나를 보고 적개심 가득한 비명을 지른다.",
           "monster": "jeokkwi",
           "monster_count": 1

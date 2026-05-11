@@ -23,6 +23,10 @@ public:
 
 	static void printTitleScreen(const std::string& message = "");
 
+	static void printPrologueScreen(const std::vector<std::string>& art, const std::vector<std::string>& lines);
+
+	static void printGameOverScreen();
+
 	static void addLog(const std::string& log);
 
 	static void addLog(const LogLine& line);
@@ -52,6 +56,8 @@ private:
 
 	static std::vector<LogLine> s_logs;
 
+	static int s_newLogCount;
+
 	static const int STAT_ROW = 2;   // 스탯바 행
 	static const int LOG_START_ROW = 5;   // 로그 시작 행
 	static const int LOG_END_ROW = 24;  // 로그 끝 행 (10줄)
@@ -60,7 +66,7 @@ private:
 
 	static const int TOTAL_WIDTH = 140;	//총 너비
 	static const int LEFT_WIDTH = 90;  // 왼쪽 패널 너비
-	static const int RIGHT_COL = 92;  // 오른쪽 패널 시작 열
+	static const int RIGHT_COL = 96;  // 오른쪽 패널 시작 열
 
 	
 };

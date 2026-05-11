@@ -9,18 +9,16 @@ public:
 
 	using SkillCommand::SkillCommand;
 
-	void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) override
+	void execute(Player& player, std::vector<Monster*>& monsters, int monsterIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
+
 		int realDamage = 0;
 
-		Player* player = dynamic_cast<Player*>(&user);
-		if (!player) return ;
-
-		if (!player->isChargingGumni())
+		if (!player.isConcentrating())
 		{
-			player->consumeStamina(m_staminaCost);
+			player.consumeStamina(m_staminaCost);
 
-			player->startGumniCharge();
+			player.startConcentrate();
 
 			m_log.clear();
 			m_log.push_back(LogSegment("<" + m_name + ">", Color::BLUE));
@@ -32,26 +30,26 @@ public:
 		}
 		else
 		{
-			if (player->wasHitWhileCharging())
+			if (player.wasHitWhileConcentrating())
 			{
-				int actualdamage = player->getAtk() * HIT_DAMAGE_RATIO;
-				realDamage = targets[targetIndex]->takeDamage(actualdamage);
+				int actualdamage = player.getAtk() * HIT_DAMAGE_RATIO;
+				realDamage = monsters[monsterIndex]->takeDamage(actualdamage);
 			}
 			else
 			{
-				int actualdamage = (player->getAtk() * m_damageRatio);
-				realDamage = targets[targetIndex]->takeDamage(actualdamage);
+				int actualdamage = (player.getAtk() * m_damageRatio);
+				realDamage = monsters[monsterIndex]->takeDamage(actualdamage);
 			}
 
 			m_log.clear();
 			m_log.push_back(LogSegment("[집중]", Color::YELLOW));
 			m_log.push_back(LogSegment(" 을 끝냈다, ", Color::WHITE));
-			m_log.push_back(LogSegment("[" + targets[targetIndex]->getName() + "]", Color::RED));
+			m_log.push_back(LogSegment("[" + monsters[monsterIndex]->getName() + "]", Color::RED));
 			m_log.push_back(LogSegment(" 에게 ", Color::WHITE));
 			m_log.push_back(LogSegment(std::to_string(realDamage), Color::ORANGE));
 			m_log.push_back(LogSegment(" 의 피해를 입혔다.", Color::WHITE));
 
-			player->releaseGumni();
+			player.endConcentrate();
 		}
 
 		if (logCallback)

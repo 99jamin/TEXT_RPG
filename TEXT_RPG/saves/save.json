@@ -1,35 +1,21 @@
 {
     "map": {
-        "currentMapId": "red_tide_port",
-        "currentX": 5,
-        "currentY": 4,
+        "currentMapId": "tidal_flat",
+        "currentX": 2,
+        "currentY": 1,
         "mapClearData": {
-            "red_tide_port": [
-                "item_1",
-                "skill_1"
-            ],
-            "tidal_flat": [
-                "skill_1"
-            ],
-            "village": [
-                "skill_1"
-            ]
+            "tidal_flat": []
         }
     },
     "player": {
-        "hp": 982,
+        "hp": 100,
         "inventory": {
-            "dried_fish": 2,
-            "herb": 4,
-            "incense_pouch": 1
+            "bandage": 1
         },
         "poisoned": false,
         "skills": [
-            "Nuigyeol",
-            "Musuki",
-            "Neoul",
-            "Gumni"
+            "Nuigyeol"
         ],
-        "stamina": 5
+        "stamina": 1
     }
 }

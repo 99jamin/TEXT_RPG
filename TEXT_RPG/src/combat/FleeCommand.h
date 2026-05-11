@@ -1,14 +1,14 @@
 ﻿#pragma once
-#include "Command.h"
+#include "PlayerCommand.h"
 #include <random>
 #include <string>
 
-class FleeCommand : public Command
+class FleeCommand : public PlayerCommand
 {
 
 public:
 
-	void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) override
+	void execute(Player& player, std::vector<Monster*>& monsters, int monsterIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
 		static std::mt19937 gen(std::random_device{}());
 		static std::uniform_int_distribution<int> dis(0, 9);

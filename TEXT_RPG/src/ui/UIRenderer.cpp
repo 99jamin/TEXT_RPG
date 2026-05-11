@@ -2,24 +2,26 @@
 #include "../entity/Player.h"
 #include "../entity/Monster.h"
 #include "../data/DataManager.h"
+#include <conio.h>
 
 std::vector<LogLine> UIRenderer::s_logs;
+int UIRenderer::s_newLogCount = 0;
 
- void UIRenderer::printExploreScreen(const Map& map, const Player& player, const std::vector<std::string>& choices)
+void UIRenderer::printExploreScreen(const Map& map, const Player& player, const std::vector<std::string>& choices)
 {
 	system("cls");
 
 	printLayout(player, [&]() { printMiniMap(map); }, choices);
 }
 
- void UIRenderer::printCombatScreen(const std::vector<Monster*>& monsters, const Player& player, const std::vector<std::string>& choices)
+void UIRenderer::printCombatScreen(const std::vector<Monster*>& monsters, const Player& player, const std::vector<std::string>& choices)
 {
 	system("cls");
 
 	printLayout(player, [&]() { printEnemyInfo(monsters); }, choices);
 }
 
- void UIRenderer::printInvenScreen(const std::vector<std::pair<std::string, int>>& itemList, const Player& player, const std::vector<std::string>& choices)
+void UIRenderer::printInvenScreen(const std::vector<std::pair<std::string, int>>& itemList, const Player& player, const std::vector<std::string>& choices)
 {
 	system("cls");
 
@@ -28,9 +30,9 @@ std::vector<LogLine> UIRenderer::s_logs;
 
 
 
- void UIRenderer::printTitleScreen(const std::string& message)
+void UIRenderer::printTitleScreen(const std::string& message)
 {
-	 //system("cls");
+	 system("cls");
 
 	 // 아스키 아트 (15줄, 가운데 상단)
 	 std::vector<std::string> art = {
@@ -78,13 +80,99 @@ std::vector<LogLine> UIRenderer::s_logs;
 	 std::cout << "> ";
 }
 
- void UIRenderer::addLog(const std::string& log)
+ void UIRenderer::printPrologueScreen(const std::vector<std::string>& art, const std::vector<std::string>& lines)
+ {
+	 system("cls");
+
+	 // 아트 출력 (중앙 정렬)
+	 int artWidth = art.empty() ? 0 : 76;  // 아트 만들고 나서 조정
+	 int artX = (TOTAL_WIDTH - artWidth) / 2;
+	 for (int i = 0; i < (int)art.size(); i++)
+	 {
+		 setCursor(artX, 2 + i);
+		 std::cout << art[i];
+	 }
+
+	 //텍스트 출력
+	 bool skipped = false;
+	 for (int i = 0; i < (int)lines.size(); i++)
+	 {
+		 setCursor(5, 25 + i*2);
+
+		 if (skipped)
+		 {
+			 std::cout << lines[i];
+			 continue;
+		 }
+
+		 int j = 0;
+		 for (; j < (int)lines[i].size(); j++)
+		 {
+			 if (_kbhit()) { _getch(); skipped = true; break; }
+			 std::cout << lines[i][j];
+			 Sleep(20);
+		 }
+
+		 if (skipped)
+			 std::cout << lines[i].substr(j);  // 끊긴 줄 나머지 즉시 출력
+	 }
+
+	 setCursor((TOTAL_WIDTH - 24) / 2, 35);
+	 std::cout << "[ 아무 키나 누르면 계속... ]";
+ }
+
+ void UIRenderer::printGameOverScreen()
+ {
+	 system("cls");
+
+	 // 아스키 아트 (15줄, 가운데 상단)
+	 std::vector<std::string> art = {
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⡀⠘⣿⡇⠀⣤⣤⣤⣤⢻⣿⠀⠀⠰⣤⣤⠘⣿⡆⠀⢀⣴⣦⣀⣹⣿⠀⠀⠀⢀⣿⣆⠀⠀⢀⣀⡀⠀⠈⢻⡇⠀⣀⣀⣀⣈⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⡇⠀⣿⣇⣀⢻⣇⣸⣿⢸⣿⠶⠛⣿⣿⣟⠛⣿⣇⡀⢿⣇⣸⣿⣽⣿⠀⣰⣾⣛⣉⣙⣻⣇⡈⣿⡇⠀⠀⢸⡇⠀⣿⡏⠉⠁⣿⣇⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⢠⠿⠋⠻⡷⣿⡏⠉⠘⠋⣩⣿⣾⡏⠀⠐⣿⣤⣿⠇⣿⠉⠉⠀⠩⣿⡄⣾⡏⠀⠉⢿⣯⣉⣿⣯⠉⠁⢿⣷⡶⠶⢻⡇⠀⢿⣷⣶⠶⣿⡏⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⠇⠀⠀⠀⢿⣧⣼⠟⠀⠀⠀⠉⠀⠀⣿⠀⠀⢠⡾⠛⣷⠟⢷⡆⠀⢸⣿⣭⣽⡿⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⢿⡇⠀⠺⠗⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+	 };
+
+	 int artStartX = (TOTAL_WIDTH - 65) / 2;
+	 for (int i = 0; i < (int)art.size(); i++)
+	 {
+		 setCursor(artStartX, 3 + i);
+		 std::cout << art[i];
+	 }
+
+	 // 선택지
+	 int menuX = TOTAL_WIDTH / 2 - 8;
+	 setCursor(menuX, 20);
+	 std::cout << "1. 시작화면으로 돌아가기.";
+	 setCursor(menuX, 22);
+	 std::cout << "2. 종료하기.";
+	 setCursor(menuX, 24);
+
+	 setCursor(menuX, 29);
+	 std::cout << "> ";
+ }
+
+void UIRenderer::addLog(const std::string& log)
 {
 	 LogLine line = { LogSegment(log, Color::WHITE) };
 
 	s_logs.push_back(line);
 	if (s_logs.size() > 20)
 		s_logs.erase(s_logs.begin());
+
+	s_newLogCount++;
 }
 
 void UIRenderer::addLog(const LogLine& line)
@@ -92,14 +180,16 @@ void UIRenderer::addLog(const LogLine& line)
 	s_logs.push_back(line);
 	if (s_logs.size() > 20)
 		s_logs.erase(s_logs.begin());
- }
+	
+	s_newLogCount++;
+}
 
- void UIRenderer::clearLogs()
+void UIRenderer::clearLogs()
 {
 	s_logs.clear();
 }
 
- void UIRenderer::printLayout(const Player& player, std::function<void()> rightPanelFn, const std::vector<std::string>& choices)
+void UIRenderer::printLayout(const Player& player, std::function<void()> rightPanelFn, const std::vector<std::string>& choices)
 {
 	// 상단 구분선 + 스탯바
 	setCursor(0, 0);
@@ -108,27 +198,18 @@ void UIRenderer::addLog(const LogLine& line)
 	setCursor(0, 4);
 	std::cout << std::string(TOTAL_WIDTH, '=');
 
-	// 로그 영역 (왼쪽) + 세로 구분선
+	// 로그 영역 (왼쪽)
 	for (int i = 0; i < 20; i++)
 	{
 		setCursor(0, LOG_START_ROW + i);
 		std::cout << std::string(LEFT_WIDTH, ' ');  // 빈 줄로 영역 확보
-		setCursor(LEFT_WIDTH, LOG_START_ROW + i);
-		std::cout << "|";
 	}
 
-	// 로그 출력
-	int logY = 0;
-	for (auto& line : s_logs)
+	// 세로 구분선
+	for (int i = 0; i <= CHOICE_ROW+4; ++i)
 	{
-		setCursor(1, LOG_START_ROW + (logY++));
-
-		for (auto& seg : line)
-		{
-			setColor(seg.color);
-			std::cout << (seg.text);
-		}
-		resetColor();
+		setCursor(LEFT_WIDTH, LOG_START_ROW + i);
+		std::cout << "|";
 	}
 
 	// 오른쪽 패널
@@ -136,20 +217,60 @@ void UIRenderer::addLog(const LogLine& line)
 
 	// 하단 구분선 + 선택지
 	setCursor(0, SEP_ROW);
+	std::cout << std::string(LEFT_WIDTH, '=');
+	setCursor(0, CHOICE_ROW + 10);
 	std::cout << std::string(TOTAL_WIDTH, '=');
+
+	// 로그 출력
+	int logY = 0;
+	int newStart = (int)s_logs.size() - s_newLogCount;
+
+	bool skipped = false;
+
+	for (int i = 0; i < (int)s_logs.size(); i++)
+	{
+		setCursor(1, LOG_START_ROW + logY++);
+		bool isNew = (i >= newStart);
+
+		for (auto& seg : s_logs[i])
+		{
+			setColor(seg.color);
+			if (isNew && !skipped)
+			{
+				int j = 0;
+				for (; j < (int)seg.text.size(); j++)
+				{
+					if (_kbhit()) { _getch(); skipped = true; break; }
+					std::cout << seg.text[j];
+					Sleep(10);
+				}
+				if (skipped)
+					std::cout << seg.text.substr(j);  // 끊긴 세그먼트 나머지 즉시 출력
+			}
+			else
+			{
+				std::cout << seg.text;
+			}
+		}
+		resetColor();
+	}
+
+	s_newLogCount = 0;
+
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));  // 버퍼 비우기
+
+
 	for (int i = 0; i < (int)choices.size(); i++)
 	{
 		setCursor(3, CHOICE_ROW + i * 2);
 		std::cout << " " << choices[i];
 	}
-	setCursor(0, CHOICE_ROW + (int)choices.size() * 2 + 1);
-	std::cout << std::string(TOTAL_WIDTH, '=');
 
-	setCursor(0, CHOICE_ROW + (int)choices.size() * 2 + 2);
-	std::cout << " > ";
+	setCursor(0, CHOICE_ROW + 12);
+	std::cout << " 선택 : ";
 }
 
- void UIRenderer::printStatBar(const Player& player)
+void UIRenderer::printStatBar(const Player& player)
 {
 	int hpBar = (player.getCurHp() * 20) / player.getMaxHp();
 	std::string condition = player.isPoisoned() ? "역병" : "없음";
@@ -199,9 +320,17 @@ void UIRenderer::addLog(const LogLine& line)
 	 if (monsters[0]->isBoss())
 		 setColor(Color::BOSS); // 보스 색상
 
+	 std::vector<std::string> art = monsters[0]->getArt();
+
+	 for (int i = 0; i < (int)art.size(); i++)
+	 {
+		 setCursor(RIGHT_COL, LOG_START_ROW+i);
+		 std::cout << art[i];
+	 }
+
 	for (int i = 0; i < (int)monsters.size(); ++i)
 	{
-		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i));
+		setCursor(RIGHT_COL, LOG_START_ROW + 16 + (4 * i));
 
 		if (monsters[0]->isBoss())
 			std::cout << monsters[i]->getName();
@@ -209,7 +338,7 @@ void UIRenderer::addLog(const LogLine& line)
 			std::cout << i + 1 << ". " << monsters[i]->getName();
 
 		int hpBar = (monsters[i]->getCurHp() * 30) / monsters[i]->getMaxHp();
-		setCursor(RIGHT_COL, LOG_START_ROW + (4 * i) + 2);
+		setCursor(RIGHT_COL, LOG_START_ROW + 16 + (4 * i) + 2);
 		//std::cout << "체력: ";
 		for (int j = 1; j <= 30; ++j)
 		{
@@ -243,9 +372,11 @@ void UIRenderer::addLog(const LogLine& line)
 
  void UIRenderer::printMapInfo(const Map& map)
 {
-	setCursor(RIGHT_COL, LOG_START_ROW);
-	std::cout << "위치 : " << map.getName();
 	setCursor(RIGHT_COL, LOG_START_ROW + 1);
+	setColor(Color::BWHITE);
+	std::cout << map.getName();
+	setColor(Color::WHITE);
+	setCursor(RIGHT_COL, LOG_START_ROW + 3);
 	std::cout << map.getDescription();
 }
 
@@ -257,23 +388,24 @@ void UIRenderer::addLog(const LogLine& line)
 	int curY = map.getCurrentY();
 	auto& gird = map.getRoomGrid();
 
+	int mapStartY = LOG_START_ROW + 5;
+
 	for (int y = 0; y < 6; ++y)
 	{
-		setCursor(RIGHT_COL, LOG_START_ROW + 3 + y);
 		for (int x = 0; x < 6; ++x)
 		{
+			int px = RIGHT_COL + x * 6;
+			int py = mapStartY + y * 3;
+
 			if (!gird[y][x])
-			{
-				std::cout << "  ";
-			}
-			else if (x == curX && y == curY)
-			{
-				std::cout << "■";
-			}
-			else
-			{
-				std::cout << "□";
-			}
+				continue;  // 빈 칸은 그냥 비움
+
+			bool isCur = (x == curX && y == curY);
+			std::string mid = isCur ? "│ ■│" : "│   │";
+
+			setCursor(px, py);     std::cout << "┌───┐";
+			setCursor(px, py + 1); std::cout << mid;
+			setCursor(px, py + 2); std::cout << "└───┘";
 		}
 	}
 }

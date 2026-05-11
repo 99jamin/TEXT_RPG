@@ -1,10 +1,11 @@
 ﻿#include "GameManager.h"
 #include "TitleState.h"
+#include "GameOverState.h"
 #include "../data/DataManager.h"
 
 GameManager::GameManager()
 	:running(true),
-	m_player(std::make_unique<Player>("엄마",1000,15,0,5))
+	m_player(std::make_unique<Player>("이름없음",100,15,0,5))
 {
 	DataManager::getInstance().loadAll();
 }
@@ -22,7 +23,7 @@ void GameManager::pushState(std::unique_ptr<GameState> state)
 {
 	if (!stateStack.empty())
 	{
-		stateStack.top()->exit(*this);
+		stateStack.top()->pause(*this);
 	}
 
 	stateStack.push(std::move(state));
@@ -40,7 +41,7 @@ void GameManager::popState()
 
 	if (!stateStack.empty())
 	{
-		stateStack.top()->enter(*this);
+		stateStack.top()->resume(*this);
 	}
 }
 
@@ -77,7 +78,7 @@ void GameManager::gameover()
 		stateStack.pop();
 	}
 
-	pushState(std::make_unique<TitleState>());
+	pushState(std::make_unique<GameOverState>());
 }
 
 bool GameManager::isRunning() const

@@ -15,10 +15,7 @@ public:
 		
 		while (!(std::cin >> input))
 		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			UIRenderer::addLog("올바른 선택을 해야한다.");
-			if (redraw) redraw();
+			handleInvalidInput(redraw);
 		}
 
 		return input;
@@ -30,10 +27,7 @@ public:
 
 		while (!(std::cin >> input) || input < min || input > max)
 		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			UIRenderer::addLog("올바른 선택을 해야한다.");
-			if (redraw) redraw();
+			handleInvalidInput(redraw);
 		}
 
 		return input;
@@ -41,5 +35,12 @@ public:
 
 private:
 
+	static void handleInvalidInput(std::function<void()> redraw)
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		UIRenderer::addLog("올바른 선택을 해야한다.");
+		if (redraw) redraw();
+	}
 
 };

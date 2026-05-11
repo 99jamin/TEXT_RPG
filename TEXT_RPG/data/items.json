@@ -1,13 +1,6 @@
 ﻿{
   "items": [
     {
-      "id": "bandage",
-      "name": "붕대",
-      "description": "낡은 천 조각. 피를 멎게 한다.",
-      "effect": "HpRestore",
-      "value": 10
-    },
-    {
       "id": "herb",
       "name": "약초",
       "description": "쓴 풀. 달여 마시면 기력이 돈다.",
@@ -31,7 +24,7 @@
     {
       "id": "red_flesh",
       "name": "붉은 살점",
-      "description": "붉은 살점. 독기가 가득하다.",
+      "description": "붉은 살점. 먹을 수 있어 보인다.",
       "effect": "HpRestore",
       "value": 50
     },

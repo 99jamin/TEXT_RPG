@@ -1,7 +1,6 @@
 ﻿#include "Player.h"
 #include "Item.h"
 #include "../data/DataManager.h"
-#include "../ui/UIRenderer.h"
 #include <vector>
 #include <algorithm>
 
@@ -11,10 +10,25 @@ Player::Player(const std::string& name, int maxHp, int atk, int def, int maxStam
 
 }
 
+void Player::init()
+{
+	Entity::setAtk(15);
+	Entity::setDef(0);
+	Entity::setCurHp(Entity::getMaxHp());
+	m_maxStamina = 5;
+	m_stamina = 1;
+	m_skills = {};
+	m_inven = {};
+	m_isConcentrating = false;
+	m_wasHitWhileConcentrating = false;
+	m_isDefending = false;
+	m_isPoison = false;
+}
+
 int Player::takeDamage(int damage)
 {
-	if (m_isChargingGumni)
-		setHitWhileCharging();
+	if (m_isConcentrating)
+		hitWhileConcentrating();
 
 	if (m_isDefending)
 	{
@@ -70,30 +84,30 @@ void Player::loadFromSave(int curHp, int stamina, bool poisoned, std::map<std::s
 	m_skills = skills;
 }
 
-void Player::startGumniCharge()
+void Player::startConcentrate()
 {
-	m_isChargingGumni = true;
+	m_isConcentrating = true;
 }
 
-void Player::setHitWhileCharging()
+void Player::hitWhileConcentrating()
 {
-	m_wasHitWhileCharging = true;
+	m_wasHitWhileConcentrating = true;
 }
 
-bool Player::isChargingGumni() const
+bool Player::isConcentrating() const
 {
-	return m_isChargingGumni;
+	return m_isConcentrating;
 }
 
-bool Player::wasHitWhileCharging() const
+bool Player::wasHitWhileConcentrating() const
 {
-	return m_wasHitWhileCharging;
+	return m_wasHitWhileConcentrating;
 }
 
-void Player::releaseGumni()
+void Player::endConcentrate()
 {
-	m_isChargingGumni = false;
-	m_wasHitWhileCharging = false;
+	m_isConcentrating = false;
+	m_wasHitWhileConcentrating = false;
 }
 
 void Player::applyPoison() { m_isPoison = true; }
@@ -111,11 +125,6 @@ void Player::drainStamina(int amount)
 //inven
 void Player::addItem(const std::string& id, int count)
 {
-	std::vector<LogSegment>log;
-	log.push_back(LogSegment("["+DataManager::getInstance().getItemName(id)+"]", Color::CYAN));
-	log.push_back(LogSegment(" 을/를 습득했다.", Color::WHITE));
-	UIRenderer::addLog(log);
-
 	m_inven[id] += count;
 }
 
@@ -143,10 +152,5 @@ void Player::useItem(const std::string& id)
 	Item item(data);
 	item.useItem(*this);
 	removeItem(id);
-
-	std::vector<LogSegment>log;
-	log.push_back(LogSegment("["+data.name+"]", Color::CYAN));
-	log.push_back(LogSegment(" 을/를 사용했다.", Color::WHITE));
-	UIRenderer::addLog(log);
-
+		
 }

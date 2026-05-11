@@ -9,26 +9,35 @@ public:
 
 	using SkillCommand::SkillCommand;
 
-	void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) override
+	void execute(Player& player, std::vector<Monster*>& monsters, int monsterIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
-		Player* player = dynamic_cast<Player*>(&user);
-		if (player) player->consumeStamina(m_staminaCost);
+		player.consumeStamina(m_staminaCost);
 
-		Boss* boss = dynamic_cast<Boss*>(targets[targetIndex]);
 
-		if (boss)
+		if (monsters[monsterIndex]->isBoss())
 		{
 			if (logCallback)
 			{
 				m_log.clear();
 				m_log.push_back(LogSegment("<" + m_name + ">", Color::CYAN));
 				m_log.push_back(LogSegment(" 을/를 사용했다, ", Color::WHITE));
-				m_log.push_back(LogSegment("[" + targets[targetIndex]->getName() + "]", Color::BOSS));
+				m_log.push_back(LogSegment("[" + monsters[monsterIndex]->getName() + "]", Color::BOSS));
 				m_log.push_back(LogSegment(" 는 울음을 그치고 안식에 들었다.", Color::WHITE));
 				logCallback(m_log);
 			}
 
-			targets[targetIndex]-> dead();
+			monsters[monsterIndex]-> dead();
+		}
+		else
+		{
+			if (logCallback)
+			{
+				m_log.clear();
+				m_log.push_back(LogSegment("<" + m_name + ">", Color::CYAN));
+				m_log.push_back(LogSegment(" 을/를 사용했다, ", Color::WHITE));
+				m_log.push_back(LogSegment(" 아무런 효과가 없다...", Color::WHITE));
+				logCallback(m_log);
+			}
 		}
 
 		return;

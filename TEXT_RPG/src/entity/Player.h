@@ -11,6 +11,8 @@ public:
 
 	Player(const std::string& name, int maxHp, int atk, int def, int maxStamina);
 
+	void init();
+
 	int takeDamage(int damage);
 
 	void printStatus() const override;
@@ -33,12 +35,12 @@ public:
 	//Save
 	void loadFromSave(int curHp, int stamina, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills);
 
-	//GumniCommand Flag
-	void startGumniCharge();
-	void setHitWhileCharging();
-	bool isChargingGumni() const;
-	bool wasHitWhileCharging() const;
-	void releaseGumni();
+	//Concentrating Flag
+	void startConcentrate();
+	void hitWhileConcentrating();
+	bool isConcentrating() const;
+	bool wasHitWhileConcentrating() const;
+	void endConcentrate();
 
 	//Defecd Flag
 	void startDefend() { m_isDefending = true; }
@@ -70,8 +72,8 @@ private:
 	int m_stamina;
 	int m_maxStamina;
 
-	bool m_isChargingGumni = false;
-	bool m_wasHitWhileCharging = false;
+	bool m_isConcentrating = false;
+	bool m_wasHitWhileConcentrating = false;
 
 	bool m_isDefending = false;
 

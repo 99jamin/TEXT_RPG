@@ -1,10 +1,10 @@
 ﻿#pragma once
-#include "Command.h"
+#include "PlayerCommand.h"
 #include "../data/DataTypes.h"
 #include <string>
 
 
-class SkillCommand : public Command
+class SkillCommand : public PlayerCommand
 {
 
 public:
@@ -15,7 +15,7 @@ public:
 
 	}
 
-	virtual void execute(Entity& user, std::vector<Entity*>& targets, int targetIndex, std::function<void(LogLine)> logCallback = nullptr) = 0;
+	virtual void execute(Player& player, std::vector<Monster*>& monsters, int monsterIndex, std::function<void(LogLine)> logCallback = nullptr) = 0;
 
 	
 protected:
@@ -23,5 +23,4 @@ protected:
 	float m_damageRatio;
 	int m_staminaCost;
 	std::string m_name;
-	LogLine m_log;
 };
