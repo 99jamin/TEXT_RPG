@@ -15,6 +15,8 @@ void DataManager::loadAll()
     loadItems("data/items.json");
     loadSkills("data/skills.json");
     loadMaps("data/maps.json");
+    loadPrologue("data/prologue.json");
+    loadEnding("data/ending.json");
 }
 
 MonsterData DataManager::getMonsterData(const std::string& id)
@@ -50,14 +52,14 @@ MapData DataManager::getMapData(const std::string& id)
     return MapData{};
 }
 
-std::string DataManager::getItemName(const std::string& id)
+const std::vector<PageData>& DataManager::getPrologueData() const
 {
-    return getItemData(id).name;
+    return m_PrologueTable;
 }
 
-int DataManager::getSkillStamina(SkillType skill)
+const std::vector<PageData>& DataManager::getEndingData() const
 {
-    return getSkillData(skill).stamina_cost;
+    return m_EndingTable;
 }
 
 void DataManager::loadMonsters(const std::string& path)
@@ -69,13 +71,16 @@ void DataManager::loadMonsters(const std::string& path)
         MonsterData monster;
         monster.id = j["id"];
         monster.name = j["name"];
-        monster.description = j["description"];
+        monster.attackLog = j["attackLog"];
         monster.hp = j["hp"];
         monster.attack = j["attack"];
         monster.defense = j["defense"];
         monster.effect = stringToMonsterEffect(j["effect"]);
         monster.dropItemId = j["drop_item"];
         monster.art = j["art"];
+        monster.phaseTwoLog = j.value("phaseTwoLog","");
+        if (j.contains("art2"))
+            monster.art2 = j["art2"];
 
         m_monsterTable[monster.id] = monster;
     }
@@ -92,6 +97,7 @@ void DataManager::loadItems(const std::string& path)
         item.id = j["id"];
         item.name = j["name"];
         item.description = j["description"];
+        item.useLog = j.value("useLog","");
         item.effect = stringToItemEffect(j["effect"]);
         item.value = j.value("value", 0);  
 
@@ -133,6 +139,7 @@ void DataManager::loadMaps(const std::string& path)
         map.name = j["name"];
         map.description = j["description"];
         map.nextMapId = j["next_map"];
+        map.bgm = j["bgm"];
 
         for (auto& row : j["grid"])
         {
@@ -166,6 +173,36 @@ void DataManager::loadMaps(const std::string& path)
     }
 }
 
+void DataManager::loadPrologue(const std::string& path)
+{
+    std::ifstream file(path);
+    json data = json::parse(file);
+
+    for (auto& j : data["pages"])
+    {
+        PageData page;
+        page.art = j["art"];
+        page.lines = j["lines"];
+
+        m_PrologueTable.push_back(page);
+    }
+}
+
+void DataManager::loadEnding(const std::string& path)
+{
+    std::ifstream file(path);
+    json data = json::parse(file);
+
+    for (auto& j : data["pages"])
+    {
+        PageData page;
+        page.art = j["art"];
+        page.lines = j["lines"];
+
+        m_EndingTable.push_back(page);
+    }
+}
+
 MonsterEffect DataManager::stringToMonsterEffect(const std::string& str)
 {
     if (str == "Poison")       return MonsterEffect::Poison;
@@ -183,6 +220,7 @@ ItemEffect DataManager::stringToItemEffect(const std::string& str)
     if (str == "CurePoison")    return ItemEffect::CurePoison;
     if (str == "StaminaRestore") return ItemEffect::StaminaRestore;
     if (str == "SkillLearn")    return ItemEffect::SkillLearn;
+    if (str == "Evolution")    return ItemEffect::Evolution;
     return ItemEffect::None;
 }
 

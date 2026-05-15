@@ -24,6 +24,7 @@ private:
 	std::string m_id;
 	std::string m_name;
 	std::string m_description;
+	std::string m_useLog;
 	ItemEffect m_effect;
 	int m_value;
 	SkillType m_skillId;

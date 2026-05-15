@@ -2,6 +2,7 @@
 
 enum class ItemEffect {
     None,
+    Evolution,
     HpRestore,
     HpRestoreFull,
     CurePoison,

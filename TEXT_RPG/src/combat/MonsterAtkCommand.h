@@ -58,7 +58,7 @@ public:
         {
             m_log.clear();
             m_log.push_back(LogSegment("[" + monster.getName() + "]", Color::RED));
-            m_log.push_back(LogSegment(" 의 공격, ", Color::WHITE));
+            m_log.push_back(LogSegment(monster.getAttackLog(), Color::WHITE));
             m_log.push_back(LogSegment(" " + std::to_string(realDamage), Color::RED));
             m_log.push_back(LogSegment(" 의 피해를 입었다.", Color::WHITE));
             logCallback(m_log);
@@ -69,7 +69,6 @@ public:
 
 
 private:
-
     static constexpr float DAMAGE_RATIO = 1.2;
     static constexpr float HIGH_DAMAGE_RATIO = 2.0;
     static constexpr float HP_ABSORB_RATIO = 0.2;

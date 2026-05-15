@@ -12,13 +12,15 @@ struct MonsterData
 {
     std::string id;
     std::string name;
-    std::string description;
+    std::string attackLog;
+    std::string phaseTwoLog;
+    std::string dropItemId;
     int hp;
     int attack;
     int defense;
     MonsterEffect effect;
-    std::string dropItemId;
     std::vector<std::string> art;
+    std::vector<std::string> art2;
 };
 
 struct ItemData 
@@ -26,6 +28,7 @@ struct ItemData
     std::string id;
     std::string name;
     std::string description;
+    std::string useLog;
     ItemEffect effect;
     SkillType skillId;
     int value;
@@ -49,6 +52,7 @@ struct MapData
     std::string name;
     std::string description;
     std::string nextMapId;
+    std::string bgm;
     std::vector<std::vector<std::string>> grid;
     std::map<std::string, RoomData> rooms;  // id → RoomData
 };
@@ -69,6 +73,8 @@ struct SaveData
     {
         int hp;
         int stamina;
+        int atk;
+        int def;
         bool poisoned;
         std::map<std::string, int> inventory;
         std::vector<SkillType> skills;
@@ -85,4 +91,10 @@ struct SaveData
 
     PlayerSaveData player;
     MapSaveData map;
+};
+
+struct PageData
+{
+    std::vector<std::string> art;
+    std::vector<std::string> lines;
 };

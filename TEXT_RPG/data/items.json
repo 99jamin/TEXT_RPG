@@ -3,7 +3,8 @@
     {
       "id": "herb",
       "name": "약초",
-      "description": "쓴 풀. 달여 마시면 기력이 돈다.",
+      "description": "쓴 풀. 달여 마시면 약효가 있다.",
+      "useLog" : "상처가 조금 아물었다.",
       "effect": "HpRestore",
       "value": 20
     },
@@ -11,6 +12,7 @@
       "id": "incense_pouch",
       "name": "향낭",
       "description": "역병 쫓는 향주머니. 독기를 걷어낸다.",
+      "useLog": "독기가 싹 가셨다.",
       "effect": "CurePoison",
       "value": 0
     },
@@ -18,55 +20,63 @@
       "id": "yeong_yak",
       "name": "영약",
       "description": "신비로운 약. 모든 상처를 아물게 한다.",
+      "useLog": "상처가 모두 아물었다.",
       "effect": "HpRestoreFull",
       "value": 0
     },
     {
       "id": "red_flesh",
       "name": "붉은 살점",
-      "description": "붉은 살점. 먹을 수 있어 보인다.",
-      "effect": "HpRestore",
+      "description": "꿈틀거리는 살점. 먹어도 될까..?",
+      "useLog": "몸에 변화가 생긴 듯 하다..",
+      "effect": "Evolution",
       "value": 50
     },
     {
       "id": "dried_fish",
       "name": "어포",
       "description": "바짝 말린 생선. 씹으면 기운이 차오른다.",
+      "useLog": "기력이 돋았다.",
       "effect": "StaminaRestore",
       "value": 2
     },
     {
       "id": "mugaseo_1",
       "name": "찢긴 무가서",
-      "description": "찢긴 무가서. 뉫결이 새겨져 있다.",
+      "description": "검무 [뉫결]이 기록되어있다.",
+      "useLog": "[뉫결]을 익혔다.",
       "effect": "SkillLearn",
       "skill": "Nuigyeol"
     },
     {
       "id": "mugaseo_2",
       "name": "무가서 조각 첫째",
-      "description": "무가서 조각. 무수기가 새겨져 있다.",
+      "description": "검무 [무수기]가 기록되어있다.",
+      "useLog": "[무수기]를 익혔다.",
       "effect": "SkillLearn",
       "skill": "Musuki"
     },
     {
       "id": "mugaseo_3",
       "name": "무가서 조각 둘째",
-      "description": "무가서 조각. 너울이 새겨져 있다.",
+      "description": "검무 [너울]이 기록되어있다.",
+      "useLog": "[너울]을 익혔다.",
       "effect": "SkillLearn",
       "skill": "Neoul"
     },
     {
       "id": "mugaseo_4",
       "name": "무가서 조각 셋째",
-      "description": "무가서 조각. 굼뉘가 새겨져 있다.",
+      "description": "검무 [굼뉘]가 기록되어있다.",
+      "useLog": "[굼뉘]를 익혔다.",
       "effect": "SkillLearn",
       "skill": "Gumni"
     },
     {
       "id": "mugaseo_5",
       "name": "무가서 마지막 조각",
-      "description": "무가서 마지막. 물마루가 새겨져 있다.",
+      "description": "검무 [물마루]가 기록되어있다.",
+      "useLog": "[물마루]를 익혔다.",
       "effect": "SkillLearn",
       "skill": "Mulmaru"
     }

@@ -3,7 +3,6 @@
 #include <string>
 #include <memory>
 #include "DataTypes.h"
-#include "../entity/Monster.h"
 
 class DataManager {
 public:
@@ -19,7 +18,13 @@ public:
 
     MapData getMapData(const std::string& id);
 
+    const std::vector<PageData>& getPrologueData() const;
+
+    const std::vector<PageData>& getEndingData() const;
+
     std::string getItemName(const std::string& id);
+
+    std::string getUseLog(const std::string& id);
     
     int getSkillStamina(SkillType skill);
 
@@ -36,6 +41,10 @@ private:
 
     void loadMaps(const std::string& path);
 
+    void loadPrologue(const std::string& path);
+
+    void loadEnding(const std::string& path);
+
     MonsterEffect stringToMonsterEffect(const std::string& str);
 
     ItemEffect stringToItemEffect(const std::string& str);
@@ -48,4 +57,6 @@ private:
     std::unordered_map<std::string, ItemData> m_itemTable;
     std::unordered_map<std::string, SkillData> m_skillTable;
     std::unordered_map<std::string, MapData> m_mapTable;
+    std::vector<PageData> m_PrologueTable;
+    std::vector<PageData> m_EndingTable;
 };

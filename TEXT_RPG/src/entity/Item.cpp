@@ -2,7 +2,7 @@
 #include "Player.h"
 
 Item::Item(const ItemData& data)
-	:m_id(data.id), m_name(data.name), m_description(data.description), m_effect(data.effect), m_value(data.value), m_skillId(data.skillId)
+	:m_id(data.id), m_name(data.name), m_description(data.description), m_effect(data.effect), m_value(data.value), m_skillId(data.skillId),m_useLog(data.useLog)
 {
 	
 }
@@ -13,6 +13,12 @@ void Item::useItem(Player& player)
 	{
 	case ItemEffect::None:
 	{
+		break;
+	}
+	case ItemEffect::Evolution:
+	{
+		player.recoverHp(m_value);
+		player.evolution(10);
 		break;
 	}
 	case ItemEffect::HpRestore:
