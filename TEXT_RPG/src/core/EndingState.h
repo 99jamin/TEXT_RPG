@@ -3,16 +3,15 @@
 #include <vector>
 #include <string>
 #include "../data/DataTypes.h"
-
 class GameManager;
 
-class PrologueState : public GameState
+class EndingState : public GameState
 {
 public:
 
-	PrologueState();
+	EndingState();
 
-	void enter(GameManager&manager) override;
+	void enter(GameManager& manager) override;
 
 	void update(GameManager& manager) override;
 

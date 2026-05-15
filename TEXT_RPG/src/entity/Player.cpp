@@ -73,11 +73,19 @@ void Player::recoverStamina(int amount)
 	m_stamina = std::min(m_maxStamina, m_stamina);
 }
 
+void Player::evolution(int amount)
+{
+	Entity::setAtk(Entity::getAtk() + amount);
+	Entity::setDef(Entity::getDef() + amount);
+}
+
 
 //Save
-void Player::loadFromSave(int curHp, int stamina, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills)
+void Player::loadFromSave(int curHp, int atk, int def, int stamina, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills)
 {
 	Entity::setCurHp(curHp);
+	Entity::setAtk(atk);
+	Entity::setDef(def);
 	m_stamina = stamina;
 	m_isPoison = poisoned;
 	m_inven = inventory;

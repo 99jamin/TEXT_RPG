@@ -6,10 +6,11 @@
 #include "../save/SaveManager.h"
 #include "../ui/UIRenderer.h"
 #include "../input/InputHandler.h"
+#include "../sound/SoundManager.h"
 
 void TitleState::enter(GameManager& manager)
 {
-
+	SoundManager::play("bgm/title.mp3");
 }
 
 void TitleState::update(GameManager& manager)
@@ -37,7 +38,7 @@ void TitleState::update(GameManager& manager)
 		SaveManager::getInstance().loadData();
 
 		auto& pd = SaveManager::getInstance().getPlayerData();
-		manager.getPlayer().loadFromSave(pd.hp, pd.stamina, pd.poisoned, pd.inventory, pd.skills);
+		manager.getPlayer().loadFromSave(pd.hp, pd.atk, pd.def, pd.stamina, pd.poisoned, pd.inventory, pd.skills);
 		manager.pushState(std::make_unique<ExploreState>(SaveManager::getInstance().getMapId(), true));
 	}
 
@@ -47,13 +48,18 @@ void TitleState::update(GameManager& manager)
 
 void TitleState::exit(GameManager& manager)
 {
-
+	SoundManager::stop();
 }
 
-void TitleState::pause(GameManager& manager) {}
+void TitleState::pause(GameManager& manager) 
+{
+	SoundManager::stop();
+}
 
 void TitleState::resume(GameManager& manager)
 {
+	SoundManager::play("bgm/title.mp3");
+
 	if (m_startNewGame)
 	{
 		m_startNewGame = false;

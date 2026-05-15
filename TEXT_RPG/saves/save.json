@@ -1,21 +1,29 @@
-{
+﻿{
     "map": {
-        "currentMapId": "tidal_flat",
+        "currentMapId": "jeokkwi_lair",
         "currentX": 2,
-        "currentY": 1,
+        "currentY": 2,
         "mapClearData": {
-            "tidal_flat": []
+            "jeokkwi_lair": []
         }
     },
     "player": {
         "hp": 100,
+        "atk": 100,
+        "def": 100,
         "inventory": {
-            "bandage": 1
+            "dried_fish": 6,
+            "herb": 1,
+            "incense_pouch": 1,
+            "yeong_yak": 1
         },
-        "poisoned": false,
+        "poisoned": true,
         "skills": [
-            "Nuigyeol"
+            "Nuigyeol",
+            "Musuki",
+            "Neoul",
+            "Gumni"
         ],
-        "stamina": 1
+        "stamina": 5
     }
 }

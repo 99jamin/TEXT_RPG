@@ -36,11 +36,16 @@ public:
     int getCurrentX() const { return m_currentX; }
     int getCurrentY() const { return m_currentY; }
 
+
+    //BGM
+    const std::string& getBgm() const { return m_bgm; }
+
 private:
     std::string m_id;
     std::string m_name;
     std::string m_description;
     std::string m_nextMapId;
+    std::string m_bgm;
 
     std::vector<std::vector<std::unique_ptr<Room>>> m_roomGrid;
     Room* currentRoom = nullptr;

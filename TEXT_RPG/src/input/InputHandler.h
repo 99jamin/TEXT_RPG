@@ -3,44 +3,29 @@
 #include <limits>
 #include <functional>
 #include "../ui/UIRenderer.h"
+#include "../sound/SoundManager.h"
+#include <conio.h>
 
 class InputHandler
 {
 
 public:
 
-	static int getInt(std::function<void()> redraw = nullptr)
-	{
-		int input;
-		
-		while (!(std::cin >> input))
-		{
-			handleInvalidInput(redraw);
-		}
-
-		return input;
-	}
-
 	static int getInt(int min, int max, std::function<void()> redraw = nullptr)
 	{
-		int input;
-
-		while (!(std::cin >> input) || input < min || input > max)
+		while (true)
 		{
-			handleInvalidInput(redraw);
+			int ch = _getch();
+			if (ch >= '0' + min && ch <= '0' + max)
+			{
+				SoundManager::playSFX("sfx/enter.wav");
+				return ch - '0';
+			}
+			UIRenderer::addLog("올바른 선택을 해야한다.");
+			if (redraw) redraw();
 		}
-
-		return input;
 	}
 
 private:
-
-	static void handleInvalidInput(std::function<void()> redraw)
-	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		UIRenderer::addLog("올바른 선택을 해야한다.");
-		if (redraw) redraw();
-	}
 
 };

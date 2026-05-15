@@ -37,6 +37,9 @@
     <Filter Include="헤더 파일\input">
       <UniqueIdentifier>{cf721f2d-6bdc-4c1c-949e-32ff56118efc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\sound">
+      <UniqueIdentifier>{2fd875c4-9bb2-4b4a-8cd3-45c4573ae532}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\GameManager.cpp">
@@ -85,6 +88,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\core\GameOverState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sound\SoundManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\EndingState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\save\SaveManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -219,6 +231,12 @@
       <Filter>헤더 파일\core</Filter>
     </ClInclude>
     <ClInclude Include="src\core\GameOverState.h">
+      <Filter>헤더 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sound\SoundManager.h">
+      <Filter>헤더 파일\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\EndingState.h">
       <Filter>헤더 파일\core</Filter>
     </ClInclude>
   </ItemGroup>

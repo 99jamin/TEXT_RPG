@@ -5,6 +5,7 @@
       "name": "바닷가 마을",
       "description": "역병이 덮친 바닷가 마을.",
       "next_map": "tidal_flat",
+      "bgm": "bgm/zone1.mp3",
       "grid": [
         [ null, null, null, null, null, null ],
         [ "start", "skill_1", null, null, null, null ],
@@ -68,6 +69,7 @@
       "name": "갯벌 해안",
       "description": "붉은 조수가 남긴 붉은 갯벌.",
       "next_map": "ruined_village",
+      "bgm": "bgm/zone1.mp3",
       "grid": [
         [ null, null, "start", null, null, null ],
         [ null, "combat_1", "event_1", "combat_2", null, null ],
@@ -143,6 +145,7 @@
       "name": "황폐한 어촌",
       "description": "역병에 황폐화된 어촌.",
       "next_map": "red_tide_port",
+      "bgm": "bgm/zone1.mp3",
       "grid": [
         [ null, "event_1", null, "combat_3", null, null ],
         [ "start", "combat_1", "skill_1", "combat_2", null, null ],
@@ -236,6 +239,7 @@
       "name": "적조 뒤덮인 포구",
       "description": "핏빛으로 물든 포구.",
       "next_map": "misty_island",
+      "bgm": "bgm/zone1.mp3",
       "grid": [
         [ "start", "combat_1", null, null, null, null ],
         [ null, "event_1", "combat_2", null, null, null ],
@@ -316,6 +320,7 @@
       "name": "안개 낀 섬 외부",
       "description": "짙은 안개가 감싸진 섬.",
       "next_map": "cave_entrance",
+      "bgm": "bgm/zone1.mp3",
       "grid": [
         [ "start", "combat_1", "event_1", "combat_2", "combat_3", "event_2" ],
         [ null, null, null, null, null, "combat_5" ],
@@ -401,6 +406,7 @@
       "name": "섬 동굴 입구",
       "description": "동굴 깊은 곳. 기묘한 울음소리가 들린다.",
       "next_map": "cave_b1",
+      "bgm": "bgm/zone2.mp3",
       "grid": [
         [ null, null, "start", null, null, null ],
         [ null, null, "combat_1", null, null, null ],
@@ -468,6 +474,7 @@
       "name": "섬 지하",
       "description": "바닥에는 정체 모를 붉은 액체가 흐른다.",
       "next_map": "jeokkwi_lair",
+      "bgm": "bgm/zone2.mp3",
       "grid": [
         [ "start", "combat_1", null, "event_1", null, null ],
         [ null, "combat_2", null, "combat_3", null, null ],
@@ -566,6 +573,7 @@
       "name": "섬의 심부",
       "description": "역병의 근원. 기괴한 울음소리가 가득하다.",
       "next_map": "ending",
+      "bgm": "bgm/zone2.mp3",
       "grid": [
         [ null, null, null, null, null, null ],
         [ null, null, null, null, null, null ],
@@ -598,6 +606,7 @@
       "name": "집으로 가는 길",
       "description": "집으로 가는 길.",
       "next_map": "",
+      "bgm": "bgm/zone2.mp3",
       "grid": [
         [ null, null, null, null, null, null ],
         [ null, null, null, null, null, null ],

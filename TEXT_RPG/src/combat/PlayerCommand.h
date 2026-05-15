@@ -13,7 +13,4 @@ public:
 
 	virtual void execute(Player& player, std::vector<Monster*>& monsters, int monsterIndex, std::function<void(LogLine)> logCallback = nullptr) = 0;
 
-protected:
-
-	LogLine m_log;
 };

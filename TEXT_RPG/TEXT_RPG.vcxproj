@@ -22,6 +22,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\combat\CombatSystem.cpp" />
     <ClCompile Include="src\core\CombatState.cpp" />
+    <ClCompile Include="src\core\EndingState.cpp" />
     <ClCompile Include="src\core\ExploreState.cpp" />
     <ClCompile Include="src\core\GameManager.cpp" />
     <ClCompile Include="src\core\GameOverState.cpp" />
@@ -34,6 +35,8 @@
     <ClCompile Include="src\entity\Monster.cpp" />
     <ClCompile Include="src\entity\Player.cpp" />
     <ClCompile Include="src\map\Map.cpp" />
+    <ClCompile Include="src\save\SaveManager.cpp" />
+    <ClCompile Include="src\sound\SoundManager.cpp" />
     <ClCompile Include="src\ui\UIRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +59,7 @@
     <ClInclude Include="src\combat\SkillType.h" />
     <ClInclude Include="src\combat\SoroksorokCommand.h" />
     <ClInclude Include="src\core\CombatState.h" />
+    <ClInclude Include="src\core\EndingState.h" />
     <ClInclude Include="src\core\ExploreState.h" />
     <ClInclude Include="src\core\GameManager.h" />
     <ClInclude Include="src\core\GameOverState.h" />
@@ -79,6 +83,7 @@
     <ClInclude Include="src\map\RoomType.h" />
     <ClInclude Include="src\map\Direction.h" />
     <ClInclude Include="src\save\SaveManager.h" />
+    <ClInclude Include="src\sound\SoundManager.h" />
     <ClInclude Include="src\ui\LogLine.h" />
     <ClInclude Include="src\ui\UIRenderer.h" />
   </ItemGroup>

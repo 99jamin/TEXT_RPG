@@ -31,6 +31,6 @@ public:
 	bool isFleeSuccess() const { return m_fleeSuccess; }
 
 private:
-
+	LogLine m_log;
 	bool m_fleeSuccess = false;
 };

@@ -23,7 +23,7 @@ public:
 
 	static void printTitleScreen(const std::string& message = "");
 
-	static void printPrologueScreen(const std::vector<std::string>& art, const std::vector<std::string>& lines);
+	static void printPageScreen(const std::vector<std::string>& art, const std::vector<std::string>& lines);
 
 	static void printGameOverScreen();
 

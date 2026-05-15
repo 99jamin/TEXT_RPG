@@ -2,6 +2,7 @@
 #include "../entity/Player.h"
 #include "../entity/Monster.h"
 #include "../data/DataManager.h"
+#include "../sound/SoundManager.h"
 #include <conio.h>
 
 std::vector<LogLine> UIRenderer::s_logs;
@@ -80,7 +81,7 @@ void UIRenderer::printTitleScreen(const std::string& message)
 	 std::cout << "> ";
 }
 
- void UIRenderer::printPrologueScreen(const std::vector<std::string>& art, const std::vector<std::string>& lines)
+ void UIRenderer::printPageScreen(const std::vector<std::string>& art, const std::vector<std::string>& lines)
  {
 	 system("cls");
 
@@ -109,6 +110,10 @@ void UIRenderer::printTitleScreen(const std::string& message)
 		 for (; j < (int)lines[i].size(); j++)
 		 {
 			 if (_kbhit()) { _getch(); skipped = true; break; }
+
+			 if (j % 3 == 0)  // 2글자마다 한 번
+				SoundManager::playSFX("sfx/typing1.wav");
+
 			 std::cout << lines[i][j];
 			 Sleep(20);
 		 }
@@ -241,6 +246,10 @@ void UIRenderer::printLayout(const Player& player, std::function<void()> rightPa
 				for (; j < (int)seg.text.size(); j++)
 				{
 					if (_kbhit()) { _getch(); skipped = true; break; }
+
+					if (j % 5 == 0)  // 2글자마다 한 번
+						SoundManager::playSFX("sfx/typing1.wav");
+
 					std::cout << seg.text[j];
 					Sleep(10);
 				}
@@ -262,7 +271,7 @@ void UIRenderer::printLayout(const Player& player, std::function<void()> rightPa
 
 	for (int i = 0; i < (int)choices.size(); i++)
 	{
-		setCursor(3, CHOICE_ROW + i * 2);
+		i < 5 ? setCursor(3, CHOICE_ROW + i * 2) : setCursor(30, CHOICE_ROW + (i-5) * 2);
 		std::cout << " " << choices[i];
 	}
 

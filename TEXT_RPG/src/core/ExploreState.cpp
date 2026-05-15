@@ -1,12 +1,14 @@
 ﻿#include "ExploreState.h"
 #include "GameManager.h"
 #include "CombatState.h"
+#include "EndingState.h"
 #include "../map/RoomType.h"
 #include "../data/DataManager.h"
 #include "../entity/Player.h"
 #include "../ui/UIRenderer.h"
 #include "../save/SaveManager.h"
 #include "../input/InputHandler.h"
+#include "../sound/SoundManager.h"
 #include <iostream>
 #include <memory>
 
@@ -23,13 +25,14 @@ ExploreState::ExploreState(const std::string& mapId, bool isLoad)
 void ExploreState::enter(GameManager& manager)
 {
     printRoomText();
+    SoundManager::play(m_map.getBgm());
 }
 
 void ExploreState::update(GameManager& manager)
 {
     UIRenderer::printExploreScreen(m_map, manager.getPlayer(), getChoices());
 
-    int input = InputHandler::getInt(1, 4, [&]() {UIRenderer::printExploreScreen(m_map, manager.getPlayer(), getChoices()); });
+    int input = InputHandler::getInt(0, 4, [&]() {UIRenderer::printExploreScreen(m_map, manager.getPlayer(), getChoices()); });
 
     switch (input)
     {
@@ -37,8 +40,24 @@ void ExploreState::update(GameManager& manager)
     case 2: handleAction(manager); break;
     case 3: handleInventory(manager); break;
     case 4: handleDiary(manager); break;
+    case 0: manager.quit(); break;
     }
 }
+
+ void ExploreState::exit(GameManager& manager) 
+ {
+     SoundManager::stop();
+ }
+
+ void ExploreState::pause(GameManager& manager) 
+ {
+     SoundManager::stop();
+ }
+
+ void ExploreState::resume(GameManager& manager) 
+ {
+     SoundManager::play(m_map.getBgm());
+ }
 
 // 현재 방 텍스트 출력
 void ExploreState::printRoomText()
@@ -76,7 +95,12 @@ std::vector<std::string> ExploreState::getChoices()
     // 방 타입에 따라 2번 선택지 변경
 
     if (room->getRoomType() == RoomType::Exit)
-        choices.push_back("2. 다음 지역으로 이동하기.");
+    {
+        if(m_map.getId()=="ending")
+            choices.push_back("2. 자결한다");
+        else
+            choices.push_back("2. 다음 지역으로 이동하기");
+    }
     else if ((room->getRoomType() == RoomType::Combat || room->getRoomType() == RoomType::Boss) && !room->isCleared())
         choices.push_back("2. 공격하기");
     else
@@ -84,6 +108,7 @@ std::vector<std::string> ExploreState::getChoices()
 
     choices.push_back("3. 소지품");
     choices.push_back("4. 일기");
+    choices.push_back("0. 종료");
 
     return choices;
 }
@@ -112,7 +137,7 @@ void ExploreState::handleMove(GameManager& manager)
         );
     }
 
-    for (int i = 0; i < availableDirs.size(); i++)
+    for (size_t i = 0; i < availableDirs.size(); i++)
         choices.push_back(std::to_string(i + 1) + "." + dirToString(availableDirs[i]));
     choices.push_back("0. 취소");
 
@@ -160,15 +185,14 @@ void ExploreState::handleAction(GameManager& manager)
                     if (!data.dropItemId.empty())
                     {
                         manager.getPlayer().addItem(data.dropItemId, 1);
+                        ItemData itemData = DataManager::getInstance().getItemData(data.dropItemId);
                         std::vector<LogSegment>log;
-                        log.push_back(LogSegment("[" + DataManager::getInstance().getItemName(data.dropItemId) + "]", Color::CYAN));
+                        log.push_back(LogSegment("[" + itemData.name + "]", Color::CYAN));
                         log.push_back(LogSegment(" 을/를 1 개 습득했다.", Color::WHITE));
                         UIRenderer::addLog(log);
                     }
                 }
             }));
-
-
         break;
     }
     case RoomType::Item:
@@ -178,7 +202,8 @@ void ExploreState::handleAction(GameManager& manager)
         manager.getPlayer().addItem(room->getItemId(), room->getItemCount());
 
         std::vector<LogSegment>log;
-        log.push_back(LogSegment("[" + DataManager::getInstance().getItemName(room->getItemId()) + "]", Color::CYAN));
+        ItemData itemData = DataManager::getInstance().getItemData(room->getItemId());
+        log.push_back(LogSegment("[" + itemData.name + "]", Color::CYAN));
         log.push_back(LogSegment(" 을/를" + std::to_string(room->getItemCount()) + " 개 습득했다.", Color::WHITE));
         UIRenderer::addLog(log);
 
@@ -193,11 +218,27 @@ void ExploreState::handleAction(GameManager& manager)
     }
     case RoomType::Exit:
     {
-        UIRenderer::addLog(room->getActionText());
+        if (m_map.getId() == "ending")
+        {
+            manager.pushState(std::make_unique<EndingState>());
+            break;
+        }
+        else
+        {
+            UIRenderer::addLog(room->getActionText());
+            auto oldBgm = m_map.getBgm();
 
-        m_map = Map(DataManager::getInstance().getMapData(m_map.getNextMapId()));
-        printRoomText();
-        break;
+            m_map = Map(DataManager::getInstance().getMapData(m_map.getNextMapId()));
+
+            if (oldBgm != m_map.getBgm())
+            {
+                SoundManager::stop();
+                SoundManager::play(m_map.getBgm());
+            }
+
+            printRoomText();
+            break;
+        }
     }
     default:
         break;
@@ -236,11 +277,21 @@ void ExploreState::handleInventory(GameManager& manager)
 
     std::string selectedId = itemList[input - 1].first;
     manager.getPlayer().useItem(selectedId);
+    
+    auto data = DataManager::getInstance().getItemData(selectedId);
 
     std::vector<LogSegment>log;
-    log.push_back(LogSegment("[" + DataManager::getInstance().getItemName(selectedId) + "]", Color::CYAN));
+    log.push_back(LogSegment("[" + data.name + "]", Color::CYAN));
     log.push_back(LogSegment(" 을/를 사용했다.", Color::WHITE));
     UIRenderer::addLog(log);
+
+    if (!data.useLog.empty())
+    {
+        std::vector<LogSegment>useLog;
+        useLog.push_back(LogSegment(data.useLog, Color::CYAN));
+        UIRenderer::addLog(useLog);
+    }
+
 }
 
 // 일기 처리

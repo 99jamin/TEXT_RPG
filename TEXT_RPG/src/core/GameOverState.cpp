@@ -3,10 +3,11 @@
 #include "../input/InputHandler.h"
 #include "TitleState.h"
 #include "GameManager.h"
+#include "../sound/SoundManager.h"
 
 void GameOverState::enter(GameManager& manager)
 {
-
+    SoundManager::play("bgm/gameover.mp3");
 }
 
 void GameOverState::update(GameManager& manager)
@@ -28,5 +29,5 @@ void GameOverState::update(GameManager& manager)
 
 void GameOverState::exit(GameManager& manager)
 {
-
+    SoundManager::stop();
 }

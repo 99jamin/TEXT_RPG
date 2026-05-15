@@ -29,6 +29,12 @@ public:
 
 private:
 
+	const std::string initialName = "무명";
+	const int initialHp = 100;
+	const int initialAtk = 10;
+	const int initialDef = 10;
+	const int initialStamina = 5;
+
 	std::stack<std::unique_ptr<GameState>> stateStack;
 	std::unique_ptr<Player> m_player;
 	bool running;

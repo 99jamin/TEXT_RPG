@@ -5,6 +5,7 @@
 #include "../combat/CombatSystem.h"
 #include "../data/DataManager.h"
 #include "../combat/MonsterFactory.h"
+#include "../sound/SoundManager.h"
 
 CombatState::CombatState(int monsterCount, std::string monsterId, std::function<void(CombatResult)> onResult)
 	: m_onResult(onResult)
@@ -21,10 +22,19 @@ CombatState::~CombatState() = default;
 
 void CombatState::enter(GameManager& manager)
 {
+
 	std::vector<Monster*> rawPtrs;
 	for (auto& m : m_monsters)
 		rawPtrs.push_back(m.get());
 	m_combatSystem = std::make_unique<CombatSystem>(manager.getPlayer(), rawPtrs);
+
+	if (m_monsters[0]->isLastBoss())
+		SoundManager::play("bgm/lastboss.mp3");
+	else if (m_monsters[0]->isBoss())
+		SoundManager::play("bgm/boss.mp3");
+	else
+		SoundManager::play("bgm/combat.mp3");
+
 }
 
 void CombatState::update(GameManager& manager)
@@ -55,7 +65,7 @@ void CombatState::update(GameManager& manager)
 
 void CombatState::exit(GameManager& manager)
 {
-
+	SoundManager::stop();
 }
 
 

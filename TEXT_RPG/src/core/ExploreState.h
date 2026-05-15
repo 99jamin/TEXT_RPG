@@ -18,11 +18,11 @@ public:
 
     void update(GameManager& manager) override;
 
-    void exit(GameManager& manager) override {}
+    void exit(GameManager& manager) override;
 
-    void pause(GameManager& manager) override {}
+    void pause(GameManager& manager) override;
 
-    void resume(GameManager& manager) override {}
+    void resume(GameManager& manager) override;
 
 private:
 

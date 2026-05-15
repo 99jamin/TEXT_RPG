@@ -27,13 +27,15 @@ public:
 
 	void recoverStamina(int amount);
 
+	void evolution(int amount);
+
 	//getter
 	const std::vector<SkillType>& getSkills() const { return m_skills; }
 	int getStamina() const { return m_stamina; }
 	int getMaxStamina() const { return m_maxStamina; }
 
 	//Save
-	void loadFromSave(int curHp, int stamina, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills);
+	void loadFromSave(int curHp, int atk, int def, int stamina, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills);
 
 	//Concentrating Flag
 	void startConcentrate();
@@ -57,7 +59,7 @@ public:
 	void addItem(const std::string& id, int count);
 	void removeItem(const std::string& id);
 	bool hasItem(const std::string& id) const;
-	const std::map<std::string, int > getInven() const
+	const std::map<std::string, int >& getInven() const
 	{
 		return m_inven;
 	}
@@ -78,7 +80,5 @@ private:
 	bool m_isDefending = false;
 
 	bool m_isPoison = false;
-
-
 
 };

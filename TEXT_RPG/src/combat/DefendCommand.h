@@ -20,5 +20,6 @@ public:
 
 		return;
 	}
-
+private:
+	LogLine m_log;
 };
