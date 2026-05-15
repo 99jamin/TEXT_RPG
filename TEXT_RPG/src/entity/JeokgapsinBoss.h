@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Boss.h"
 
 class JeokgapsinBoss : public Boss
@@ -9,6 +9,7 @@ public:
 
 	void onPhaseTwo() override
 	{
+		m_art = m_art2;
 		setAtk(getAtk() * PHASE_TWO_STAT_RATIO);
 		setDef(getDef() * PHASE_TWO_STAT_RATIO);
 		setCurHp(getMaxHp());

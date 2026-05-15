@@ -46,4 +46,6 @@ private:
 	int selectTarget(SkillType selected);
 
 	void checkMonsters();
+
+	void checkBossPhaseTransition();
 };

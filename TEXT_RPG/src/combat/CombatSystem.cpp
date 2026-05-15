@@ -177,7 +177,8 @@ bool CombatSystem::executeSkillCommand()
 
 	for (auto& e : skills)
 	{
-		skillChoice.push_back(std::to_string(++count) + "." + toString(e) + " / 기력 소모 : " + std::to_string(DataManager::getInstance().getSkillStamina(e)));
+		SkillData skillData = DataManager::getInstance().getSkillData(e);
+		skillChoice.push_back(std::to_string(++count) + "." + toString(e) + " / 기력 소모 : " + std::to_string(skillData.stamina_cost));
 	}
 
 	skillChoice.push_back("0. 취소");
@@ -192,7 +193,9 @@ bool CombatSystem::executeSkillCommand()
 
 	SkillType selected = skills[skillInput - 1];
 
-	if (m_player.getStamina() < DataManager::getInstance().getSkillStamina(selected))
+	SkillData skillData = DataManager::getInstance().getSkillData(selected);
+
+	if (m_player.getStamina() < skillData.stamina_cost)
 	{
 		UIRenderer::addLog("기력이 부족하다.");
 		return false;
@@ -204,6 +207,8 @@ bool CombatSystem::executeSkillCommand()
 	int targetIndex = selectTarget(selected);
 
 	skill->execute(m_player, m_monsters, targetIndex, [](LogLine log) {UIRenderer::addLog(log); });
+
+	checkBossPhaseTransition();
 
 	checkMonsters();
 
@@ -264,11 +269,20 @@ bool CombatSystem::handleItemInCombat()
 	std::string selectedId = itemList[input - 1].first;
 	m_player.useItem(selectedId);
 
+	auto data = DataManager::getInstance().getItemData(selectedId);
+
 	std::vector<LogSegment>log;
-	log.push_back(LogSegment("[" + DataManager::getInstance().getItemName(selectedId) + "]", Color::CYAN));
+	log.push_back(LogSegment("[" + data.name + "]", Color::CYAN));
 	log.push_back(LogSegment(" 을/를 사용했다.", Color::WHITE));
 	UIRenderer::addLog(log);
 
+	if (!data.useLog.empty())
+	{
+		std::vector<LogSegment>useLog;
+		useLog.push_back(LogSegment(data.useLog, Color::CYAN));
+		UIRenderer::addLog(useLog);
+	}
+	
 	return true;
 }
 
@@ -294,5 +308,28 @@ void CombatSystem::checkMonsters()
 	{
 		m_result = CombatResult::Victory;
 		combatEnd();
+	}
+}
+
+void CombatSystem::checkBossPhaseTransition()
+{
+	for (auto& m : m_monsters)
+	{
+		Boss* boss = dynamic_cast<Boss*>(m);
+		if (boss && boss->consumePhaseTwoTrigger())
+		{
+			if (!boss->getPhaseTwoLog().empty())
+				UIRenderer::addLog(boss->getPhaseTwoLog());
+
+			if (boss->isLastBoss())
+			{
+				m_player.learnSkill(SkillType::Soroksorok);
+
+				LogLine log;
+				log.push_back(LogSegment("[자장소리: 소록소록]", Color::CYAN));
+				log.push_back(LogSegment(" 을 떠올렸다.", Color::WHITE));
+				UIRenderer::addLog(log);
+			}
+		}
 	}
 }

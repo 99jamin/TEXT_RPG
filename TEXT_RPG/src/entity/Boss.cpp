@@ -18,13 +18,29 @@ void Boss::checkPhaseTransition()
 
 	if (hpRatio < PHASE_TWO_THRESHOLD)
 	{
+		m_phaseTwoJustTriggered = true;
 		m_isPhaseTwo = true;
 		onPhaseTwo();
 	}
-		
+}
+
+bool Boss::consumePhaseTwoTrigger()
+{
+	if (m_phaseTwoJustTriggered)
+	{
+		m_phaseTwoJustTriggered = false;
+		return true;
+	}
+
+	return false;
 }
 
 bool Boss::isPhaseTwo() const
 {
 	return m_isPhaseTwo;
+}
+
+const std::string& Boss::getPhaseTwoLog() const
+{
+	return m_phaseTwoLog;
 }

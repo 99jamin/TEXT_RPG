@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Boss.h"
 
 class JeokkwiBoss : public Boss
@@ -9,9 +9,12 @@ public:
 
 	void onPhaseTwo() override
 	{
+		m_art = m_art2;
 		setDef(PHASE_TWO_DEF);
 		setCurHp(PHASE_TWO_HP);
 	}
+
+	bool isLastBoss() const { return true; }
 
 private:
 
