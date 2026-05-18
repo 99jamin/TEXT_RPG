@@ -10,6 +10,7 @@
 #include "../save/SaveManager.h"
 #include "../input/InputHandler.h"
 #include "../sound/SoundManager.h"
+#include "../inven/InventoryHandler.h"
 #include <iostream>
 #include <memory>
 
@@ -252,49 +253,7 @@ void ExploreState::handleAction(GameManager& manager)
 // 소지품 처리
 void ExploreState::handleInventory(GameManager& manager)
 {
-    auto& inven = manager.getPlayer().getInven();
-
-    if (inven.empty())
-    {
-        UIRenderer::addLog("소지품이 없다.");
-        return;
-    }
-
-    // 아이템 목록 출력
-    std::vector<std::string> itemChoices;
-    std::vector<std::pair<std::string, int>> itemList;
-    int count = 0;
-    for (auto& e : inven)
-    {
-        itemList.push_back(e);
-        ItemData data = DataManager::getInstance().getItemData(e.first);
-        itemChoices.push_back(std::to_string(++count) + ". " + data.name);
-    }
-    itemChoices.push_back("0. 취소");
-
-    UIRenderer::printInvenScreen(itemList, manager.getPlayer(), itemChoices);
-
-    int input = InputHandler::getInt(0, itemList.size(), [&]() {UIRenderer::printInvenScreen(itemList, manager.getPlayer(), itemChoices); });
-
-    if (input == 0)
-        return;
-
-    std::string selectedId = itemList[input - 1].first;
-    manager.getPlayer().useItem(selectedId);
-    
-    auto data = DataManager::getInstance().getItemData(selectedId);
-
-    std::vector<LogSegment>log;
-    log.push_back(LogSegment("[" + data.name + "]", Color::CYAN));
-    log.push_back(LogSegment(" 을/를 사용했다.", Color::WHITE));
-    UIRenderer::addLog(log);
-
-    if (!data.useLog.empty())
-    {
-        std::vector<LogSegment>useLog;
-        useLog.push_back(LogSegment(data.useLog, Color::CYAN));
-        UIRenderer::addLog(useLog);
-    }
+    InventoryHandler::handleInventory(manager.getPlayer());
 
 }
 

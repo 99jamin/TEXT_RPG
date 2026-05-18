@@ -16,8 +16,8 @@ public:
 
 		int actualDamage = player.getAtk() * m_damageRatio;
 
-		monsters[monsterIndex]->takeDamage(actualDamage);
 		realDamage = monsters[monsterIndex]->takeDamage(actualDamage);
+		monsters[monsterIndex]->takeDamage(actualDamage);
 
 		if (logCallback)
 		{

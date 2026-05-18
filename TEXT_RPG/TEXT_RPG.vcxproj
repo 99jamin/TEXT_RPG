@@ -35,6 +35,7 @@
     <ClCompile Include="src\entity\Item.cpp" />
     <ClCompile Include="src\entity\Monster.cpp" />
     <ClCompile Include="src\entity\Player.cpp" />
+    <ClCompile Include="src\inven\InventoryHandler.cpp" />
     <ClCompile Include="src\map\Map.cpp" />
     <ClCompile Include="src\save\SaveManager.cpp" />
     <ClCompile Include="src\sound\SoundManager.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="src\entity\Monster.h" />
     <ClInclude Include="src\entity\Player.h" />
     <ClInclude Include="src\input\InputHandler.h" />
+    <ClInclude Include="src\inven\InventoryHandler.h" />
     <ClInclude Include="src\map\Map.h" />
     <ClInclude Include="src\map\Room.h" />
     <ClInclude Include="src\map\RoomType.h" />

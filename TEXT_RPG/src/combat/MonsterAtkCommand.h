@@ -50,7 +50,7 @@ public:
 
         case MonsterEffect::HpRegen:
             
-            monster.recoverHp(static_cast<int>(actualDamage * HP_ABSORB_RATIO));
+            monster.recoverHp(monster.getAtk() * HP_ABSORB_RATIO);
             break;
         }
 
@@ -72,5 +72,5 @@ private:
     static constexpr float DAMAGE_RATIO = 1.2;
     static constexpr float HIGH_DAMAGE_RATIO = 2.0;
     static constexpr float HP_ABSORB_RATIO = 0.2;
-    static constexpr int HP_REGEN_RATIO = 3;
+    static constexpr int HP_REGEN_RATIO = 2;
 };
