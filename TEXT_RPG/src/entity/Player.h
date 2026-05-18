@@ -9,7 +9,7 @@ class Player : public Entity
 
 public:
 
-	Player(const std::string& name, int maxHp, int atk, int def, int maxStamina, int fleshCount);
+	Player();
 
 	void init();
 
@@ -88,4 +88,11 @@ private:
 
 	bool m_isPoison = false;
 
+	//초기값
+	static constexpr int initialHp = 100;
+	static constexpr int initialAtk = 15;
+	static constexpr int initialDef = 0;
+	static constexpr int initialStamina = 5;
+	static constexpr int initialfleshCount = 0;
+	static inline const std::string initialName = "무명";
 };

@@ -4,19 +4,20 @@
 #include <vector>
 #include <algorithm>
 
-Player::Player(const std::string& name, int maxHp, int atk, int def, int maxStamina, int fleshCount)
-	:Entity(name, maxHp, atk, def), m_maxStamina(maxStamina), m_stamina(maxStamina), m_fleshCount(fleshCount)
+Player::Player()
+	:Entity(initialName, initialHp, initialAtk, initialDef), m_maxStamina(initialStamina), m_stamina(1), m_fleshCount(initialfleshCount)
 {
 
 }
 
 void Player::init()
 {
-	Entity::setAtk(15);
-	Entity::setDef(0);
+	Entity::setAtk(initialAtk);
+	Entity::setDef(initialDef);
 	Entity::setCurHp(Entity::getMaxHp());
-	m_maxStamina = 5;
+	m_maxStamina = initialStamina;
 	m_stamina = 1;
+	m_fleshCount = initialfleshCount;
 	m_skills = {};
 	m_inven = {};
 	m_isConcentrating = false;

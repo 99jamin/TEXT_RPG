@@ -1,6 +1,7 @@
 ﻿#include "DataManager.h"
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <iostream>
 using json = nlohmann::json;
 
 DataManager& DataManager::getInstance()
@@ -11,13 +12,22 @@ DataManager& DataManager::getInstance()
 
 void DataManager::loadAll()
 {
-    loadMonsters("data/monsters.json");
-    loadItems("data/items.json");
-    loadSkills("data/skills.json");
-    loadMaps("data/maps.json");
-    loadPrologue("data/prologue.json");
-    loadEnding("data/ending.json");
-    loadHiddenEnding("data/hiddenending.json");
+    try
+    {
+        loadMonsters("data/monsters.json");
+        loadItems("data/items.json");
+        loadSkills("data/skills.json");
+        loadMaps("data/maps.json");
+        loadPrologue("data/prologue.json");
+        loadEnding("data/ending.json");
+        loadHiddenEnding("data/hiddenending.json");
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "[DataManager] 데이터 로딩 실패 :" << e.what() << std::endl;
+        std::exit(1);
+    }
+   
 }
 
 MonsterData DataManager::getMonsterData(const std::string& id)
@@ -71,6 +81,12 @@ const std::vector<PageData>& DataManager::getHiddenEndingData() const
 void DataManager::loadMonsters(const std::string& path)
 {
     std::ifstream file(path);
+
+    if (!file.is_open())
+    {
+        throw std::runtime_error("파일을 열 수 없음 : " + path);
+    }
+
     json data = json::parse(file);
 
     for (auto& j : data["monsters"]) {
@@ -95,6 +111,12 @@ void DataManager::loadMonsters(const std::string& path)
 void DataManager::loadItems(const std::string& path)
 {
     std::ifstream file(path);
+
+    if (!file.is_open())
+    {
+        throw std::runtime_error("파일을 열 수 없음 : " + path);
+    }
+
     json data = json::parse(file);
 
     for (auto& j : data["items"])
@@ -119,6 +141,12 @@ void DataManager::loadItems(const std::string& path)
 void DataManager::loadSkills(const std::string& path)
 {
     std::ifstream file(path);
+
+    if (!file.is_open())
+    {
+        throw std::runtime_error("파일을 열 수 없음 : " + path);
+    }
+
     json data = json::parse(file);
 
     for (auto& j : data["skills"])
@@ -136,6 +164,12 @@ void DataManager::loadSkills(const std::string& path)
 void DataManager::loadMaps(const std::string& path)
 {
     std::ifstream file(path);
+
+    if (!file.is_open())
+    {
+        throw std::runtime_error("파일을 열 수 없음 : " + path);
+    }
+
     json data = json::parse(file);
 
     for (auto& j : data["maps"])
@@ -182,6 +216,12 @@ void DataManager::loadMaps(const std::string& path)
 void DataManager::loadPrologue(const std::string& path)
 {
     std::ifstream file(path);
+
+    if (!file.is_open())
+    {
+        throw std::runtime_error("파일을 열 수 없음 : " + path);
+    }
+
     json data = json::parse(file);
 
     for (auto& j : data["pages"])
@@ -197,6 +237,12 @@ void DataManager::loadPrologue(const std::string& path)
 void DataManager::loadEnding(const std::string& path)
 {
     std::ifstream file(path);
+
+    if (!file.is_open())
+    {
+        throw std::runtime_error("파일을 열 수 없음 : " + path);
+    }
+
     json data = json::parse(file);
 
     for (auto& j : data["pages"])
@@ -212,6 +258,12 @@ void DataManager::loadEnding(const std::string& path)
 void DataManager::loadHiddenEnding(const std::string& path)
 {
     std::ifstream file(path);
+
+    if (!file.is_open())
+    {
+        throw std::runtime_error("파일을 열 수 없음 : " + path);
+    }
+
     json data = json::parse(file);
 
     for (auto& j : data["pages"])
