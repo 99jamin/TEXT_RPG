@@ -2,8 +2,8 @@
   "monsters": [
     {
       "id": "plague_fisherman",
-      "name": "역병 어부",
-      "attackLog": "가 할퀴었다.",
+      "name": "어부",
+      "attackLog": "가 회칼로 긁어왔다.",
       "hp": 30,
       "attack": 8,
       "defense": 3,
@@ -29,8 +29,8 @@
     },
     {
       "id": "plague_dog",
-      "name": "역병 들개",
-      "attackLog": "가 달려들었다.",
+      "name": "들개",
+      "attackLog": "가 살을 물어뜯었다.",
       "hp": 25,
       "attack": 10,
       "defense": 1,
@@ -57,7 +57,7 @@
     {
       "id": "paegwi",
       "name": "패귀",
-      "attackLog": "가 붉은 액체를 뿜었다.",
+      "attackLog": "가 붉은 것을 뿜었다.",
       "hp": 55,
       "attack": 14,
       "defense": 6,
@@ -84,7 +84,7 @@
     {
       "id": "jeokguin",
       "name": "적구인",
-      "attackLog": "이 다리에 상처를 내고있다.",
+      "attackLog": "이 발목을 조이고 있다.",
       "hp": 50,
       "attack": 12,
       "defense": 5,
@@ -110,8 +110,8 @@
     },
     {
       "id": "plague_seagull",
-      "name": "역병 갈매기",
-      "attackLog": "가 부리로 쪼았다.",
+      "name": "갈매기",
+      "attackLog": "가 살점을 쪼아 뜯었다.",
       "hp": 45,
       "attack": 16,
       "defense": 4,
@@ -138,7 +138,7 @@
     {
       "id": "surae",
       "name": "수라어",
-      "attackLog": "가 이빨로 물어 뜯었다.",
+      "attackLog": "가 살점을 물어 뜯었다.",
       "hp": 60,
       "attack": 22,
       "defense": 8,
@@ -164,8 +164,8 @@
     },
     {
       "id": "plague_mermaid",
-      "name": "역병 인어",
-      "attackLog": "가 비명을 질렀다.",
+      "name": "인어",
+      "attackLog": "가 손톱을 세워 긁었다.",
       "hp": 65,
       "attack": 18,
       "defense": 10,
@@ -192,7 +192,7 @@
     {
       "id": "cave_taechung",
       "name": "동굴 태충",
-      "attackLog": "이 피를 빨고있다.",
+      "attackLog": "이 살에 파고들었다.",
       "hp": 70,
       "attack": 20,
       "defense": 8,
@@ -219,7 +219,7 @@
     {
       "id": "jeoksalgwi",
       "name": "적살귀",
-      "attackLog": "는 꿈틀거리고 있다.",
+      "attackLog": "가 몸을 휘감았다.",
       "hp": 110,
       "attack": 22,
       "defense": 12,
@@ -246,7 +246,7 @@
     {
       "id": "yugangwi",
       "name": "육안귀",
-      "attackLog": "가 나를 천천히 응시한다.",
+      "attackLog": "가 응시한다. 기력이 빠져나간다.",
       "hp": 90,
       "attack": 24,
       "defense": 20,
@@ -273,7 +273,7 @@
     {
       "id": "jeokgapsin",
       "name": "적갑신",
-      "attackLog": "이 집게발로 몸을 짓이겼다.",
+      "attackLog": "이 집게발을 내리찍었다.",
       "hp": 200,
       "attack": 30,
       "defense": 0,
@@ -296,7 +296,7 @@
         "⠀⠀⠈⠁⠀⠙⠧⠀⠀⠘⠛⣿⣷⣦⣷⣦⣤⡄⠀⠀⠀⠀⠴⠛⠁⠀⠈⠁⠀⠀",
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
       ],
-      "phaseTwoLog": "적갑신이 껍질을 부수고 탈피 하려 한다.",
+      "phaseTwoLog": "등딱지가 갈라졌다. 안에서 무언가 나오고 있다.",
       "art2": [
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
@@ -318,7 +318,7 @@
     {
       "id": "jeokkwi",
       "name": "저퀴",
-      "attackLog": "가 한 맺힌 울음을 내지른다.",
+      "attackLog": "가 울부짖었다. 온몸이 떨렸다.",
       "hp": 350,
       "attack": 35,
       "defense": 20,
@@ -341,7 +341,7 @@
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
       ],
-      "phaseTwoLog": "저퀴에게 붙어있던 부패한 살점과 오물들이 떨어져 나갔다.",
+      "phaseTwoLog": "역병이 벗겨지기 시작했다. 안에서 울음소리가 났다.",
       "art2": [
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",

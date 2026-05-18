@@ -23,6 +23,14 @@ int Entity::takeDamage(int damage)
 	return actualDamage;
 }
 
+int Entity::takeFixedDamage(int amount)
+{
+	m_curHp -= amount;
+	m_curHp = std::max(0, m_curHp);
+
+	return amount;
+}
+
 void Entity::recoverHp(int amount)
 {
 	m_curHp += amount;

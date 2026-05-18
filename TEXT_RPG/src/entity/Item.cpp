@@ -18,7 +18,7 @@ void Item::useItem(Player& player)
 	case ItemEffect::Evolution:
 	{
 		player.recoverHp(m_value);
-		player.evolution(10);
+		player.evolution(atkEvolutionAmount,defEvolutionAmount);
 		break;
 	}
 	case ItemEffect::HpRestore:

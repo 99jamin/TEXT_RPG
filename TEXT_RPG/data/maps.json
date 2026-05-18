@@ -17,50 +17,50 @@
       "rooms": {
         "start": {
           "type": "Start",
-          "text": "집이 엉망이 되어있다.",
-          "action_text": "침대에는 아직 아이의 온기가 남아있다..."
+          "text": "집 안이 어질러져 있었다. 밥상이 엎어져 있고 그릇이 깨져 있었다.",
+          "action_text": "아이의 이불이 바닥에 떨어져 있었다. 온기가 남아 있었다."
         },
         "skill_1": {
           "type": "Item",
-          "text": "남편이 남겨둔 검과, 검무를 기록한 서책이 바닥에 널부러져 있다.",
-          "action_text": "검과 무가서를 집어들었다. 무가서에는 검무가 기록되어 있다.",
+          "text": "방 구석에 남편이 남긴 것들이 있었다. 천으로 감싸 놓은 그대로였다.",
+          "action_text": "천을 벗기고 검을 들었다. 무가서를 품에 넣었다.",
           "item": "mugaseo_1",
           "count": 1
         },
         "combat_1": {
           "type": "Combat",
-          "text": "역병에 걸린 어부가 걸어온다.",
+          "text": "문 밖에 사람이 서 있었다. 손에 회칼을 들고 있었다. 눈이 마주치자 달려왔다.",
           "monster": "plague_fisherman",
           "monster_count": 1
         },
         "item_1": {
           "type": "Item",
-          "text": "마을이 텅 비어있다. 역병의 냄새가 진하게 풍긴다.",
-          "action_text": "뻣뻣하게 굳은 시체 옆에 약초 묶음이 떨어져 있었다.",
+          "text": "길에 시체가 하나 쓰러져 있었다. 뻣뻣하게 굳어 있었다.",
+          "action_text": "시체 옆에 약초 묶음이 떨어져 있었다. 집어 들었다.",
           "item": "herb",
           "count": 1
         },
         "combat_2": {
           "type": "Combat",
-          "text": "개떼들이 나를 둘러 싼다.",
+          "text": "골목에서 개 두 마리가 나왔다. 주둥이가 붉었다. 무언가를 먹다 말고 온 것 같았다.",
           "monster": "plague_dog",
-          "monster_count": 3
+          "monster_count": 2
         },
         "combat_3": {
           "type": "Combat",
-          "text": "역병에 걸린 어부가 걸어온다.",
+          "text": "어부가 담벼락에 머리를 박고 있었다. 반복해서, 계속. 다가가자 멈추고 이쪽을 보았다.",
           "monster": "plague_fisherman",
           "monster_count": 1
         },
         "event_2": {
           "type": "Event",
-          "text": "마을 끝자락이다. 저 멀리 갯벌이 보인다.",
-          "action_text": "바닷바람이 불어온다."
+          "text": "마을 끝자락이었다. 저 멀리 갯벌이 보였다.",
+          "action_text": "역귀들의 발자국이 갯벌 쪽에서부터 찍혀 있었다. 이것들이 거기서 온 것이다."
         },
         "exit": {
           "type": "Exit",
-          "text": "갯벌 해안으로 향하는 길이 보인다.",
-          "action_text": "역귀들의 발자국이 갯벌 해안으로부터 오고있다."
+          "text": "갯벌로 이어지는 길이 보였다. 발자국은 전부 이쪽으로 향해 있었다.",
+          "action_text": "이것들이 계속 오고 있다. 아이가 아무리 멀리 도망쳐도 끝이 없을 것이다."
         }
       }
     },
@@ -81,62 +81,62 @@
       "rooms": {
         "start": {
           "type": "Start",
-          "text": "발밑엔 붉게 물든 뻘이 뒤엉켜있다. 걸을 때마다 역겨운 기분이 든다.",
-          "action_text": "피는 아닌것 같다."
+          "text": "발밑이 붉었다. 갯벌 전체가 적조에 물들어 있었다.",
+          "action_text": "피는 아닌 것 같았다. 바다에서 밀려든 것이다."
         },
         "event_1": {
           "type": "Event",
-          "text": "뻘 속에 무언가 반쯤 파묻혀 있다.",
-          "action_text": "어부의 시체다. 얼마 되지 않은 것 같다."
+          "text": "뻘 속에 사람이 반쯤 파묻혀 있었다. 어부였다.",
+          "action_text": "죽은 지 얼마 되지 않은 것 같았다. 얼굴이 일그러져 있었다."
         },
         "combat_1": {
           "type": "Combat",
-          "text": "혐오스러운 갯지렁이가 내 발을 감싼다.",
+          "text": "발밑에서 무언가가 발목을 감았다. 갯지렁이였다. 팔뚝만 한 크기였다.",
           "monster": "jeokguin",
-          "monster_count": 2
+          "monster_count": 1
         },
         "combat_2": {
           "type": "Combat",
-          "text": "역병에 걸린 어부가 걸어온다.",
+          "text": "뻘밭에 사람이 서 있었다. 뻘을 퍼서 입에 넣고 있었다. 나를 보자 달려왔다.",
           "monster": "plague_fisherman",
           "monster_count": 1
         },
         "item_1": {
           "type": "Item",
-          "text": "적조 속에 반쯤 잠긴 시체 더미가 보인다.",
-          "action_text": "시체를 뒤졌다. 썩은 손아귀에 약초 묶음이 있다.",
+          "text": "적조 속에 시체가 여러 구 겹쳐 있었다.",
+          "action_text": "시체 사이를 뒤졌다. 썩은 손에 약초 묶음이 쥐어져 있었다. 손가락을 하나씩 펴서 빼냈다.",
           "item": "herb",
           "count": 2
         },
         "combat_3": {
           "type": "Combat",
-          "text": "거대한 조개가 나에게 붉은 살점들은 내뱉는다.",
+          "text": "뻘에서 거대한 조개가 입을 벌렸다. 안쪽이 온통 붉었다. 살점 같은 것을 뱉어냈다.",
           "monster": "paegwi",
           "monster_count": 1
         },
         "skill_1": {
           "type": "Item",
-          "text": "적조에 잠긴 시체 더미 속에 종이 뭉치가 보인다.",
-          "action_text": "뻘 속에서 건져냈다. 피와 적조에 젖어 있지만 글씨는 읽힌다.",
+          "text": "시체 더미 속에 종이 뭉치가 걸려 있었다.",
+          "action_text": "적조에 젖어 있었으나 글씨는 읽을 수 있었다. 무가서의 찢긴 조각이었다.",
           "item": "mugaseo_2",
           "count": 1
         },
         "combat_4": {
           "type": "Combat",
-          "text": "혐오스러운 갯지렁이가 내 발을 감싼다.",
+          "text": "갯벌이 움직였다. 뻘 속에서 갯지렁이 두 마리가 기어 나왔다.",
           "monster": "jeokguin",
-          "monster_count": 3
+          "monster_count": 2
         },
         "combat_5": {
           "type": "Combat",
-          "text": "거대한 조개가 나에게 붉은 살점들은 내뱉는다.",
+          "text": "뻘 위에 조개가 박혀 있었다. 가까이 가자 껍질이 열리며 붉은 것을 쏟아냈다.",
           "monster": "paegwi",
           "monster_count": 1
         },
         "exit": {
           "type": "Exit",
-          "text": "갯벌이 끝나는 곳에 버려진 어촌이 보인다.",
-          "action_text": "발자국이 어촌까지 이어져 있다. 살아남은 사람이 있을까?"
+          "text": "갯벌이 끝나는 곳에 마을이 보였다. 지붕이 내려앉은 집들이 줄지어 있었다.",
+          "action_text": "발자국이 저 마을에서부터 이어져 있었다. 저 마을도 당한 것이다."
         }
       }
     },
@@ -157,80 +157,80 @@
       "rooms": {
         "start": {
           "type": "Start",
-          "text": "어촌 입구다. 집집마다 문이 열려있다. 시체는 보이지 않는다.",
-          "action_text": "붉은 핏 자국들이 이어져있다."
+          "text": "어촌 입구였다. 문이란 문은 전부 열려 있었다. 사람 소리는 나지 않았다.",
+          "action_text": "핏자국이 마을 안쪽으로 이어져 있었다."
         },
         "combat_1": {
           "type": "Combat",
-          "text": "갈매기가 이성을 잃고 달려든다.",
+          "text": "지붕 위에서 갈매기가 무언가를 쪼아 먹고 있었다. 다가가자 날카롭게 울며 내려왔다.",
           "monster": "plague_seagull",
           "monster_count": 2
         },
         "event_1": {
           "type": "Event",
-          "text": "버려진 집 안을 들여다봤다. 밥상이 그대로 차려져 있지만, 오래된 것 처럼 상해있다.",
-          "action_text": "급하게 도망친 것 같다. 아이의 신발이 문 앞에 남겨져 있었다."
+          "text": "버려진 집 안을 들여다보았다. 밥상이 차려져 있었다. 반찬이 곰팡이에 뒤덮여 있었다.",
+          "action_text": "문 앞에 아이의 신발이 한 짝 벗겨져 있었다. 나머지 한 짝은 보이지 않았다."
         },
         "combat_2": {
           "type": "Combat",
-          "text": "역병에 걸린 어부가 걸어온다.",
+          "text": "골목에서 어부 둘이 나왔다. 한쪽이 다른 쪽 어깨를 뜯고 있었다. 나를 보자 둘 다 달려왔다.",
           "monster": "plague_fisherman",
           "monster_count": 2
         },
         "item_1": {
           "type": "Item",
-          "text": "창고 문이 반쯤 열려있다. 이성을 잃은 어민은 자신의 팔을 뜯어 먹고있다. ",
-          "action_text": "이성을 잃은 어민 바로 옆에서 약초를 집었다. 눈이 마주쳤지만 반응이 없다.",
+          "text": "창고 문이 반쯤 열려 있었다. 안에서 씹는 소리가 났다.",
+          "action_text": "어민 하나가 제 팔뚝을 뜯어 먹고 있었다. 옆에 약초가 있었다. 집었다. 고개도 들지 않았다.",
           "item": "herb",
           "count": 2
         },
         "combat_3": {
           "type": "Combat",
-          "text": "갈매기가 이성을 잃고 달려든다.",
+          "text": "갈매기 떼가 시체 위에 내려앉아 있었다. 쫓으려 했으나 먼저 달려들었다.",
           "monster": "plague_seagull",
           "monster_count": 2
         },
         "combat_4": {
           "type": "Combat",
-          "text": "역병에 걸린 어부가 걸어온다.",
+          "text": "어부가 벽에 기대 서 있었다. 죽은 줄 알았다. 옆을 지나려 하자 손이 뻗어왔다.",
           "monster": "plague_fisherman",
           "monster_count": 1
         },
         "skill_1": {
           "type": "Item",
-          "text": "무너진 집 잔해 속에 종이 뭉치가 보인다.",
-          "action_text": "무너진 잔해를 손으로 헤쳤다. 손바닥이 긁혔다. 종이 뭉치를 꺼냈다.",
+          "text": "무너진 집 잔해 아래 종이가 보였다.",
+          "action_text": "잔해를 손으로 헤쳤다. 손바닥이 찢어졌다. 무가서 조각을 꺼냈다.",
           "item": "mugaseo_3",
           "count": 1
         },
         "event_2": {
           "type": "Item",
-          "text": "낡은 제단이 있다. 풍어를 빌던 곳인 것 같다.",
-          "action_text": "향불을 손에 쥐었다. 아직 온기가 남아있다.",
+          "text": "낡은 제단이 있었다. 풍어를 빌던 곳인 것 같았다.",
+          "action_text": "제단 위에 향낭이 놓여 있었다. 아직 향 냄새가 남아 있었다.",
           "item": "incense_pouch",
           "count": 1
         },
         "combat_5": {
           "type": "Combat",
-          "text": "갈매기가 이성을 잃고 달려든다.",
+          "text": "하늘에서 그림자가 내려왔다. 갈매기 세 마리가 동시에 덮쳤다.",
           "monster": "plague_seagull",
           "monster_count": 3
         },
         "combat_6": {
           "type": "Combat",
-          "text": "역병에 걸린 어부가 걸어온다.",
+          "text": "어부 둘이 나란히 걸어오고 있었다. 걸음걸이가 같았다. 같이 일하던 사이였을 것이다.",
           "monster": "plague_fisherman",
           "monster_count": 2
         },
         "event_3": {
           "type": "Event",
-          "text": "역병에 이성을 잃은 어민이 상반신만 남은 채 기어다니고 있다.",
-          "action_text": "다른 처지에 신경쓸 시간이 없다."
+          "text": "어민 하나가 상반신만 남은 채 바닥을 기고 있었다. 내장이 질질 끌려왔다.",
+          "action_text": "입이 움직이고 있었다. 무언가 말하려는 것 같았으나 소리는 나오지 않았다."
         },
         "exit": {
           "type": "Exit",
-          "text": "어촌을 벗어나니 포구가 보인다. 바다가 핏빛으로 물들어 있다.",
-          "action_text": "길은 포구로만 이어져 있다. 포구로 가보자."
+          "text": "어촌을 벗어나자 포구가 보였다. 바다가 핏빛이었다.",
+          "action_text": "이 마을도 당한 것이다. 도망쳐봐야 소용없다. 이것들이 오는 곳을 찾아 끝내야 한다."
         }
       }
     },
@@ -251,67 +251,67 @@
       "rooms": {
         "start": {
           "type": "Start",
-          "text": "포구 입구다. 바다가 완전히 붉게 물들어 있다. 비린내와 썩은 냄새가 뒤섞여 코를 찌른다.",
-          "action_text": "발자국들이 바다로 부터 나와있다. 건너편 섬에서 온 것인가..?"
+          "text": "포구였다. 바다가 완전히 붉었다. 비린내와 썩은 내가 뒤섞여 숨쉬기가 어려웠다.",
+          "action_text": "발자국들이 바다에서 나와 있었다. 건너편에 섬이 흐릿하게 보였다."
         },
         "combat_1": {
           "type": "Combat",
-          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "text": "적조 속에서 물고기가 튀어올랐다. 얼굴이 기형으로 부풀어 있었다. 이빨이 사람 것 같았다.",
           "monster": "surae",
           "monster_count": 2
         },
         "event_1": {
           "type": "Event",
-          "text": "포구 창고 앞에 시체들이 쌓여있다.",
-          "action_text": "상반신이 통째로 뜯겨나간 시체들이다. 무언가 씹어 삼킨 듯한 거친 단면이다."
+          "text": "포구 창고 앞에 시체들이 쌓여 있었다.",
+          "action_text": "상반신이 통째로 뜯겨 나간 것들이었다. 단면이 거칠었다. 이빨로 씹어 뜯은 자국이었다."
         },
         "combat_2": {
           "type": "Combat",
-          "text": "갈매기가 이성을 잃고 달려든다.",
+          "text": "시체 위에 앉아 있던 갈매기들이 한꺼번에 날아올랐다. 내 쪽으로 왔다.",
           "monster": "plague_seagull",
           "monster_count": 3
         },
         "item_1": {
           "type": "Item",
-          "text": "뒤집힌 배 아래 무언가 걸려있다.",
-          "action_text": "뒤집힌 배 아래로 손을 뻗었다. 어부들이 남긴 어포인 것 같다.",
+          "text": "뒤집힌 배 아래 그늘에 무언가 걸려 있었다.",
+          "action_text": "손을 뻗었다. 어부들이 남긴 어포였다. 아직 먹을 수 있었다.",
           "item": "dried_fish",
           "count": 2
         },
         "combat_3": {
           "type": "Combat",
-          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "text": "발밑 물속에서 무언가 부딪혔다. 물고기가 입을 벌린 채 뛰어올랐다.",
           "monster": "surae",
           "monster_count": 2
         },
         "skill_1": {
           "type": "Item",
-          "text": "부서진 배의 선실 안에 방수포로 감싼 꾸러미가 있다.",
-          "action_text": "선실 바닥의 시체들을 지나 꾸러미를 집었다.",
+          "text": "부서진 배의 선실 안에 방수포로 감싼 꾸러미가 있었다.",
+          "action_text": "선실 바닥에 시체 두 구가 겹쳐 있었다. 넘어서 꾸러미를 집었다. 무가서 조각이었다.",
           "item": "mugaseo_4",
           "count": 1
         },
         "combat_4": {
           "type": "Combat",
-          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "text": "적조가 출렁였다. 물고기 세 마리가 한꺼번에 솟아올랐다.",
           "monster": "surae",
           "monster_count": 3
         },
         "event_2": {
           "type": "Event",
-          "text": "포구 끝이다. 배 한 척이 묶여있다. 저 배로 섬에 갈 수 있을 것 같다.",
-          "action_text": "배 주변에 거대한 무언가의 흔적이 있다. 파쇄된 나무 조각들, 뜯긴 밧줄.."
+          "text": "포구 끝에 배 한 척이 묶여 있었다.",
+          "action_text": "배 주변 나무가 부서져 있었다. 밧줄이 뜯겨 있었다. 거대한 것이 지나간 흔적이었다."
         },
         "boss_1": {
           "type": "Boss",
-          "text": "거대한 적갈색의 붉은 게가 거대한 집게발을 휘두른다.",
+          "text": "배 앞을 거대한 게가 막고 있었다. 등딱지가 적조 빛이었다. 집게발이 천천히 올라갔다.",
           "monster": "jeokgapsin",
           "monster_count": 1
         },
         "exit": {
           "type": "Exit",
-          "text": "묶여있던 배가 자유로워졌다. 안개에 싸인 섬이 저 멀리 보인다.",
-          "action_text": "달리 방도가 없다. 섬으로 향하자."
+          "text": "적갑신이 쓰러지자 포구가 조용해졌다. 묶여 있던 배가 풀렸다.",
+          "action_text": "안개 속에 섬이 보였다. 역귀들은 저 섬에서 오고 있었다. 끝내러 가야 한다."
         }
       }
     },
@@ -332,70 +332,70 @@
       "rooms": {
         "start": {
           "type": "Start",
-          "text": "배에서 내렸다. 섬 전체가 안개로 뒤덮여 있다. 섬 외곽길을 따라 걸어간다.",
-          "action_text": "발자국들이 선명하게 한길로 이어져있다."
+          "text": "배에서 내렸다. 섬 전체가 안개에 묻혀 있었다.",
+          "action_text": "발밑의 흙이 붉었다. 역병 냄새가 땅에서부터 올라왔다."
         },
         "combat_1": {
           "type": "Combat",
-          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "text": "해안가에 물고기들이 널려 있었다. 죽은 줄 알았다. 하나가 몸을 뒤틀며 덮쳤다.",
           "monster": "surae",
           "monster_count": 2
         },
         "event_1": {
           "type": "Event",
-          "text": "길 주변에 붉은 물체들이 꿈틀거린다.",
-          "action_text": "괜히 건드리지 않는게 좋겠다."
+          "text": "길 옆에 붉은 덩어리들이 바위에 달라붙어 꿈틀거리고 있었다.",
+          "action_text": "건드리지 않았다."
         },
         "event_3": {
           "type": "Event",
-          "text": "안개 속에서 기묘한 울음소리가 들린다.",
-          "action_text": "섬 중심에서 나는 소리다. 계속 나아가기로 했다."
+          "text": "안개 속에서 울음소리가 들렸다. 아이 울음소리 같았다.",
+          "action_text": "섬 안쪽에서 나는 소리였다."
         },
         "combat_2": {
           "type": "Combat",
-          "text": "갈매기가 이성을 잃고 달려든다.",
+          "text": "안개 속에서 날갯짓 소리가 났다. 보이기 전에 먼저 부딪혀왔다.",
           "monster": "plague_seagull",
           "monster_count": 3
         },
         "combat_3": {
           "type": "Combat",
-          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "text": "웅덩이에서 물고기가 기어 나왔다. 지느러미로 땅을 짚고 있었다. 물 밖에서도 움직였다.",
           "monster": "surae",
           "monster_count": 2
         },
         "item_1": {
           "type": "Item",
-          "text": "바위 틈에 낡은 보따리가 끼어있다.",
-          "action_text": "보따리를 열었다. 썩은 내가 났다. 바닥에서 약초만 골라냈다.",
+          "text": "바위 틈에 보따리가 끼어 있었다.",
+          "action_text": "열었다. 썩은 내가 났다. 바닥에서 약초만 골라 집었다.",
           "item": "herb",
           "count": 1
         },
         "item_2": {
           "type": "Item",
-          "text": "소름돋을 만큼 많은 발자국이 동굴 입구로부터 나와 찍혀있다.",
-          "action_text": "발자국 사이를 뒤졌다. 짓밟힌 어포들 중 아직 먹을 수 있는 것을 주웠다.",
+          "text": "동굴 입구 앞에 발자국이 무수히 찍혀 있었다.",
+          "action_text": "발자국 사이에 짓밟힌 어포가 있었다. 먹을 수 있는 것을 골랐다.",
           "item": "dried_fish",
           "count": 1
         },
         "event_2": {
           "type": "Event",
-          "text": "섬을 반쯤 돌았다. 역병의 기운이 점점 짙어진다.",
-          "action_text": "발밑의 땅이 적갈색으로 물들어 있다. 이 섬 자체가 역병에 물든 것 같다."
+          "text": "섬을 반쯤 돌았다. 안개가 더 짙어졌다.",
+          "action_text": "발밑의 땅이 물렁거렸다. 흙이 아닌 것 같았다. 확인하지 않았다."
         },
         "combat_4": {
           "type": "Combat",
-          "text": "갈매기가 이성을 잃고 달려든다.",
+          "text": "갈매기가 안개 사이로 날아왔다. 부리에 무언가 매달려 있었다. 손가락이었다.",
           "monster": "plague_seagull",
           "monster_count": 2
         },
         "exit": {
           "type": "Exit",
-          "text": "동굴 입구가 보인다. 안에서 역병의 기운이 흘러나오고 있다.",
-          "action_text": "동굴로 들어가보자."
+          "text": "동굴 입구가 보였다. 안에서 따뜻하고 축축한 바람이 불어 나왔다.",
+          "action_text": "역병 냄새가 가장 짙었다. 근원이 이 안에 있다."
         },
         "combat_5": {
           "type": "Combat",
-          "text": "얼굴이 뒤틀린 물고기가 나에게 뛰어든다.",
+          "text": "적조 웅덩이에서 물고기 세 마리가 한꺼번에 솟아올랐다. 입에서 붉은 거품이 나오고 있었다.",
           "monster": "surae",
           "monster_count": 3
         }
@@ -418,54 +418,54 @@
       "rooms": {
         "start": {
           "type": "Start",
-          "text": "동굴 입구다. 바깥 빛이 희미하게 들어온다. 벽면에 검붉은 얼룩이 번져있다.",
-          "action_text": "이 동굴로 부터 역귀들이 온 것이 분명하다."
+          "text": "동굴 안으로 들어섰다. 바깥 빛이 금세 사라졌다. 벽에서 검붉은 것이 흘러내리고 있었다.",
+          "action_text": "역귀들의 발자국이 이 안에서부터 나 있었다."
         },
         "combat_1": {
           "type": "Combat",
-          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "text": "발밑에서 무언가 올라왔다. 구더기였다. 팔뚝만 한 놈이 세 마리, 몸을 기어올랐다.",
           "monster": "cave_taechung",
           "monster_count": 3
         },
         "event_1": {
           "type": "Event",
-          "text": "인간이 아닌것이 붉은 반점에 뒤덮여 신음하고있다.",
-          "action_text": "인어인듯 하다. 실제로는 처음 본다."
+          "text": "바닥에 누운 것이 있었다. 윗몸은 사람이고 아래는 달랐다. 비늘에 붉은 반점이 있었다.",
+          "action_text": "인어인 것 같았다. 살면서 처음 보았다."
         },
         "item_1": {
           "type": "Item",
-          "text": "어두운 탓에 붉은 물체를 밟았다.",
-          "action_text": "밟은 것을 집어들었다. 어딘가 쓸 곳이 있을까..",
+          "text": "어둠 속에서 무언가를 밟았다. 물렁했다.",
+          "action_text": "붉은 살점이었다. 비린내가 났다. 배가 고팠다.",
           "item": "red_flesh",
           "count": 1
         },
         "combat_2": {
           "type": "Combat",
-          "text": "인어가 고통에 신음하며 울부짖는다.",
+          "text": "동굴 벽에 기대어 있던 것이 몸을 일으켰다. 인어였다. 입에서 신음이 새어 나왔다.",
           "monster": "plague_mermaid",
           "monster_count": 1
         },
         "combat_3": {
           "type": "Combat",
-          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "text": "천장에서 구더기가 떨어졌다. 한 마리가 아니었다. 우수수 쏟아져 내렸다.",
           "monster": "cave_taechung",
-          "monster_count": 4
+          "monster_count": 3
         },
         "combat_4": {
           "type": "Combat",
-          "text": "인어가 고통에 신음하며 울부짖는다.",
+          "text": "인어 둘이 엎드려 있었다. 한쪽이 다른 쪽 비늘을 뜯고 있었다. 다가가자 고개를 돌렸다.",
           "monster": "plague_mermaid",
           "monster_count": 2
         },
         "event_2": {
           "type": "Event",
-          "text": "빛이 완전히 사라졌다. 역병의 냄새가 숨을 막는다.",
-          "action_text": "아이 생각이 났다. 지금쯤 자고 있을 것이다. 계속 나아가기로 했다."
+          "text": "빛이 완전히 사라졌다. 손을 뻗으면 축축한 벽이 잡혔다.",
+          "action_text": "아이 생각이 났다. 지금쯤 잘 도망갔을 것이다. 그래야 한다."
         },
         "exit": {
           "type": "Exit",
-          "text": "지하로 내려가는 통로가 보인다. 아래에서 기묘한 울음소리가 들려온다.",
-          "action_text": "더 내려가보자."
+          "text": "지하로 내려가는 통로가 있었다. 아래에서 울음소리가 올라왔다.",
+          "action_text": "아이 울음소리 같았다."
         }
       }
     },
@@ -486,92 +486,92 @@
       "rooms": {
         "start": {
           "type": "Start",
-          "text": "완전한 어둠 속에 역병의 기운이 가득하다. 벽면이 살점으로 덮여있다.",
-          "action_text": "역귀들의 수장이라도 있는 걸까. 공포감이 밀려온다."
+          "text": "벽과 바닥이 살점으로 뒤덮여 있었다. 발을 디딜 때마다 물렁거렸다.",
+          "action_text": "이 깊은 곳에 무엇이 있는 것인지. 두려웠으나 멈출 수 없었다."
         },
         "combat_1": {
           "type": "Combat",
-          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "text": "살점 사이에서 구더기가 기어 나왔다. 여기서는 벽에서 나왔다.",
           "monster": "cave_taechung",
           "monster_count": 4
         },
         "event_1": {
           "type": "Event",
-          "text": "막다른 곳이다. 시체들이 쌓여있다.",
-          "action_text": "남편이 떠날 때 입었던 옷과 비슷한 옷가지들이 시체 사이사이에 널부러져 있다."
+          "text": "막다른 곳이었다. 시체들이 쌓여 있었다.",
+          "action_text": "시체들이 입고 있는 옷이 낯익었다. 남편이 떠날 때 입었던 것과 비슷했다. 확인하지 않았다."
         },
         "combat_2": {
           "type": "Combat",
-          "text": "붉은 살점들이 모여든다.",
+          "text": "바닥의 살점이 뭉쳐서 일어섰다. 형체가 없었다. 사람도 짐승도 아닌 것이 달려왔다.",
           "monster": "jeoksalgwi",
           "monster_count": 3
         },
         "combat_3": {
           "type": "Combat",
-          "text": "거북 껍질에서 나온 여섯개의 눈이 나를 응시한다.",
+          "text": "거북 껍질 같은 것 위에 눈이 있었다. 여섯 개였다. 전부 나를 보고 있었다.",
           "monster": "yugangwi",
           "monster_count": 1
         },
         "item_1": {
           "type": "Item",
-          "text": "바닥에 무언가 떨어져 있다.",
-          "action_text": "바닥에 떨어진 향낭을 주웠다. 역병 냄새가 조금 옅어지는 것 같다.",
+          "text": "바닥에 무언가 떨어져 있었다.",
+          "action_text": "향낭이었다. 품에 넣자 역병 냄새가 조금 옅어졌다.",
           "item": "incense_pouch",
           "count": 1
         },
         "combat_4": {
           "type": "Combat",
-          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "text": "벽에서 구더기가 쏟아졌다. 아래로 올수록 더 크고 많아졌다.",
           "monster": "cave_taechung",
-          "monster_count": 4
+          "monster_count": 3
         },
         "combat_5": {
           "type": "Combat",
-          "text": "붉은 살점들이 모여든다.",
+          "text": "살점 덩어리가 또 일어섰다. 이번에는 셋이었다. 입 같은 것이 벌어졌다.",
           "monster": "jeoksalgwi",
           "monster_count": 3
         },
         "event_2": {
           "type": "Event",
-          "text": "길이 갈라진다. 어느 쪽에서도 울음소리가 들린다.",
-          "action_text": "두 길 모두 역병의 기운이 짙다."
+          "text": "길이 둘로 갈라졌다.",
+          "action_text": "양쪽 모두에서 울음소리가 들렸다. 어느 쪽이 진짜인지 알 수 없었다."
         },
         "combat_6": {
           "type": "Combat",
-          "text": "구더기가 짓물을 흘리며 내몸을 기어오른다.",
+          "text": "발밑이 꿈틀거렸다. 밟고 있는 것이 살점이 아니라 구더기였다.",
           "monster": "cave_taechung",
           "monster_count": 3
         },
         "skill_1": {
           "type": "Item",
-          "text": "바닥에 방수포에 싸인 꾸러미가 있다.",
-          "action_text": "방수포를 벗겼다. 안에서 피비린내가 났다. 무가서 조각이었다.",
+          "text": "바닥에 방수포에 싸인 꾸러미가 있었다.",
+          "action_text": "열었다. 안에서 피 냄새가 났다. 무가서의 마지막 조각이었다.",
           "item": "mugaseo_5",
           "count": 1
         },
         "combat_7": {
           "type": "Combat",
-          "text": "붉은 살점들이 모여든다.",
+          "text": "앞을 막은 살점 덩어리들이 천천히 형체를 갖추었다.",
           "monster": "jeoksalgwi",
           "monster_count": 3
         },
         "combat_8": {
           "type": "Combat",
-          "text": "거북 껍질에서 나온 여섯개의 눈이 나를 응시한다.",
+          "text": "거북 껍질이 둘 나타났다. 열두 개의 눈이 어둠 속에서 빛났다.",
           "monster": "yugangwi",
           "monster_count": 2
         },
         "exit": {
           "type": "Exit",
-          "text": "더 깊은 곳으로 내려가는 통로가 보인다. 아래에서 기괴한 울음소리 같은 것이 들려온다.",
-          "action_text": "이곳에 역병의 근원이 있음에 분명하다. 두렵지만 가야한다."
+          "text": "더 깊은 곳으로 내려가는 통로가 있었다. 울음소리가 가까웠다.",
+          "action_text": "근원이 바로 아래에 있었다."
         }
       }
     },
     {
       "id": "jeokkwi_lair",
       "name": "섬의 심부",
-      "description": "역병의 근원. 기괴한 울음소리가 가득하다.",
+      "description": "역병의 근원.",
       "next_map": "ending",
       "bgm": "bgm/zone2.mp3",
       "grid": [
@@ -585,26 +585,26 @@
       "rooms": {
         "start": {
           "type": "Start",
-          "text": "심부다. 흉물이 보인다. 기괴한 울음소리가 사방에서 들린다. 아이의 울음소리 같기도 하다.",
-          "action_text": "이젠 돌이킬 수 없다."
+          "text": "바닥도 벽도 천장도 살점이었다. 전부 움직이고 있었다. 숨을 쉬는 것 같았다.",
+          "action_text": "앞에서 울음소리가 들렸다. 아이의 울음소리였다."
         },
         "boss": {
           "type": "Boss",
-          "text": "나를 보고 적개심 가득한 비명을 지른다.",
+          "text": "그것이 있었다. 역병에 뒤덮인 형체 안에 무언가가 웅크려 있었다. 나를 보자 비명을 질렀다.",
           "monster": "jeokkwi",
           "monster_count": 1
         },
         "exit": {
           "type": "Exit",
-          "text": "모든 것이 끝났다. 이제 집으로 가자.",
-          "action_text": "섬 외곽의 배로 향하자."
+          "text": "저퀴가 쓰러졌다. 역병이 벗겨지자 안의 것이 보였다. 한 번도 안기지 못한 아이였다.",
+          "action_text": "이제 돌아가야 한다."
         }
       }
     },
     {
       "id": "ending",
       "name": "집으로 가는 길",
-      "description": "집으로 가는 길.",
+      "description": "끝.",
       "next_map": "",
       "bgm": "bgm/zone2.mp3",
       "grid": [
@@ -618,18 +618,18 @@
       "rooms": {
         "start": {
           "type": "Start",
-          "text": "한걸음이 힘들다. 머리가 어지럽다. 이성의 끈이 끊길 것 같다. 그래도 가야한다. 아이가 기다린다.",
-          "action_text": "배와 가까워져 간다."
+          "text": "동굴을 나왔다. 다리에 힘이 없었다. 머릿속이 흐릿했다. 배가 고팠다. 참을 수 없이 고팠다.",
+          "action_text": "이성이 희미해진다."
         },
         "event_1": {
           "type": "Event",
-          "text": "붉은 바다에 비친 내모습이 보인다.",
-          "action_text": "온몸에 붉은 반점이 가득하다. 역병에 걸렸다. 아이에게 가선 안된다. 이성을 잃기 전에."
+          "text": "해안의 물에 비친 제 모습이 보였다.",
+          "action_text": "온몸에 붉은 반점이 피어 있었다. 알고 있었다. 살점을 먹을 때부터 알고 있었다."
         },
         "exit": {
           "type": "Exit",
-          "text": "아이는 잘 자고있을까? 자장가를 불러줘야 하는데,",
-          "action_text": "..............................."
+          "text": "아이가 견딜 수 없을 만큼 보고 싶다. 이성을 잃기 전에 마지막 역귀를 죽이자.",
+          "action_text": "아이를 지키라고 받은 검이었다."
         }
       }
     }

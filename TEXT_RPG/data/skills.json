@@ -9,25 +9,25 @@
     {
       "id": "Musuki",
       "name": "바닷소리: 무수기",
-      "damage_ratio": 0.8,
+      "damage_ratio": 1.0,
       "stamina_cost": 2
     },
     {
       "id": "Neoul",
       "name": "바닷소리: 너울",
-      "damage_ratio": 1.0,
+      "damage_ratio": 2.0,
       "stamina_cost": 3
     },
     {
       "id": "Gumni",
       "name": "바닷소리: 굼뉘",
-      "damage_ratio": 1.5,
+      "damage_ratio": 2.5,
       "stamina_cost": 2
     },
     {
       "id": "Mulmaru",
       "name": "바닷소리: 물마루",
-      "damage_ratio": 2.0,
+      "damage_ratio": 3.5,
       "stamina_cost": 4
     },
     {

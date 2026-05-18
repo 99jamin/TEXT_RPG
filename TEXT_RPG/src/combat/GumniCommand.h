@@ -61,5 +61,5 @@ public:
 private:
 
 	LogLine m_log;
-	static constexpr float HIT_DAMAGE_RATIO = 3.0f;
+	static constexpr float HIT_DAMAGE_RATIO = 3.5f;
 };

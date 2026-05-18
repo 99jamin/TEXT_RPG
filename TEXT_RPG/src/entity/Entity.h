@@ -12,6 +12,8 @@ public:
 
 	int takeDamage(int damage) override;
 
+	int takeFixedDamage(int amount) override;
+
 	virtual void printStatus() const = 0;		
 
 	virtual void dead() = 0;					

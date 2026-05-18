@@ -14,7 +14,7 @@ public:
 		setCurHp(PHASE_TWO_HP);
 	}
 
-	bool isLastBoss() const { return true; }
+	bool isLastBoss() const override { return true; }
 
 private:
 

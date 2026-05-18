@@ -18,7 +18,7 @@ public:
 
 	bool isBoss() const override { return true; };
 
-	bool isLastBoss() const { return false; }
+	bool isLastBoss() const override { return false; }
 
 	bool consumePhaseTwoTrigger();
 

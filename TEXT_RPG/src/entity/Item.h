@@ -28,4 +28,7 @@ private:
 	ItemEffect m_effect;
 	int m_value;
 	SkillType m_skillId;
+
+	static constexpr int atkEvolutionAmount = 3;
+	static constexpr int defEvolutionAmount = 1;
 };

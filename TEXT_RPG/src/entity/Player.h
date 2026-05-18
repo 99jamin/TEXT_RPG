@@ -15,6 +15,8 @@ public:
 
 	int takeDamage(int damage);
 
+	int takeFixedDamage(int amount) override;
+
 	void printStatus() const override;
 
 	void dead() override;
@@ -27,7 +29,7 @@ public:
 
 	void recoverStamina(int amount);
 
-	void evolution(int amount);
+	void evolution(int atkAmount, int defAmount);
 
 	//getter
 	const std::vector<SkillType>& getSkills() const { return m_skills; }

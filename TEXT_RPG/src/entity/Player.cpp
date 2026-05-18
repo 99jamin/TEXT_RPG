@@ -39,6 +39,11 @@ int Player::takeDamage(int damage)
 	return Entity::takeDamage(damage);
 }
 
+int Player::takeFixedDamage(int amount)
+{
+	return Entity::takeFixedDamage(amount);
+}
+
 void Player::printStatus() const
 {
 	
@@ -73,10 +78,10 @@ void Player::recoverStamina(int amount)
 	m_stamina = std::min(m_maxStamina, m_stamina);
 }
 
-void Player::evolution(int amount)
+void Player::evolution(int atkAmount, int defAmount)
 {
-	Entity::setAtk(Entity::getAtk() + amount);
-	Entity::setDef(Entity::getDef() + amount);
+	Entity::setAtk(Entity::getAtk() + atkAmount);
+	Entity::setDef(Entity::getDef() + defAmount);
 }
 
 

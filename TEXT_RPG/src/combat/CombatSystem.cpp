@@ -140,7 +140,7 @@ bool CombatSystem::checkPlayerStatus()
 	//플레이어 상태이상 체크
 	if (m_player.isPoisoned())
 	{
-		int damage = m_player.takeDamage(POISON_DAMAGE);
+		int damage = m_player.takeFixedDamage(POISON_DAMAGE);
 
 		std::vector<LogSegment>log;
 		log.push_back(LogSegment("[역병]", Color::PURPLE));
