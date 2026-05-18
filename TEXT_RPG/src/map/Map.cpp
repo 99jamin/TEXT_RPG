@@ -6,13 +6,13 @@ Map::Map(const MapData& data)
     : m_id(data.id), m_name(data.name), m_description(data.description), m_nextMapId(data.nextMapId),m_bgm(data.bgm)
 {
     // 6x6 grid Room 객체 생성
-    m_roomGrid.resize(6);
+    m_roomGrid.resize(GRID_SIZE);
     for (auto& row : m_roomGrid)
-        row.resize(6);
+        row.resize(GRID_SIZE);
 
-    for (int y = 0; y < 6; y++)
+    for (int y = 0; y < GRID_SIZE; y++)
     {
-        for (int x = 0; x < 6; x++)
+        for (int x = 0; x < GRID_SIZE; x++)
         {
             const std::string& roomId = data.grid[y][x];
             if (roomId.empty()) continue;

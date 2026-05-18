@@ -58,15 +58,42 @@ private:
 
 	static int s_newLogCount;
 
-	static const int STAT_ROW = 2;   // 스탯바 행
-	static const int LOG_START_ROW = 5;   // 로그 시작 행
-	static const int LOG_END_ROW = 24;  // 로그 끝 행 (10줄)
-	static const int SEP_ROW = 25;  // 구분선 행
-	static const int CHOICE_ROW = 27;  // 선택지 시작 행
+	// 레이아웃 행
+	static const int STAT_ROW = 2;
+	static const int LOG_START_ROW = 5;
+	static const int LOG_END_ROW = 24;
+	static const int SEP_ROW = 25;
+	static const int CHOICE_ROW = 27;
 
-	static const int TOTAL_WIDTH = 140;	//총 너비
-	static const int LEFT_WIDTH = 90;  // 왼쪽 패널 너비
-	static const int RIGHT_COL = 96;  // 오른쪽 패널 시작 열
+	// 레이아웃 열
+	static const int TOTAL_WIDTH = 140;
+	static const int LEFT_WIDTH = 90;
+	static const int RIGHT_COL = 96;
+
+	// 스탯바 X좌표
+	static const int STAMINA_X = 43;
+	static const int STATUS_X = 73;
+
+	// 로그
+	static const int MAX_LOG_COUNT = 20;
+	static const int LOG_TYPING_DELAY = 10;
+	static const int PAGE_TYPING_DELAY = 20;
+
+	// HP바
+	static const int HP_BAR_LENGTH = 20;
+	static const int ENEMY_HP_BAR_LENGTH = 30;
+	static const float HP_DANGER_RATIO;
+
+	// 적 정보
+	static const int ENEMY_INFO_Y_OFFSET = 16;
+	static const int ENEMY_INFO_SPACING = 4;
+
+	// 선택지
+	static const int CHOICES_PER_COLUMN = 5;
+
+	// 타이틀/페이지 아트
+	static const int TITLE_ART_WIDTH = 65;
+	static const int PAGE_ART_WIDTH = 76;
 
 	
 };

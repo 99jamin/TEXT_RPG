@@ -11,9 +11,9 @@ public:
 	void execute(Player& player, std::vector<Monster*>& monsters, int monsterIndex, std::function<void(LogLine)> logCallback = nullptr) override
 	{
 		static std::mt19937 gen(std::random_device{}());
-		static std::uniform_int_distribution<int> dis(0, 9);
+		static std::uniform_int_distribution<int> dis(0, FLEE_THRESHOLD+1);
 
-		m_fleeSuccess = dis(gen) < 8;
+		m_fleeSuccess = dis(gen) < FLEE_THRESHOLD;
 
 		if (logCallback)
 		{
@@ -33,4 +33,5 @@ public:
 private:
 	LogLine m_log;
 	bool m_fleeSuccess = false;
+	static constexpr int FLEE_THRESHOLD = 8;
 };

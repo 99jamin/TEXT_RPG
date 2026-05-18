@@ -54,4 +54,6 @@ private:
     int m_currentY = 0;
 
     std::pair<int, int> getDelta(Direction dir) const;
+
+    static constexpr int GRID_SIZE = 6;
 };

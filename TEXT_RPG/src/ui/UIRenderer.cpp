@@ -7,6 +7,7 @@
 
 std::vector<LogLine> UIRenderer::s_logs;
 int UIRenderer::s_newLogCount = 0;
+const float UIRenderer::HP_DANGER_RATIO = 0.3f;
 
 void UIRenderer::printExploreScreen(const Map& map, const Player& player, const std::vector<std::string>& choices)
 {
@@ -54,7 +55,7 @@ void UIRenderer::printTitleScreen(const std::string& message)
 	"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
 	 };
 
-	 int artStartX = (TOTAL_WIDTH - 65) / 2;
+	 int artStartX = (TOTAL_WIDTH - TITLE_ART_WIDTH) / 2;
 	 for (int i = 0; i < (int)art.size(); i++)
 	 {
 		 setCursor(artStartX, 3 + i);
@@ -86,7 +87,7 @@ void UIRenderer::printTitleScreen(const std::string& message)
 	 system("cls");
 
 	 // 아트 출력 (중앙 정렬)
-	 int artWidth = art.empty() ? 0 : 76;  // 아트 만들고 나서 조정
+	 int artWidth = art.empty() ? 0 : PAGE_ART_WIDTH;
 	 int artX = (TOTAL_WIDTH - artWidth) / 2;
 	 for (int i = 0; i < (int)art.size(); i++)
 	 {
@@ -115,7 +116,7 @@ void UIRenderer::printTitleScreen(const std::string& message)
 				SoundManager::playSFX("sfx/typing1.wav");
 
 			 std::cout << lines[i][j];
-			 Sleep(20);
+			 Sleep(PAGE_TYPING_DELAY);
 		 }
 
 		 if (skipped)
@@ -150,7 +151,7 @@ void UIRenderer::printTitleScreen(const std::string& message)
 	 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
 	 };
 
-	 int artStartX = (TOTAL_WIDTH - 65) / 2;
+	 int artStartX = (TOTAL_WIDTH - TITLE_ART_WIDTH) / 2;
 	 for (int i = 0; i < (int)art.size(); i++)
 	 {
 		 setCursor(artStartX, 3 + i);
@@ -174,7 +175,7 @@ void UIRenderer::addLog(const std::string& log)
 	 LogLine line = { LogSegment(log, Color::WHITE) };
 
 	s_logs.push_back(line);
-	if (s_logs.size() > 20)
+	if ((int)s_logs.size() > MAX_LOG_COUNT)
 		s_logs.erase(s_logs.begin());
 
 	s_newLogCount++;
@@ -183,7 +184,7 @@ void UIRenderer::addLog(const std::string& log)
 void UIRenderer::addLog(const LogLine& line)
  {
 	s_logs.push_back(line);
-	if (s_logs.size() > 20)
+	if ((int)s_logs.size() > MAX_LOG_COUNT)
 		s_logs.erase(s_logs.begin());
 	
 	s_newLogCount++;
@@ -204,7 +205,7 @@ void UIRenderer::printLayout(const Player& player, std::function<void()> rightPa
 	std::cout << std::string(TOTAL_WIDTH, '=');
 
 	// 로그 영역 (왼쪽)
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < MAX_LOG_COUNT; i++)
 	{
 		setCursor(0, LOG_START_ROW + i);
 		std::cout << std::string(LEFT_WIDTH, ' ');  // 빈 줄로 영역 확보
@@ -251,7 +252,7 @@ void UIRenderer::printLayout(const Player& player, std::function<void()> rightPa
 						SoundManager::playSFX("sfx/typing1.wav");
 
 					std::cout << seg.text[j];
-					Sleep(10);
+					Sleep(LOG_TYPING_DELAY);
 				}
 				if (skipped)
 					std::cout << seg.text.substr(j);  // 끊긴 세그먼트 나머지 즉시 출력
@@ -271,7 +272,7 @@ void UIRenderer::printLayout(const Player& player, std::function<void()> rightPa
 
 	for (int i = 0; i < (int)choices.size(); i++)
 	{
-		i < 5 ? setCursor(3, CHOICE_ROW + i * 2) : setCursor(30, CHOICE_ROW + (i-5) * 2);
+		i < CHOICES_PER_COLUMN ? setCursor(3, CHOICE_ROW + i * 2) : setCursor(30, CHOICE_ROW + (i - CHOICES_PER_COLUMN) * 2);
 		std::cout << " " << choices[i];
 	}
 
@@ -281,14 +282,14 @@ void UIRenderer::printLayout(const Player& player, std::function<void()> rightPa
 
 void UIRenderer::printStatBar(const Player& player)
 {
-	int hpBar = (player.getCurHp() * 20) / player.getMaxHp();
+	int hpBar = (player.getCurHp() * HP_BAR_LENGTH) / player.getMaxHp();
 	std::string condition = player.isPoisoned() ? "역병" : "없음";
 
 	setCursor(3, STAT_ROW);
-	int threshold = player.getMaxHp() * 3 / 10;
+	int threshold = static_cast<int>(player.getMaxHp() * HP_DANGER_RATIO);
 	setColor(player.getCurHp() <= threshold ? Color::RED : Color::GREEN);
 	std::cout << "체력 : ";
-	for (int i = 1; i <= 20; ++i)
+	for (int i = 1; i <= HP_BAR_LENGTH; ++i)
 	{
 		if (i <= hpBar)
 		{
@@ -300,7 +301,7 @@ void UIRenderer::printStatBar(const Player& player)
 		}
 	}
 
-	setCursor(43, STAT_ROW);  // 기력 시작 x 고정
+	setCursor(STAMINA_X, STAT_ROW);
 	setColor(Color::YELLOW);
 	std::cout << "기력 : ";
 	for (int i = 1; i <= player.getMaxStamina(); ++i)
@@ -315,7 +316,7 @@ void UIRenderer::printStatBar(const Player& player)
 		}
 	}
 
-	setCursor(73, STAT_ROW);  // 상태이상 시작 x 고정
+	setCursor(STATUS_X, STAT_ROW);
 	setColor(player.isPoisoned() ? Color::PURPLE : Color::WHITE);
 	std::cout << "상태이상 : " << condition;
 	resetColor();
@@ -339,17 +340,16 @@ void UIRenderer::printStatBar(const Player& player)
 
 	for (int i = 0; i < (int)monsters.size(); ++i)
 	{
-		setCursor(RIGHT_COL, LOG_START_ROW + 16 + (4 * i));
+		setCursor(RIGHT_COL, LOG_START_ROW + ENEMY_INFO_Y_OFFSET + (ENEMY_INFO_SPACING * i));
 
 		if (monsters[0]->isBoss())
 			std::cout << monsters[i]->getName();
 		else
 			std::cout << i + 1 << ". " << monsters[i]->getName();
 
-		int hpBar = (monsters[i]->getCurHp() * 30) / monsters[i]->getMaxHp();
-		setCursor(RIGHT_COL, LOG_START_ROW + 16 + (4 * i) + 2);
-		//std::cout << "체력: ";
-		for (int j = 1; j <= 30; ++j)
+		int hpBar = (monsters[i]->getCurHp() * ENEMY_HP_BAR_LENGTH) / monsters[i]->getMaxHp();
+		setCursor(RIGHT_COL, LOG_START_ROW + ENEMY_INFO_Y_OFFSET + (ENEMY_INFO_SPACING * i) + 2);
+		for (int j = 1; j <= ENEMY_HP_BAR_LENGTH; ++j)
 		{
 			if (j <= hpBar)
 			{
