@@ -1,33 +1,46 @@
 ﻿#include "SaveManager.h"
 #include "../entity/Player.h"
 #include "../map/Map.h"
+#include <iostream>
 
 void SaveManager::loadData()
 {
-	if (!hasSave())
-		return;
+	try
+	{
+		if (!hasSave())
+			return;
 
-	std::ifstream file(filePath);
-	if (!file.is_open())
-		return; // 세이브 파일 없음
+		std::ifstream file(filePath);
 
-	json j = json::parse(file);
+		if (!file.is_open())
+		{
+			throw std::runtime_error("파일을 열 수 없음: " + filePath);
+		}
 
-	m_data.player.hp = j["player"]["hp"];
-	m_data.player.atk = j["player"]["atk"];
-	m_data.player.def = j["player"]["def"];
-	m_data.player.stamina = j["player"]["stamina"];
-	m_data.player.fleshCount = j["player"]["fleshCount"];
-	m_data.player.poisoned = j["player"]["poisoned"];
-	m_data.player.inventory = j["player"]["inventory"].get<std::map<std::string, int>>();
+		json j = json::parse(file);
 
-	for (auto& id : j["player"]["skills"])
-		m_data.player.skills.push_back(fromId(id.get<std::string>()));
+		m_data.player.hp = j["player"]["hp"];
+		m_data.player.atk = j["player"]["atk"];
+		m_data.player.def = j["player"]["def"];
+		m_data.player.stamina = j["player"]["stamina"];
+		m_data.player.fleshCount = j["player"]["fleshCount"];
+		m_data.player.poisoned = j["player"]["poisoned"];
+		m_data.player.inventory = j["player"]["inventory"].get<std::map<std::string, int>>();
 
-	m_data.map.currentMapId = j["map"]["currentMapId"];
-	m_data.map.currentX = j["map"]["currentX"];
-	m_data.map.currentY = j["map"]["currentY"];
-	m_data.map.mapClearData = j["map"]["mapClearData"].get<std::map<std::string, std::vector<std::string>>>();
+		for (auto& id : j["player"]["skills"])
+			m_data.player.skills.push_back(fromId(id.get<std::string>()));
+
+		m_data.map.currentMapId = j["map"]["currentMapId"];
+		m_data.map.currentX = j["map"]["currentX"];
+		m_data.map.currentY = j["map"]["currentY"];
+		m_data.map.mapClearData = j["map"]["mapClearData"].get<std::map<std::string, std::vector<std::string>>>();
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "[SaveManager] 데이터 로딩 실패: " << e.what() << std::endl;
+		std::exit(1);
+	}
+	
 }
 
 void SaveManager::saveData(const Player& player, const Map& map)
