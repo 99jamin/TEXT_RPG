@@ -99,6 +99,9 @@
     <ClCompile Include="src\save\SaveManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\HiddenEndingState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entity\Boss.h">
@@ -237,6 +240,9 @@
       <Filter>헤더 파일\sound</Filter>
     </ClInclude>
     <ClInclude Include="src\core\EndingState.h">
+      <Filter>헤더 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\HiddenEndingState.h">
       <Filter>헤더 파일\core</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,6 +17,7 @@ void SaveManager::loadData()
 	m_data.player.atk = j["player"]["atk"];
 	m_data.player.def = j["player"]["def"];
 	m_data.player.stamina = j["player"]["stamina"];
+	m_data.player.fleshCount = j["player"]["fleshCount"];
 	m_data.player.poisoned = j["player"]["poisoned"];
 	m_data.player.inventory = j["player"]["inventory"].get<std::map<std::string, int>>();
 
@@ -36,6 +37,7 @@ void SaveManager::saveData(const Player& player, const Map& map)
 	m_data.player.atk = player.getAtk();
 	m_data.player.def = player.getDef();
 	m_data.player.stamina = player.getStamina();
+	m_data.player.fleshCount = player.getFleshCount();
 	m_data.player.poisoned = player.isPoisoned();
 	m_data.player.inventory = player.getInven();
 	m_data.player.skills = player.getSkills();
@@ -61,6 +63,7 @@ void SaveManager::saveLocal()
 	j["player"]["atk"] = m_data.player.atk;
 	j["player"]["def"] = m_data.player.def;
 	j["player"]["stamina"] = m_data.player.stamina;
+	j["player"]["fleshCount"] = m_data.player.fleshCount;
 	j["player"]["poisoned"] = m_data.player.poisoned;
 	j["player"]["inventory"] = m_data.player.inventory;
 	j["player"]["skills"] = skillId;

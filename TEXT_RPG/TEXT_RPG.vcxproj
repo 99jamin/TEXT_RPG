@@ -26,6 +26,7 @@
     <ClCompile Include="src\core\ExploreState.cpp" />
     <ClCompile Include="src\core\GameManager.cpp" />
     <ClCompile Include="src\core\GameOverState.cpp" />
+    <ClCompile Include="src\core\HiddenEndingState.cpp" />
     <ClCompile Include="src\core\PrologueState.cpp" />
     <ClCompile Include="src\core\TitleState.cpp" />
     <ClCompile Include="src\data\DataManager.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="src\core\GameManager.h" />
     <ClInclude Include="src\core\GameOverState.h" />
     <ClInclude Include="src\core\GameState.h" />
+    <ClInclude Include="src\core\HiddenEndingState.h" />
     <ClInclude Include="src\core\PrologueState.h" />
     <ClInclude Include="src\core\TitleState.h" />
     <ClInclude Include="src\data\DataManager.h" />

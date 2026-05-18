@@ -17,6 +17,7 @@ void Item::useItem(Player& player)
 	}
 	case ItemEffect::Evolution:
 	{
+		player.addFleshCount();
 		player.recoverHp(m_value);
 		player.evolution(atkEvolutionAmount,defEvolutionAmount);
 		break;

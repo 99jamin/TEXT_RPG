@@ -9,7 +9,7 @@ class Player : public Entity
 
 public:
 
-	Player(const std::string& name, int maxHp, int atk, int def, int maxStamina);
+	Player(const std::string& name, int maxHp, int atk, int def, int maxStamina, int fleshCount);
 
 	void init();
 
@@ -31,13 +31,16 @@ public:
 
 	void evolution(int atkAmount, int defAmount);
 
+	void addFleshCount() { ++m_fleshCount; }
+
 	//getter
 	const std::vector<SkillType>& getSkills() const { return m_skills; }
 	int getStamina() const { return m_stamina; }
 	int getMaxStamina() const { return m_maxStamina; }
+	const int getFleshCount() const { return m_fleshCount; }
 
 	//Save
-	void loadFromSave(int curHp, int atk, int def, int stamina, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills);
+	void loadFromSave(int curHp, int atk, int def, int stamina, int fleshCount, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills);
 
 	//Concentrating Flag
 	void startConcentrate();
@@ -75,6 +78,8 @@ private:
 
 	int m_stamina;
 	int m_maxStamina;
+
+	int m_fleshCount;
 
 	bool m_isConcentrating = false;
 	bool m_wasHitWhileConcentrating = false;

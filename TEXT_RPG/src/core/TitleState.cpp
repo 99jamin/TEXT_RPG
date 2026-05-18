@@ -38,7 +38,7 @@ void TitleState::update(GameManager& manager)
 		SaveManager::getInstance().loadData();
 
 		auto& pd = SaveManager::getInstance().getPlayerData();
-		manager.getPlayer().loadFromSave(pd.hp, pd.atk, pd.def, pd.stamina, pd.poisoned, pd.inventory, pd.skills);
+		manager.getPlayer().loadFromSave(pd.hp, pd.atk, pd.def, pd.stamina, pd.fleshCount, pd.poisoned, pd.inventory, pd.skills);
 		manager.pushState(std::make_unique<ExploreState>(SaveManager::getInstance().getMapId(), true));
 	}
 

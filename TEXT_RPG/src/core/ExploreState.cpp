@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "CombatState.h"
 #include "EndingState.h"
+#include "HiddenEndingState.h"
 #include "../map/RoomType.h"
 #include "../data/DataManager.h"
 #include "../entity/Player.h"
@@ -220,7 +221,10 @@ void ExploreState::handleAction(GameManager& manager)
     {
         if (m_map.getId() == "ending")
         {
-            manager.pushState(std::make_unique<EndingState>());
+            if(manager.getPlayer().getFleshCount() >= 25)
+                manager.pushState(std::make_unique<HiddenEndingState>());
+            else
+                manager.pushState(std::make_unique<EndingState>());
             break;
         }
         else

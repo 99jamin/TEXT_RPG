@@ -17,6 +17,7 @@ void DataManager::loadAll()
     loadMaps("data/maps.json");
     loadPrologue("data/prologue.json");
     loadEnding("data/ending.json");
+    loadHiddenEnding("data/hiddenending.json");
 }
 
 MonsterData DataManager::getMonsterData(const std::string& id)
@@ -60,6 +61,11 @@ const std::vector<PageData>& DataManager::getPrologueData() const
 const std::vector<PageData>& DataManager::getEndingData() const
 {
     return m_EndingTable;
+}
+
+const std::vector<PageData>& DataManager::getHiddenEndingData() const
+{
+    return m_HiddenEndingTable;
 }
 
 void DataManager::loadMonsters(const std::string& path)
@@ -200,6 +206,21 @@ void DataManager::loadEnding(const std::string& path)
         page.lines = j["lines"];
 
         m_EndingTable.push_back(page);
+    }
+}
+
+void DataManager::loadHiddenEnding(const std::string& path)
+{
+    std::ifstream file(path);
+    json data = json::parse(file);
+
+    for (auto& j : data["pages"])
+    {
+        PageData page;
+        page.art = j["art"];
+        page.lines = j["lines"];
+
+        m_HiddenEndingTable.push_back(page);
     }
 }
 

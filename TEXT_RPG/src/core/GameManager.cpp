@@ -5,7 +5,7 @@
 
 GameManager::GameManager()
 	:running(true),
-	m_player(std::make_unique<Player>(initialName, initialHp, initialAtk,initialDef,initialStamina))
+	m_player(std::make_unique<Player>(initialName, initialHp, initialAtk, initialDef,initialStamina, initialfleshCount))
 {
 	DataManager::getInstance().loadAll();
 }

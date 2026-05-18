@@ -4,8 +4,8 @@
 #include <vector>
 #include <algorithm>
 
-Player::Player(const std::string& name, int maxHp, int atk, int def, int maxStamina)
-	:Entity(name, maxHp, atk, def), m_maxStamina(maxStamina), m_stamina(maxStamina)
+Player::Player(const std::string& name, int maxHp, int atk, int def, int maxStamina, int fleshCount)
+	:Entity(name, maxHp, atk, def), m_maxStamina(maxStamina), m_stamina(maxStamina), m_fleshCount(fleshCount)
 {
 
 }
@@ -86,7 +86,7 @@ void Player::evolution(int atkAmount, int defAmount)
 
 
 //Save
-void Player::loadFromSave(int curHp, int atk, int def, int stamina, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills)
+void Player::loadFromSave(int curHp, int atk, int def, int stamina, int fleshCount, bool poisoned, std::map<std::string, int> inventory, std::vector<SkillType> skills)
 {
 	Entity::setCurHp(curHp);
 	Entity::setAtk(atk);
@@ -95,6 +95,7 @@ void Player::loadFromSave(int curHp, int atk, int def, int stamina, bool poisone
 	m_isPoison = poisoned;
 	m_inven = inventory;
 	m_skills = skills;
+	m_fleshCount = fleshCount;
 }
 
 void Player::startConcentrate()

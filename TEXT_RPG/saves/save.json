@@ -11,6 +11,7 @@
         "hp": 100,
         "atk": 100,
         "def": 100,
+        "fleshCount": 30,
         "inventory": {
             "dried_fish": 6,
             "herb": 1,

@@ -75,6 +75,7 @@ struct SaveData
         int stamina;
         int atk;
         int def;
+        int fleshCount;
         bool poisoned;
         std::map<std::string, int> inventory;
         std::vector<SkillType> skills;

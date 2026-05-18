@@ -22,13 +22,7 @@ public:
 
     const std::vector<PageData>& getEndingData() const;
 
-    std::string getItemName(const std::string& id);
-
-    std::string getUseLog(const std::string& id);
-    
-    int getSkillStamina(SkillType skill);
-
-
+    const std::vector<PageData>& getHiddenEndingData() const;
 
 private:
     DataManager() = default;
@@ -45,6 +39,8 @@ private:
 
     void loadEnding(const std::string& path);
 
+    void loadHiddenEnding(const std::string& path);
+
     MonsterEffect stringToMonsterEffect(const std::string& str);
 
     ItemEffect stringToItemEffect(const std::string& str);
@@ -59,4 +55,5 @@ private:
     std::unordered_map<std::string, MapData> m_mapTable;
     std::vector<PageData> m_PrologueTable;
     std::vector<PageData> m_EndingTable;
+    std::vector<PageData> m_HiddenEndingTable;
 };
