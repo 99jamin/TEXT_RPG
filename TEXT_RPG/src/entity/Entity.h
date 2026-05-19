@@ -14,9 +14,7 @@ public:
 
 	int takeFixedDamage(int amount) override;
 
-	virtual void printStatus() const = 0;		
-
-	virtual void dead() = 0;					
+	virtual void dead() { setCurHp(0);}
 
 	const std::string& getName() const { return m_name; }
 	int getCurHp() const { return m_curHp; }

@@ -10,8 +10,8 @@ public:
 	void onPhaseTwo() override
 	{
 		m_art = m_art2;
-		setAtk(getAtk() * PHASE_TWO_STAT_RATIO);
-		setDef(getDef() * PHASE_TWO_STAT_RATIO);
+		setAtk(static_cast<int>(getAtk() * PHASE_TWO_STAT_RATIO));
+		setDef(static_cast<int>(getDef() * PHASE_TWO_STAT_RATIO));
 		setCurHp(getMaxHp());
 	}
 

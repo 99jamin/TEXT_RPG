@@ -32,13 +32,13 @@ public:
 		{
 			if (player.wasHitWhileConcentrating())
 			{
-				int actualdamage = player.getAtk() * HIT_DAMAGE_RATIO;
-				realDamage = monsters[monsterIndex]->takeDamage(actualdamage);
+				int actualDamage = static_cast<int>(player.getAtk() * m_damageRatio);
+				realDamage = monsters[monsterIndex]->takeDamage(actualDamage);
 			}
 			else
 			{
-				int actualdamage = (player.getAtk() * m_damageRatio);
-				realDamage = monsters[monsterIndex]->takeDamage(actualdamage);
+				int actualDamage = static_cast<int>(player.getAtk() * m_damageRatio);
+				realDamage = monsters[monsterIndex]->takeDamage(actualDamage);
 			}
 
 			m_log.clear();

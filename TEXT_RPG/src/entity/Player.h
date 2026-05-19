@@ -17,10 +17,6 @@ public:
 
 	int takeFixedDamage(int amount) override;
 
-	void printStatus() const override;
-
-	void dead() override;
-
 	void learnSkill(SkillType skill);
 
 	bool hasSkill(SkillType skill) const;

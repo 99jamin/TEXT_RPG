@@ -14,13 +14,11 @@ public:
 
 	virtual void onPhaseTwo() = 0;
 
-	const std::string& getPhaseTwoLog() const;
-
 	bool isBoss() const override { return true; };
 
 	bool isLastBoss() const override { return false; }
 
-	bool consumePhaseTwoTrigger();
+	bool consumePhaseTwoTrigger() override;
 
 private:
 

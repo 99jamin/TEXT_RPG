@@ -10,10 +10,6 @@ class Monster : public Entity
 public:
 	Monster(const MonsterData& data);
 
-	void printStatus() const override;
-
-	void dead() override;
-
 	MonsterEffect getEffect() const { return m_effect; }
 
 	const std::string& getAttackLog() const;
@@ -23,6 +19,10 @@ public:
 	virtual bool isBoss() const { return false; }
 
 	virtual bool isLastBoss() const { return false; }
+
+	virtual bool consumePhaseTwoTrigger() { return false; }
+
+	const std::string& getPhaseTwoLog() const;
 
 protected:
 

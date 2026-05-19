@@ -40,7 +40,4 @@ bool Boss::isPhaseTwo() const
 	return m_isPhaseTwo;
 }
 
-const std::string& Boss::getPhaseTwoLog() const
-{
-	return m_phaseTwoLog;
-}
+

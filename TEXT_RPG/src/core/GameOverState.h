@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "GameState.h"
 
-class Gamemanager;
+class GameManager;
 
 class GameOverState : public GameState
 {

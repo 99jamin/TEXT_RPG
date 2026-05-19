@@ -6,15 +6,10 @@
 
 }
 
-void Monster::printStatus() const
-{
-
-}
-
-void Monster::dead()
-{
-	Entity::setCurHp(0);
-}
+ const std::string& Monster::getPhaseTwoLog() const
+ {
+	 return m_phaseTwoLog;
+ }
 
 const std::string& Monster::getAttackLog() const
 {

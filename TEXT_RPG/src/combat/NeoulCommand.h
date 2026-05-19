@@ -14,7 +14,7 @@ public:
 
 		int realDamage = 0;
 
-		int actualDamage = player.getAtk() * m_damageRatio;
+		int actualDamage = static_cast<int>(player.getAtk() * m_damageRatio);
 
 		for (auto& e : monsters)
 		{

@@ -45,16 +45,6 @@ int Player::takeFixedDamage(int amount)
 	return Entity::takeFixedDamage(amount);
 }
 
-void Player::printStatus() const
-{
-	
-}
-
-void Player::dead()
-{
-
-}
-
 void Player::learnSkill(SkillType skill)
 {
 	if (!hasSkill(skill))

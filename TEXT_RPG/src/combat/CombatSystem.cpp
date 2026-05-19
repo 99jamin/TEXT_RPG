@@ -129,7 +129,7 @@ bool CombatSystem::checkPlayerStatus()
 		{
 			printTargetChoice();
 
-			int targetInput = InputHandler::getInt(1, m_monsters.size(), [&]() {printTargetChoice(); }) - 1;
+			int targetInput = InputHandler::getInt(1,static_cast<int>(m_monsters.size()), [&]() {printTargetChoice(); }) - 1;
 
 			skill->execute(m_player, m_monsters, targetInput, [](LogLine log) {UIRenderer::addLog(log); });
 		}
@@ -187,7 +187,7 @@ bool CombatSystem::executeSkillCommand()
 	UIRenderer::printCombatScreen(m_monsters, m_player, skillChoice);
 
 	//스킬 입력
-	int skillInput = InputHandler::getInt(0, skills.size(), [&]() {UIRenderer::printCombatScreen(m_monsters, m_player, skillChoice); });
+	int skillInput = InputHandler::getInt(0, static_cast<int>(skills.size()), [&]() {UIRenderer::printCombatScreen(m_monsters, m_player, skillChoice); });
 
 	if (skillInput == 0)
 		return false;
@@ -248,7 +248,7 @@ int CombatSystem::selectTarget(SkillType selected)
 	if (m_monsters.size() == 1)
 		return 0;
 	printTargetChoice();
-	return InputHandler::getInt(1, m_monsters.size(), [&]() {printTargetChoice(); }) - 1;
+	return InputHandler::getInt(1, static_cast<int>(m_monsters.size()), [&]() {printTargetChoice(); }) - 1;
 }
 
 void CombatSystem::checkMonsters()
@@ -270,13 +270,12 @@ void CombatSystem::checkBossPhaseTransition()
 {
 	for (auto& m : m_monsters)
 	{
-		Boss* boss = dynamic_cast<Boss*>(m);
-		if (boss && boss->consumePhaseTwoTrigger())
+		if (m->consumePhaseTwoTrigger())
 		{
-			if (!boss->getPhaseTwoLog().empty())
-				UIRenderer::addLog(boss->getPhaseTwoLog());
+			if (!m->getPhaseTwoLog().empty())
+				UIRenderer::addLog(m->getPhaseTwoLog());
 
-			if (boss->isLastBoss())
+			if (m->isLastBoss())
 			{
 				m_player.learnSkill(SkillType::Soroksorok);
 
