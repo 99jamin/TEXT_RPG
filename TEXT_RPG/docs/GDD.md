@@ -24,7 +24,7 @@
 | 개발 언어 | C++17 |
 | 개발 환경 | Visual Studio 2022 |
 | 버전 관리 | Git / GitHub |
-| 외부 라이브러리 | nlohmann/json (JSON 파싱) |
+| 외부 라이브러리 | nlohmann/json (JSON 파싱), Windows MCI (사운드) |
 
 ### 1.1 게임 소개
 > 처용가와 섬집아기를 모티프로 한 한국 중세 다크 판타지 텍스트 RPG.  
@@ -36,17 +36,17 @@
 - [x] 커맨드 패턴 기반 전투 시스템
 - [x] 상속/다형성 — Entity 계층 구조
 - [x] 스마트 포인터를 활용한 메모리 관리
-- [x] 파일 I/O 기반 세이브/로드 (txt)
-- [x] std::optional, std::variant (C++17)
+- [x] 파일 I/O 기반 세이브/로드 (JSON)
 
 ### 1.3 레퍼런스
 - 처용가 (신라 헌강왕 대 향가)
 - 섬집아기 (한국 전통 자장가)
-- DanbiLuau - 2시간만에 만든 텍스트 RPG (화면 레이아웃 참고)
 
 ---
 
 ## 2. 스토리 & 세계관
+
+> 상세 세계관은 [WBD (World Building Document)](WBD.md) 참고
 
 ### 2.1 배경
 신라 시대를 모티프로 한 한국 중세 판타지 세계.  
@@ -60,7 +60,7 @@
 ### 2.2 주인공
 | 항목 | 내용 |
 |---|---|
-| 이름 | 없음 (의도적 설계 — 처용가·섬집아기 원작 모두 어머니는 이름이 없다) |
+| 이름 | 없음 |
 | 신분 | 처용의 아내 |
 | 무기 | 처용이 남긴 검 |
 | 능력 | 처용의 무가서(武歌書)를 해독해 바닷소리 검무를 익힘 |
@@ -69,20 +69,11 @@
 ### 2.3 주요 등장인물 / 세력
 | 이름 | 설명 |
 |---|---|
-| 처용 | 동해 용왕의 아들, 주인공의 남편. 용궁으로 떠난 뒤 소식 없음 |
 | 저퀴(疫鬼) | 처용이 봉인한 역병의 아이. 처용의 전 아내가 역신과의 사이에서 낳은 존재 |
 | 적갑신 | 적조에 변이된 대게. 포구를 장악한 중간 보스 |
 
-### 2.4 등장인물 배경
-역신이 용궁에 나타난 것은 저퀴 때문이 아니었다.
-오랜 봉인 끝에 저퀴가 스스로 발현시킨 적조의 권능, 그것만이 목적이었다.
-역신은 권능을 취한 뒤 저퀴에게 눈길 하나 주지 않고 돌아갔다.
-처용과 그의 형제, 아버지는 모두 그 자리에서 역신에게 죽었다.
-홀로 남겨진 저퀴에게 남은 것은 두 가지였다.
-자신을 바다에 처넣은 처용을 향한 분노, 따뜻함을 받으며 자라는 세상의 아이들에 대한 질투.
-저퀴는 그 감정들을 그대로 안고 뭍으로 올라왔다. 처용의 아이를 첫 번째 목표로 삼은 채.
 
-### 2.5 스토리 흐름
+### 2.4 스토리 흐름
 ```
 [시작]
 역병에 걸려 이성을 잃은 어부들이 아이만을 노리며 집으로 찾아온다.
@@ -98,11 +89,9 @@
 그 안에서 역병에 걸려 아파하는 어린 아이의 모습을 발견한다.
 
 [엔딩]
-살의를 거두고, 자신의 아이에게 불러주던 자장가를 본떠 모가(母歌) 소록소록을 만든다.
 소록소록으로 저퀴를 재우듯 끝낸다.
 뭍에 비친 자신의 모습도 역병에 물들어 있다.
 아이에게 돌아갈 수 없음을 알고, 마지막 역병인 자기 자신을 끝낸다.
-아이가 파도소리 자장가에 소록소록 잠들어있는 모습을 상상하며.
 ```
 
 ---
@@ -140,15 +129,17 @@
 ```
 [TitleState]
     │
+[PageState] (프롤로그)
+    │
 [ExploreState] ←─────────────────┐
     │                             │
     ├── 몬스터 조우 → [CombatState] ─┤ (승리/도주)
     │                              │ (패배 → GameOverState)
-    ├── 소지품 열기 → [InventoryState] (팝/push)
-    ├── 일기 열기  → [DiaryState]     (팝/push)
+    ├── 소지품 열기 → 인벤토리 UI (ExploreState 내부)
+    ├── 일기 열기  → 세이브/로드 (ExploreState 내부)
     └── 맵 클리어  → 다음 ExploreState
                          │
-                    [EndingState]
+                    [PageState] (엔딩/히든엔딩)
 ```
 
 ### 3.4 화면 구성
@@ -158,12 +149,12 @@
 | 전투 | 스탯바 + 적 정보 + 전투 로그 + 스킬 선택지 |
 | 소지품 | 아이템 목록 + 사용/돌아가기 |
 | 일기 | 저장하기/불러오기/돌아가기 |
-| 게임 오버 | 텍스트 + 마지막 세이브로 복귀 |
+| 게임 오버 | 텍스트 + 타이틀로 복귀 |
 | 엔딩 | 스토리 텍스트 |
 
 ### 3.5 선택지 구조
 ```
-1. 이동하기
+1. 이동하기 (갈 수 있는 방향만 출력)
    ㄴ 1.동  2.서  3.남  4.북  0.돌아가기
 
 2. 조사하기 / 공격하기 (몬스터 유무에 따라 전환)
@@ -172,7 +163,7 @@
    ㄴ 아이템 목록 → 사용/돌아가기
 
 4. 일기
-   ㄴ 1.저장하기  2.불러오기  0.돌아가기
+   ㄴ 1.저장하기  0.돌아가기
 ```
 
 ### 3.6 맵 구조
@@ -200,7 +191,7 @@
 **기력 규칙**
 | 규칙 | 내용 |
 |---|---|
-| 초기 최대 기력 | 5 |
+| 최대 기력 | 5 |
 | 턴당 회복 | 1 |
 
 
@@ -214,33 +205,27 @@
 | 바닷소리 | 물마루 | 3 | 최강 단타 | 섬 지하 1층 |
 | 자장소리 | 소록소록 | 5 | 저퀴 전용 피니셔. 아내만의 무가 | 저퀴의 심부 직전 |
 
-**미사용 후보 (보관)**
-```
-바닷소리 후보: 된여울, 물결괘, 물고개, 눗덩이, 물꽃
-자장소리 후보: 배냇짓, 나비잠
-```
-
 ### 4.3 상태이상
 | 상태이상 | 효과 | 부여 몬스터 |
 |---|---|---|
-| 독 | 매 턴 HP 감소 | 갯것 |
-| 기력 감소 | 최대 기력 -1 | 뻘귀, 팔귀 |
+| 역병 | 매 턴 HP 감소 | 패귀 |
+| 기력 감소 | 최대 기력 -1 | 적구인, 육안귀 |
 
 ### 4.4 플레이어 스탯
-| 스탯 | 초기값 | 맵 클리어마다 성장 |
+| 스탯 | 초기값 | 붉은 살점 섭취 시 |
 |---|---|---|
-| HP | 100 | +20 |
-| 기력 | 5 | +1 (굼뉘 습득 시) |
-| 공격력 | 15 | +5 |
-| 방어력 | 5 | +3 |
+| HP | 100 | 0 |
+| 기력 | 5 | 0 |
+| 공격력 | 15 | +3 |
+| 방어력 | 0 | +1 |
 
 ### 4.5 아이템
 | 아이템 | 효과 | 획득처 |
 |---|---|---|
 | 약초 | HP 30 회복 | 맵 탐험 중 발견 |
 | 영약 | HP 완전 회복 | 보스 처치 후 드롭 |
-| 부적 | 상태이상 해제 | 맵 탐험 중 발견 |
-| 향불 | 기력 2 회복 | 희귀 드롭 |
+| 향낭 | 상태이상 해제 | 맵 탐험 중 발견 |
+| 어포 | 기력 2 회복 | 맵 탐험 중 발견 |
 |무가서| 바닷소리:뉫결 획득| 특정 위치 드롭|
 |무가서의 찢긴 조각1~4|스킬 습득|특정 위치 드롭|
 
@@ -249,47 +234,31 @@
 
 ### 4.6 세이브 / 로드
 - 세이브 시점: 일기에서 수동 저장
-- 세이브 형식: txt 단일 슬롯
+- 세이브 형식: JSON 단일 슬롯
 - 저장 항목: 현재 맵, HP, 기력, 공격력, 방어력, 인벤토리, 습득 스킬 목록, 클리어 맵 목록
-- 게임 오버 시: 마지막 세이브로 복귀
+- 게임 오버 시: 타이틀로 복귀
 
 ---
 
 ## 5. 콘텐츠 명세
 
-### 5.1 몬스터 목록
-| 이름 | 공격 효과 | 기타
-|---|---|---|---|
-| 역병 어부 | 없음 | 없음 |
-| 역병 들개 | 없음 | 떼로 등장 |
-| 패귀 | 독 부여 | 없음 |
-| 적구인 | 기력 감소 | 없음 |
-| 역병 갈매기 | 없음 | 회복 아이템 확정 드랍 |
-| 수라어 | 높은 데미지 | 없음 |
-| 역병 인어 | 없음 | 없음 |
-| 동굴 태충 | HP 흡수 | 없음 |
-| 적살귀 | 매 턴 HP 회복 | 없음 |
-| 육안귀 | 기력 감소 | 없음 |
-| 적갑신 | 높은 데미지 | 중간 보스 |
-| 저퀴 | 독 부여 | 최종보스 |
+### 5.1 몬스터 목록 및 스탯
+| 이름 | HP | 공격력 | 방어력 | 공격 효과 | 드롭 | 비고 |
+|---|---|---|---|---|---|---|
+| 어부 | 30 | 8 | 3 | 없음 | 붉은 살점 | |
+| 들개 | 25 | 10 | 1 | 없음 | 붉은 살점 |  |
+| 패귀 | 55 | 14 | 6 | 독 부여 | 붉은 살점 | |
+| 적구인 | 50 | 12 | 5 | 기력 감소 | 붉은 살점 | |
+| 갈매기 | 45 | 16 | 4 | 없음 | 붉은 살점 | |
+| 수라어 | 60 | 22 | 8 | 높은 데미지 | 어포 | |
+| 인어 | 65 | 18 | 10 | 없음 | 붉은 살점 | |
+| 동굴 태충 | 70 | 20 | 8 | HP 흡수 | 붉은 살점 | |
+| 적살귀 | 110 | 22 | 12 | 매 턴 HP 회복 | 붉은 살점 | |
+| 육안귀 | 90 | 24 | 20 | 기력 감소 | 붉은 살점 | |
+| 적갑신 | 200 | 30 | 0 | 높은 데미지 | 영약 | 중간 보스 (페이즈 전환) |
+| 저퀴 | 350 | 35 | 20 | 독 부여 | 없음 | 최종 보스 (페이즈 전환) |
 
-### 5.2 몬스터 스탯 (미정 — 개발 중 밸런싱)
-| 이름 | HP | 공격력 | 방어력 |
-|---|---|---|---|
-| 역병 어부 | | | |
-| 역병 들개 | | | |
-| 갯것 | | | |
-| 뻘귀 | | | |
-| 변이 갈매기 | | | |
-| 팔귀 | | | |
-| 수라어 | | | |
-| 동굴 태충 | | | |
-| 적살귀 | | | |
-| 저퀴의 살점 | | | |
-| 적갑신 | | | |
-| 저퀴 | | | |
-
-### 5.3 JSON 데이터 구조 예시
+### 5.2 JSON 데이터 구조 예시
 
 **monsters.json**
 ```json
@@ -297,25 +266,14 @@
   "monsters": [
     {
       "id": "plague_fisherman",
-      "name": "역병 어부",
-      "grade": "weak",
+      "name": "어부",
+      "attackLog": "가 회칼로 긁는다.",
       "hp": 30,
       "attack": 8,
-      "defense": 2,
-      "attack_effect": "none",
-      "passive": "none",
-      "drop_item": "herb"
-    },
-    {
-      "id": "팔귀",
-      "name": "팔귀",
-      "grade": "normal",
-      "hp": 60,
-      "attack": 18,
-      "defense": 8,
-      "attack_effect": "stamina_drain",
-      "passive": "none",
-      "drop_item": "charm"
+      "defense": 3,
+      "effect": "None",
+      "drop_item": "red_flesh",
+      "art": ["(ASCII 아트 배열)"]
     }
   ]
 }
@@ -324,24 +282,29 @@
 **maps.json**
 ```json
 {
-  "id": "village",
-  "name": "바닷가 마을",
-  "next_map": "tidal_flat",
-  "grid": [
-    [null, null, null, null, null, null],
-    [null, "start", "event_1", null, null, null],
-    [null, "combat_1", "event_2", "combat_2", null, null],
-    [null, null, "item_1", "combat_3", "skill_1", null],
-    [null, null, null, null, "exit", null],
-    [null, null, null, null, null, null]
-  ],
-  "rooms": {
-    "start":    { "type": "Start" },
-    "event_1":  { "type": "Event", "text": "역병이 마을을 덮쳤다..." },
-    "combat_1": { "type": "Combat", "monster": "plague_fisherman" },
-    "item_1":   { "type": "Item", "item": "herb", "count": 2 },
-    "exit":     { "type": "Exit", "next_map": "tidal_flat" }
-  }
+  "maps": [
+    {
+      "id": "village",
+      "name": "바닷가 마을",
+      "description": "역병이 덮친 바닷가 마을.",
+      "next_map": "tidal_flat",
+      "bgm": "bgm/zone1.mp3",
+      "grid": [
+        [null, null, null, null, null, null],
+        ["start", "skill_1", null, null, null, null],
+        [null, "combat_1", "item_1", "combat_2", null, null],
+        [null, null, "combat_3", "event_2", "exit", null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null]
+      ],
+      "rooms": {
+        "start":    { "type": "Start", "text": "...", "action_text": "..." },
+        "combat_1": { "type": "Combat", "text": "...", "monster": "plague_fisherman", "monster_count": 1 },
+        "item_1":   { "type": "Item", "text": "...", "action_text": "...", "item": "herb", "count": 1 },
+        "exit":     { "type": "Exit" }
+      }
+    }
+  ]
 }
 ```
 
@@ -351,24 +314,29 @@
 
 ### 6.1 폴더 구조
 ```
-TextRPG/
+TEXT_RPG/
 ├── src/
-│   ├── core/          # GameManager, GameState
+│   ├── core/          # GameManager, GameState, FSM States
 │   ├── entity/        # Entity, Player, Monster, Boss
-│   ├── combat/        # CombatSystem, Command 패턴
-│   ├── map/           # Map, Room
+│   ├── combat/        # CombatSystem, Command 패턴, 스킬
+│   ├── map/           # Map, Room, Direction
 │   ├── data/          # DataManager, 데이터 구조체
-│   ├── ui/            # UIRenderer, InputHandler
-│   └── save/          # SaveManager
+│   ├── ui/            # UIRenderer, LogLine
+│   ├── inven/         # InventoryHandler
+│   ├── input/         # InputHandler
+│   ├── save/          # SaveManager
+│   └── sound/         # SoundManager
 ├── data/
 │   ├── monsters.json
 │   ├── items.json
-│   └── maps/
-│       ├── village.json
-│       ├── tidal_flat.json
-│       └── ...
+│   ├── skills.json
+│   ├── maps.json
+│   ├── prologue.json
+│   ├── ending.json
+│   └── hiddenending.json
 ├── saves/
-│   └── save.txt
+│   └── save.json
+├── bgm/
 └── docs/
     └── GDD.md
 ```
@@ -377,38 +345,50 @@ TextRPG/
 | 레이어 | 클래스 | 역할 |
 |---|---|---|
 | Core | GameManager | 게임 루프, 스택 FSM 관리 |
-| Core | GameState (abstract) | 상태 기반 클래스 (enter/update/exit) |
-| Core | TitleState, ExploreState, CombatState 등 | 각 화면 상태 |
-| Entity | Entity (abstract) | 캐릭터 공통 기반 |
+| Core | GameState (abstract) | 상태 기반 클래스 (enter/update/exit/pause/resume) |
+| Core | TitleState | 타이틀 화면 |
+| Core | ExploreState | 탐험 상태 (이동, 조사, 인벤토리, 세이브) |
+| Core | CombatState | 전투 상태 |
+| Core | PageState | 범용 페이지 상태 (프롤로그/엔딩/히든엔딩 공용) |
+| Core | GameOverState | 게임 오버 화면 |
+| Entity | IDamageable (interface) | 피해 처리 인터페이스 |
+| Entity | Entity (abstract) | 캐릭터 공통 기반 (HP, ATK, DEF) |
 | Entity | Player | 기력·스킬·인벤토리·상태이상 관리 |
-| Entity | Monster | 공격효과·패시브 보유 |
-| Entity | Boss | Monster + 페이즈 전환 |
-| Combat | Command (abstract) | 전투 행동 기반 |
-| Combat | SkillCommand | 바닷소리 스킬 실행 |
-| Combat | DefendCommand | 방어 행동 |
+| Entity | Monster | 공격효과 보유, MonsterFactory로 생성 |
+| Entity | Boss | Monster + Template Method 페이즈 전환 |
+| Entity | JeokkwiBoss / JeokgapsinBoss | 보스별 페이즈 전환 구현 |
+| Combat | PlayerCommand (abstract) | 플레이어 전투 행동 기반 |
+| Combat | SkillCommand (abstract) | 스킬 공통 기반 |
+| Combat | 구체 스킬 (Nuigyeol, Musuki 등) | 개별 스킬 구현 |
+| Combat | DefendCommand | 방어 행동 (피해 반감) |
 | Combat | FleeCommand | 도주 행동 |
-| Combat | MonsterAtkCommand | 몬스터 공격 행동 |
+| Combat | MonsterAtkCommand | 몬스터 공격 + 효과별 분기 |
 | Combat | CombatSystem | 전투 루프 실행 |
-| Map | Map | 6x6 그리드, 현재 방 관리 |
+| Combat | SkillCommandFactory | SkillType → 구체 Command 생성 |
+| Combat | MonsterFactory | JSON 데이터 → Monster/Boss 생성 |
+| Map | Map | 6x6 그리드, 이동 로직, 미니맵 |
 | Map | Room | 방 타입·몬스터·아이템·이벤트 |
-| Data | DataManager | JSON 파싱 총괄 |
-| Data | MonsterData / ItemData / MapData | 데이터 구조체 |
-| System | SaveManager | txt 세이브/로드 |
-| System | UIRenderer | 콘솔 화면 출력 |
-| System | InputHandler | 사용자 입력 처리 |
+| Data | DataManager (Singleton) | JSON 파싱 총괄 |
+| Data | DataTypes | MonsterData / ItemData / MapData / SkillData / PageData |
+| System | SaveManager (Singleton) | JSON 세이브/로드 |
+| System | SoundManager | BGM/SFX (Windows MCI) |
+| UI | UIRenderer | 콘솔 화면 출력 (레이아웃, 미니맵, 로그) |
+| UI | InputHandler | 사용자 입력 처리 |
+| UI | InventoryHandler | 인벤토리 UI (탐험/전투 공용) |
 
 ### 6.3 사용 기술 및 선택 이유
 | 기술 | 적용 위치 | 선택 이유 |
 |---|---|---|
-| 스택 FSM | 게임 흐름 | 상태 전환 명확화, 이전 상태 복귀 자연스러움 |
-| 커맨드 패턴 | 전투 행동 | 플레이어/몬스터 행동 동일 인터페이스로 처리 |
-| 데이터 드리븐 | 몬스터/아이템/맵 | 코드-데이터 분리, 기획 변경에 유연 |
-| 상속/다형성 | Entity 계층 | 캐릭터 공통 처리, 확장 용이 |
-| unique_ptr | GameState 스택 | 상태 소유권 명확화 |
-| shared_ptr | Monster 객체 | 방과 전투 시스템이 공유 |
-| std::optional | 드롭 아이템, 스킬 미습득 | null 처리 안전성 |
-| std::variant | 전투 결과, 이벤트 타입 | C++17 타입 안전 union |
-| nlohmann/json | DataManager | 헤더 하나로 JSON 파싱 |
+| 스택 FSM | 게임 흐름 | pushState/popState로 상태 전환 명확화, 이전 상태 복귀 자연스러움 |
+| 커맨드 패턴 | 전투 행동 | 플레이어/몬스터 행동을 동일 인터페이스로 캡슐화 |
+| 팩토리 패턴 | 몬스터/스킬 생성 | JSON 데이터 → 객체 생성 로직 분리 |
+| 템플릿 메서드 패턴 | Boss 페이즈 전환 | 공통 전환 로직은 Boss가, 세부 연출은 서브클래스가 담당 |
+| 데이터 드리븐 | 몬스터/아이템/맵/스킬 | 코드-데이터 분리, 기획 변경에 유연 |
+| 상속/다형성 | Entity 계층 | IDamageable → Entity → Player/Monster → Boss |
+| unique_ptr | GameState 스택, Room 그리드 | 소유권 명확화, 자동 메모리 해제 |
+| std::function | PageState 종료 동작 | 람다로 종료 동작 주입 (프롤로그: popState, 엔딩: quit) |
+| nlohmann/json | DataManager, SaveManager | 헤더 하나로 JSON 파싱/직렬화 |
+| Windows MCI | SoundManager | 외부 의존성 없이 BGM/SFX 재생 |
 
 ---
 
