@@ -2,14 +2,16 @@
 #include "GameState.h"
 #include <vector>
 #include <string>
+#include <functional>
 #include "../data/DataTypes.h"
+
 class GameManager;
 
-class EndingState : public GameState
+class PageState : public GameState
 {
 public:
 
-	EndingState();
+	PageState(const std::vector<PageData>& pages, const std::string& bgm, std::function<void(GameManager&)> onFinish);
 
 	void enter(GameManager& manager) override;
 
@@ -20,6 +22,8 @@ public:
 private:
 
 	std::vector<PageData>m_pages;
+	std::string m_bgm;
+	std::function<void(GameManager&)> m_onFinish;
 	int m_currentPage = 0;
 
 };

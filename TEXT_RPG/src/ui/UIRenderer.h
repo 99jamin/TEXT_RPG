@@ -34,7 +34,6 @@ public:
 	static void clearLogs();
 
 private:
-
 	
 	static void printLayout(const Player& player, std::function<void()> rightPanelFn, const std::vector<std::string>& choices);
 
@@ -53,6 +52,8 @@ private:
 	static void setColor(Color color);
 
 	static void resetColor();
+
+	static void clearConsole();
 
 	static std::vector<LogLine> s_logs;
 

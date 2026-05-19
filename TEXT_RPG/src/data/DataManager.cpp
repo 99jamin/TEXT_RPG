@@ -30,37 +30,41 @@ void DataManager::loadAll()
    
 }
 
-MonsterData DataManager::getMonsterData(const std::string& id)
+const MonsterData& DataManager::getMonsterData(const std::string& id) const
 {
+    static const MonsterData empty{};
     auto it = m_monsterTable.find(id);
     if (it != m_monsterTable.end())
         return it->second;
-    return MonsterData{};
+    return empty;
 }
 
-SkillData DataManager::getSkillData(SkillType skill)
+const SkillData& DataManager::getSkillData(SkillType skill) const
 {
+    static const SkillData empty{};
     auto it = m_skillTable.find(toId(skill));
     if (it != m_skillTable.end())
         return it->second;
-    return SkillData{};
+    return empty;
 }
 
-ItemData DataManager::getItemData(const std::string& id)
+const ItemData& DataManager::getItemData(const std::string& id) const
 {
+    static const ItemData empty{};
     auto it = m_itemTable.find(id);
     if (it != m_itemTable.end())
         return it->second;
-    return ItemData{};
+    return empty;
 }
 
 
-MapData DataManager::getMapData(const std::string& id)
+const MapData& DataManager::getMapData(const std::string& id) const
 {
+    static const MapData empty{};
     auto it = m_mapTable.find(id);
     if (it != m_mapTable.end())
         return it->second;
-    return MapData{};
+    return empty;
 }
 
 const std::vector<PageData>& DataManager::getPrologueData() const

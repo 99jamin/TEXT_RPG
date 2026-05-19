@@ -10,13 +10,13 @@ public:
 
     void loadAll();
 
-    MonsterData getMonsterData(const std::string& id);
+    const MonsterData& getMonsterData(const std::string& id) const;
 
-    SkillData getSkillData(SkillType skill);
+    const SkillData& getSkillData(SkillType skill) const;
 
-    ItemData getItemData(const std::string& id);
+    const ItemData& getItemData(const std::string& id) const;
 
-    MapData getMapData(const std::string& id);
+    const MapData& getMapData(const std::string& id) const;
 
     const std::vector<PageData>& getPrologueData() const;
 

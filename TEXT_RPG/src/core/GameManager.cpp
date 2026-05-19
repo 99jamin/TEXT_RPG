@@ -90,3 +90,8 @@ Player& GameManager::getPlayer()
 {
 	return *m_player;
 }
+
+const Player& GameManager::getPlayer() const
+{
+	return *m_player;
+}

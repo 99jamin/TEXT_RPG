@@ -27,6 +27,8 @@ public:
 
 	Player& getPlayer();
 
+	const Player& getPlayer() const;
+
 private:
 
 	std::stack<std::unique_ptr<GameState>> stateStack;

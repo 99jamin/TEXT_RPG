@@ -1,8 +1,7 @@
 ﻿#include "ExploreState.h"
 #include "GameManager.h"
 #include "CombatState.h"
-#include "EndingState.h"
-#include "HiddenEndingState.h"
+#include "PageState.h"
 #include "../map/RoomType.h"
 #include "../data/DataManager.h"
 #include "../entity/Player.h"
@@ -223,9 +222,11 @@ void ExploreState::handleAction(GameManager& manager)
         if (m_map.getId() == "ending")
         {
             if(manager.getPlayer().getFleshCount() >= 25)
-                manager.pushState(std::make_unique<HiddenEndingState>());
+                manager.pushState(std::make_unique<PageState>(DataManager::getInstance().getHiddenEndingData(), "bgm/hiddenending.mp3",
+                    [](GameManager& m) {m.quit(); }));
             else
-                manager.pushState(std::make_unique<EndingState>());
+                manager.pushState(std::make_unique<PageState>(DataManager::getInstance().getEndingData(), "bgm/ending.mp3",
+                    [](GameManager& m) {m.quit(); }));
             break;
         }
         else

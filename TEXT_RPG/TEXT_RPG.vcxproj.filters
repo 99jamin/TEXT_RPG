@@ -75,9 +75,6 @@
     <ClCompile Include="src\map\Map.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\ExploreState.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="src\ui\UIRenderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -87,25 +84,22 @@
     <ClCompile Include="src\core\CombatState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\PrologueState.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\GameOverState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\sound\SoundManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\EndingState.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="src\save\SaveManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\HiddenEndingState.cpp">
+    <ClCompile Include="src\inven\InventoryHandler.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\inven\InventoryHandler.cpp">
+    <ClCompile Include="src\core\PageState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\ExploreState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -230,20 +224,11 @@
     <ClInclude Include="src\combat\MonsterFactory.h">
       <Filter>헤더 파일\combat</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\PrologueState.h">
-      <Filter>헤더 파일\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\GameOverState.h">
       <Filter>헤더 파일\core</Filter>
     </ClInclude>
     <ClInclude Include="src\sound\SoundManager.h">
       <Filter>헤더 파일\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\EndingState.h">
-      <Filter>헤더 파일\core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\HiddenEndingState.h">
-      <Filter>헤더 파일\core</Filter>
     </ClInclude>
     <ClInclude Include="src\inven\InventoryHandler.h">
       <Filter>헤더 파일\inven</Filter>
@@ -253,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="src\entity\ItemEffect.h">
       <Filter>헤더 파일\inven</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\PageState.h">
+      <Filter>헤더 파일\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,8 @@
 #include "TitleState.h"
 #include "GameManager.h"
 #include "ExploreState.h"
-#include "PrologueState.h"
+#include "PageState.h"
+#include "../data/DataManager.h"
 #include "../save/SaveManager.h"
 #include "../ui/UIRenderer.h"
 #include "../input/InputHandler.h"
@@ -24,7 +25,8 @@ void TitleState::update(GameManager& manager)
 	{
 		m_startNewGame = true;
 		manager.getPlayer().init();
-		manager.pushState(std::make_unique<PrologueState>());
+		manager.pushState(std::make_unique<PageState>(DataManager::getInstance().getPrologueData(), "bgm/prologue.mp3",
+			[](GameManager& m) {m.popState(); }));
 	}
 	
 	if (input == 2)

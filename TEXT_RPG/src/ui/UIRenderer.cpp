@@ -11,21 +11,21 @@ const float UIRenderer::HP_DANGER_RATIO = 0.3f;
 
 void UIRenderer::printExploreScreen(const Map& map, const Player& player, const std::vector<std::string>& choices)
 {
-	system("cls");
+	clearConsole();
 
 	printLayout(player, [&]() { printMiniMap(map); }, choices);
 }
 
 void UIRenderer::printCombatScreen(const std::vector<Monster*>& monsters, const Player& player, const std::vector<std::string>& choices)
 {
-	system("cls");
+	clearConsole();
 
 	printLayout(player, [&]() { printEnemyInfo(monsters); }, choices);
 }
 
 void UIRenderer::printInvenScreen(const std::vector<std::pair<std::string, int>>& itemList, const Player& player, const std::vector<std::string>& choices)
 {
-	system("cls");
+	clearConsole();
 
 	printLayout(player, [&]() { printItemInfo(itemList); }, choices);
 }
@@ -34,7 +34,7 @@ void UIRenderer::printInvenScreen(const std::vector<std::pair<std::string, int>>
 
 void UIRenderer::printTitleScreen(const std::string& message)
 {
-	 system("cls");
+	clearConsole();
 
 	 // 아스키 아트 (15줄, 가운데 상단)
 	 std::vector<std::string> art = {
@@ -84,7 +84,7 @@ void UIRenderer::printTitleScreen(const std::string& message)
 
  void UIRenderer::printPageScreen(const std::vector<std::string>& art, const std::vector<std::string>& lines)
  {
-	 system("cls");
+	 clearConsole();
 
 	 // 아트 출력 (중앙 정렬)
 	 int artWidth = art.empty() ? 0 : PAGE_ART_WIDTH;
@@ -129,7 +129,7 @@ void UIRenderer::printTitleScreen(const std::string& message)
 
  void UIRenderer::printGameOverScreen()
  {
-	 system("cls");
+	 clearConsole();
 
 	 // 아스키 아트 (15줄, 가운데 상단)
 	 std::vector<std::string> art = {
@@ -434,3 +434,18 @@ void UIRenderer::resetColor()
  {
 	 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); // 기본색
  }
+
+void UIRenderer::clearConsole()
+{
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD topLeft = { 0, 0 };
+	CONSOLE_SCREEN_BUFFER_INFO screen;
+	DWORD written;
+
+	GetConsoleScreenBufferInfo(hConsole, &screen);
+	DWORD length = screen.dwSize.X * screen.dwSize.Y;
+
+	FillConsoleOutputCharacterA(hConsole, ' ', length, topLeft, &written);
+	FillConsoleOutputAttribute(hConsole, screen.wAttributes, length, topLeft, &written);
+	SetConsoleCursorPosition(hConsole, topLeft);
+}
