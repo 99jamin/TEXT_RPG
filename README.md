@@ -11,7 +11,7 @@
 
 | 탐색 | 전투 | 보스전 |
 |:---:|:---:|:---:|
-| ![탐색](docs/screenshots/explore.png) | ![전투](docs/screenshots/combat.png) | ![보스전](docs/screenshots/boss.png) |
+| ![탐색](TEXT_RPG/docs/screenshots/explore.png) | ![전투](TEXT_RPG/docs/screenshots/combat.png) | ![보스전](TEXT_RPG/docs/screenshots/boss.png) |
 
 ---
 
