@@ -17,7 +17,81 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\combat\CombatSystem.cpp" />
+    <ClCompile Include="src\core\CombatState.cpp" />
+    <ClCompile Include="src\core\ExploreState.cpp" />
+    <ClCompile Include="src\core\GameManager.cpp" />
+    <ClCompile Include="src\core\GameOverState.cpp" />
+    <ClCompile Include="src\core\PageState.cpp" />
+    <ClCompile Include="src\core\TitleState.cpp" />
+    <ClCompile Include="src\data\DataManager.cpp" />
+    <ClCompile Include="src\entity\Boss.cpp" />
+    <ClCompile Include="src\entity\Entity.cpp" />
+    <ClCompile Include="src\entity\Item.cpp" />
+    <ClCompile Include="src\entity\Monster.cpp" />
+    <ClCompile Include="src\entity\Player.cpp" />
+    <ClCompile Include="src\inven\InventoryHandler.cpp" />
+    <ClCompile Include="src\map\Map.cpp" />
+    <ClCompile Include="src\save\SaveManager.cpp" />
+    <ClCompile Include="src\sound\SoundManager.cpp" />
+    <ClCompile Include="src\ui\UIRenderer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\combat\CombatResult.h" />
+    <ClInclude Include="src\combat\CombatSystem.h" />
+    <ClInclude Include="src\combat\DefendCommand.h" />
+    <ClInclude Include="src\combat\FleeCommand.h" />
+    <ClInclude Include="src\combat\GumniCommand.h" />
+    <ClInclude Include="src\combat\MonsterAtkCommand.h" />
+    <ClInclude Include="src\combat\MonsterCommand.h" />
+    <ClInclude Include="src\combat\MonsterEffect.h" />
+    <ClInclude Include="src\combat\MonsterFactory.h" />
+    <ClInclude Include="src\combat\MulmaruCommand.h" />
+    <ClInclude Include="src\combat\MusukiCommand.h" />
+    <ClInclude Include="src\combat\NeoulCommand.h" />
+    <ClInclude Include="src\combat\NuigyeolCommand.h" />
+    <ClInclude Include="src\combat\PlayerCommand.h" />
+    <ClInclude Include="src\combat\SkillCommand.h" />
+    <ClInclude Include="src\combat\SkillCommandFactory.h" />
+    <ClInclude Include="src\combat\SkillType.h" />
+    <ClInclude Include="src\combat\SoroksorokCommand.h" />
+    <ClInclude Include="src\core\CombatState.h" />
+    <ClInclude Include="src\core\ExploreState.h" />
+    <ClInclude Include="src\core\GameManager.h" />
+    <ClInclude Include="src\core\GameOverState.h" />
+    <ClInclude Include="src\core\GameState.h" />
+    <ClInclude Include="src\core\PageState.h" />
+    <ClInclude Include="src\core\TitleState.h" />
+    <ClInclude Include="src\data\DataManager.h" />
+    <ClInclude Include="src\data\DataTypes.h" />
+    <ClInclude Include="src\entity\Boss.h" />
+    <ClInclude Include="src\entity\Entity.h" />
+    <ClInclude Include="src\entity\IDamageable.h" />
+    <ClInclude Include="src\entity\Item.h" />
+    <ClInclude Include="src\entity\ItemEffect.h" />
+    <ClInclude Include="src\entity\JeokgapsinBoss.h" />
+    <ClInclude Include="src\entity\JeokkwiBoss.h" />
+    <ClInclude Include="src\entity\Monster.h" />
+    <ClInclude Include="src\entity\Player.h" />
+    <ClInclude Include="src\input\InputHandler.h" />
+    <ClInclude Include="src\inven\InventoryHandler.h" />
+    <ClInclude Include="src\map\Map.h" />
+    <ClInclude Include="src\map\Room.h" />
+    <ClInclude Include="src\map\RoomType.h" />
+    <ClInclude Include="src\map\Direction.h" />
+    <ClInclude Include="src\save\SaveManager.h" />
+    <ClInclude Include="src\sound\SoundManager.h" />
+    <ClInclude Include="src\ui\LogLine.h" />
+    <ClInclude Include="src\ui\UIRenderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\items.json" />
+    <None Include="data\maps.json" />
+    <None Include="data\monsters.json" />
+    <None Include="data\skills.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -53,27 +127,24 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared" >
+  <ImportGroup Label="Shared">
   </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -108,6 +179,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,8 +203,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-
-  <ItemGroup></ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

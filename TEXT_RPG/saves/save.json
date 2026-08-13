@@ -1,0 +1,30 @@
+﻿{
+    "map": {
+        "currentMapId": "jeokkwi_lair",
+        "currentX": 2,
+        "currentY": 2,
+        "mapClearData": {
+            "jeokkwi_lair": []
+        }
+    },
+    "player": {
+        "hp": 100,
+        "atk": 100,
+        "def": 100,
+        "fleshCount": 30,
+        "inventory": {
+            "dried_fish": 6,
+            "herb": 1,
+            "incense_pouch": 1,
+            "yeong_yak": 1
+        },
+        "poisoned": true,
+        "skills": [
+            "Nuigyeol",
+            "Musuki",
+            "Neoul",
+            "Gumni"
+        ],
+        "stamina": 5
+    }
+}

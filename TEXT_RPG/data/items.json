@@ -1,0 +1,84 @@
+﻿{
+  "items": [
+    {
+      "id": "herb",
+      "name": "약초",
+      "description": "쓴 풀. 씹으면 좀 낫다.",
+      "useLog": "상처가 조금 아물었다.",
+      "effect": "HpRestore",
+      "value": 20
+    },
+    {
+      "id": "incense_pouch",
+      "name": "향낭",
+      "description": "독기를 걷는 향주머니.",
+      "useLog": "독기가 걷혔다.",
+      "effect": "CurePoison",
+      "value": 0
+    },
+    {
+      "id": "yeong_yak",
+      "name": "영약",
+      "description": "붉은 약. 상처가 전부 아문다.",
+      "useLog": "모든 상처가 아물었다.",
+      "effect": "HpRestoreFull",
+      "value": 0
+    },
+    {
+      "id": "red_flesh",
+      "name": "붉은 살점",
+      "description": "역귀의 살점. 아직 따뜻하다.",
+      "useLog": "삼켰다. 몸에 힘이 돌았다.",
+      "effect": "Evolution",
+      "value": 30
+    },
+    {
+      "id": "dried_fish",
+      "name": "어포",
+      "description": "마른 생선. 씹으면 기운이 돈다.",
+      "useLog": "기력이 조금 찼다.",
+      "effect": "StaminaRestore",
+      "value": 2
+    },
+    {
+      "id": "mugaseo_1",
+      "name": "찢긴 무가서",
+      "description": "남편의 글씨. [뉫결]이 적혀있다.",
+      "useLog": "[뉫결]을 익혔다.",
+      "effect": "SkillLearn",
+      "skill": "Nuigyeol"
+    },
+    {
+      "id": "mugaseo_2",
+      "name": "무가서 조각 첫째",
+      "description": "핏물 젖은 종이. [무수기]가 적혀있다.",
+      "useLog": "[무수기]를 익혔다.",
+      "effect": "SkillLearn",
+      "skill": "Musuki"
+    },
+    {
+      "id": "mugaseo_3",
+      "name": "무가서 조각 둘째",
+      "description": "구겨진 종이. [너울]이 적혀있다.",
+      "useLog": "[너울]을 익혔다.",
+      "effect": "SkillLearn",
+      "skill": "Neoul"
+    },
+    {
+      "id": "mugaseo_4",
+      "name": "무가서 조각 셋째",
+      "description": "방수포에 싸인 종이. [굼뉘]가 적혀있다.",
+      "useLog": "[굼뉘]를 익혔다.",
+      "effect": "SkillLearn",
+      "skill": "Gumni"
+    },
+    {
+      "id": "mugaseo_5",
+      "name": "무가서 마지막 조각",
+      "description": "마지막 조각. [물마루]가 적혀있다.",
+      "useLog": "[물마루]를 익혔다.",
+      "effect": "SkillLearn",
+      "skill": "Mulmaru"
+    }
+  ]
+}
