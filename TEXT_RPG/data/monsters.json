@@ -276,7 +276,7 @@
       "attackLog": "이 집게발을 내리찍는다.",
       "hp": 200,
       "attack": 30,
-      "defense": 0,
+      "defense": 20,
       "effect": "HighDamage",
       "drop_item": "yeong_yak",
       "art": [

@@ -2,8 +2,9 @@
 
 처용가와 섬집아기를 모티프로 한 한국 중세 다크 판타지 텍스트 RPG
 
-> 역병으로 위협받는 아이를 지키기 위해,  
-> 이름 없는 어머니가 남편이 남긴 검과 무가서를 들고 싸워나가는 이야기.
+> 남편이 돌아오지 않은 지 3년.
+> 바다가 붉게 물들고 역병이 마을에 닿는다.
+> 아이를 지키기 위해, 아내는 남편이 남긴 검과 무가서를 들고 집을 나선다.
 
 ---
 
@@ -99,7 +100,7 @@ TEXT_RPG/
 ├── data/              게임 데이터 (monsters, items, skills, maps, story)
 ├── bgm/               배경 음악
 ├── saves/             세이브 파일
-└── docs/              GDD (Game Design Document), WBD(World Building Document)
+└── docs/              GDD (Game Design Document)
 ```
 
 ---
