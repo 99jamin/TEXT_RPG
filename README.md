@@ -16,6 +16,11 @@
 
 ---
 
+## 플레이 영상
+[![섬그늘 플레이 영상]](https://www.youtube.com/watch?v=jTMibcZB17o)
+
+---
+
 ## 기술 스택
 
 | 항목 | 내용 |
